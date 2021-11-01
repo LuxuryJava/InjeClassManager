@@ -73,6 +73,13 @@ public class MenuBarPanel extends JPanel {
             add(classButton);
             add(tempButton);
 
+            dashboardButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                }
+            });
+
             setVisible(true);
         }
     }
