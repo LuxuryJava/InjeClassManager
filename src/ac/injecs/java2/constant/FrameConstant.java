@@ -1,7 +1,8 @@
 package ac.injecs.java2.constant;
 
 public enum FrameConstant {
-    WIDTH(1200), HEIGHT(600);
+    WIDTH(1200), HEIGHT(600)
+    , MENUWIDTH(200);
 
     private int value;
     FrameConstant(int value) {
