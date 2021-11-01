@@ -1,6 +1,7 @@
 package ac.injecs.java2;
 
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.frame.DashBoardPanel;
 import ac.injecs.java2.frame.LoginPanel;
 import ac.injecs.java2.frame.MenuBarPanel;
 import ac.injecs.java2.frame.SignPanel;
@@ -14,6 +15,7 @@ public class Main {
     private JFrame MainFrame;
     private JPanel nowPanel;
 
+    public DashBoardPanel dashBoardPanel;
     public MenuBarPanel menuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
@@ -34,7 +36,6 @@ public class Main {
     // 현재 센터를 가지는 패널 지정
     public void setNowPanel(JPanel panel) {
         nowPanel = panel;
-
         nowPanel.setBackground(Color.WHITE);
         nowPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -74,12 +75,13 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         // 사용자 정의 패널 생성
+        main.dashBoardPanel = new DashBoardPanel(main);
         main.menuBarPanel = new MenuBarPanel(main); // 의존성 주입
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
 
         main.setMenuPanel(main.menuBarPanel);
-
+        main.setCenterPanel(main.dashBoardPanel);
     }
 }
 
