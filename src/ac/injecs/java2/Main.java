@@ -10,7 +10,7 @@ public class Main extends JFrame {
         setTitle("인제 클래스 매니저");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(300, 200);
+        setSize(1200, 600);
 
         Container c = getContentPane();
         c.setLayout(new FlowLayout());

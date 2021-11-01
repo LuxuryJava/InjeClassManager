@@ -4,7 +4,7 @@ public enum FrameConstant {
     WIDTH(1200), HEIGHT(600);
 
     private int value;
-    FrameConfig(int value) {
+    FrameConstant(int value) {
         this.value = value;
     }
 
