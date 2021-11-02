@@ -79,8 +79,12 @@ public class Main {
 
         main.setMenuPanel(main.menuBarPanel);
         //main.setCenterPanel(main.dashBoardPanel);
+<<<<<<< HEAD
         //main.setCenterPanel(new reservation(main));
         main.setCenterPanel(new checkClass_details(main));
+=======
+        main.setCenterPanel(new reservation(main));
+>>>>>>> be97f7ca9bf4c7dcd9c86fef825187813cd4eb03
     }
 }
 
