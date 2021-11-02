@@ -1,10 +1,7 @@
 package ac.injecs.java2;
 
 import ac.injecs.java2.constant.FrameConstant;
-import ac.injecs.java2.frame.DashBoardPanel;
-import ac.injecs.java2.frame.LoginPanel;
-import ac.injecs.java2.frame.MenuBarPanel;
-import ac.injecs.java2.frame.SignPanel;
+import ac.injecs.java2.frame.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +16,7 @@ public class Main {
     public MenuBarPanel menuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
+    public SelectDongPanel selectDongPanel;
 
     // 프레임 초기 설정
     public Main(){
@@ -79,9 +77,10 @@ public class Main {
         main.menuBarPanel = new MenuBarPanel(main); // 의존성 주입
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
+        main.selectDongPanel = new SelectDongPanel(main);
 
         main.setMenuPanel(main.menuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+        main.setCenterPanel(main.selectDongPanel);
     }
 }
 
