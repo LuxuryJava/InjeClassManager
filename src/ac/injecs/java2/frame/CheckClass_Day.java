@@ -23,6 +23,7 @@ public class CheckClass_Day extends JPanel {
 
     public class checkWeekly extends JPanel {
         public checkWeekly() {
+            setBackground(Color.WHITE);
             setLayout(new GridLayout(1,7,0,0));
             ImageIcon[] image = {new ImageIcon("images/Weekly_sun.png"), new ImageIcon("images/Weekly_mon.png"),
                     new ImageIcon("images/Weekly_tue.png"), new ImageIcon("images/Weekly_wed.png"),

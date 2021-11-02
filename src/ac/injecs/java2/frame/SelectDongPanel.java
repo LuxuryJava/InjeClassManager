@@ -15,8 +15,8 @@ public class SelectDongPanel extends JPanel {
         setLayout(null);
 
         JLabel title = new JLabel("강의실 예약");
-        title.setFont(new Font("나눔고딕", Font.PLAIN, 20));
-        title.setBounds(480, 20, 150, 30);
+        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        title.setBounds(450, 20, 150, 30);
 
         RoundedButton aButton = new RoundedButton("A동");
         aButton.setBounds(200, 200, 150, 150);
