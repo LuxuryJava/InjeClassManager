@@ -33,7 +33,6 @@ public class SignPanel extends JPanel {
         public SignBox() {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
-            //setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             JLabel nameText = new JLabel("이름:");
             JTextField nameField = new JTextField();
@@ -43,32 +42,32 @@ public class SignPanel extends JPanel {
             JTextField codeField = new JTextField();
             JLabel emailText = new JLabel("이메일:");
             JTextField emailField = new JTextField();
-            JLabel phoneText = new JLabel("전화번호:     ");
+            JLabel phoneText = new JLabel("전화번호:");
             JTextField phoneField = new JTextField();
-            JLabel passwordText = new JLabel("비밀번호:      ");
+            JLabel passwordText = new JLabel("비밀번호:");
             JPasswordField passwordField = new JPasswordField();
-            JLabel repasswordText = new JLabel("비밀번호 확인:      ");
+            JLabel repasswordText = new JLabel("비밀번호 확인:");
             JTextField repasswordField = new JPasswordField();
 
             JButton doneButton = new JButton("회원가입");
-            doneButton.setBounds(110, 300, 100, 30);
+            doneButton.setBounds(420, 410, 100, 30);
             doneButton.setFont(Sfont);
 
 
-            nameText.setBounds(60, textStartY, textWidth, textHeight);
-            nameField.setBounds(80 + textWidth, textStartY, fieldWidth, textHeight);
-            departText.setBounds(60, textStartY + 40, textWidth, textHeight);
-            departField.setBounds(80 + textWidth, textStartY + 40, fieldWidth, textHeight);
-            codeText.setBounds(60, textStartY + 80, textWidth, textHeight);
-            codeField.setBounds(80 + textWidth, textStartY + 80, fieldWidth, textHeight);
-            emailText.setBounds(50, textStartY + 120, textWidth + 10, textHeight);
-            emailField.setBounds(80 + textWidth, textStartY + 120, fieldWidth, textHeight);
-            phoneText.setBounds(40, textStartY + 160, textWidth + 50, textHeight);
-            phoneField.setBounds(80 + textWidth, textStartY + 160, fieldWidth, textHeight);
-            passwordText.setBounds(40, textStartY + 200, textWidth + 50, textHeight);
-            passwordField.setBounds(80 + textWidth, textStartY + 200, fieldWidth, textHeight);
-            repasswordText.setBounds(20, textStartY + 240, textWidth + 80, textHeight);
-            repasswordField.setBounds(80 + textWidth, textStartY + 240, fieldWidth, textHeight);
+            nameText.setBounds(380, 121, textWidth, textHeight);
+            nameField.setBounds(400 + textWidth, 121, fieldWidth, textHeight);
+            departText.setBounds(380, 121 + 40, textWidth, textHeight);
+            departField.setBounds(400 + textWidth, 121 + 40, fieldWidth, textHeight);
+            codeText.setBounds(380, 121 + 80, textWidth, textHeight);
+            codeField.setBounds(400 + textWidth, 121 + 80, fieldWidth, textHeight);
+            emailText.setBounds(370, 121 + 120, textWidth + 10, textHeight);
+            emailField.setBounds(400 + textWidth, 121 + 120, fieldWidth, textHeight);
+            phoneText.setBounds(330, 121 + 160, textWidth + 50, textHeight);
+            phoneField.setBounds(400 + textWidth, 121 + 160, fieldWidth, textHeight);
+            passwordText.setBounds(330, 121 + 200, textWidth + 50, textHeight);
+            passwordField.setBounds(400 + textWidth, 121 + 200, fieldWidth, textHeight);
+            repasswordText.setBounds(300, 121 + 240, textWidth + 80, textHeight);
+            repasswordField.setBounds(400 + textWidth, 121 + 240, fieldWidth, textHeight);
 
             nameText.setHorizontalAlignment(SwingConstants.RIGHT);
             departText.setHorizontalAlignment(SwingConstants.RIGHT);

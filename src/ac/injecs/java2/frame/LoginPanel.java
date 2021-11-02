@@ -11,16 +11,17 @@ import java.awt.event.MouseEvent;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
-
+    static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
     public LoginPanel(Main main) {
         this.mainFrame = main;
-        setLayout(null);
+        setLayout(new BorderLayout());
+
+        JLabel title = new JLabel("로그인", SwingConstants.CENTER);
+        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        add(title, BorderLayout.NORTH);
 
         LoginBox loginBox = new LoginBox();
-        loginBox.setBounds(350, 100, 300, 300);
-
-        add(loginBox);
-
+        add(loginBox, BorderLayout.CENTER);
         setVisible(true);
     }
 
@@ -29,25 +30,30 @@ public class LoginPanel extends JPanel {
 
         public LoginBox(){
             setLayout(null);
-            setBackground(Color.CYAN);
+            setBackground(new Color(0xA2E8DB));
 
-            JLabel noticeText = new JLabel("로그인");
-            JLabel idText = new JLabel("ID");
+            JLabel idText = new JLabel("ID:");
             JTextField idField = new JTextField();
-            JLabel passwordText = new JLabel("PW");
+            JLabel passwordText = new JLabel("PW:");
             JPasswordField passwordField = new JPasswordField();
             JButton signButton = new JButton("회원가입");
             JButton loginButton = new JButton("로그인");
 
-            noticeText.setBounds(120, 10, textWidth, 30);
-            idText.setBounds(75, 90, textWidth, 30);
-            idField.setBounds(75 + textWidth, 90, 150, 30);
-            passwordText.setBounds(75, 130, textWidth, 30);
-            passwordField.setBounds(75 + textWidth, 130, 150, 30);
-            signButton.setBounds(80, 170, 90, 50);
-            loginButton.setBounds(190, 170, 80, 50);
+            idText.setBounds(380, 200, textWidth, 30);
+            idField.setBounds(400 + textWidth, 200, 150, 30);
+            passwordText.setBounds(380, 240, textWidth, 30);
+            passwordField.setBounds(400 + textWidth, 240, 150, 30);
+            signButton.setBounds(400, 300, 90, 30);
+            loginButton.setBounds(500, 300, 90, 30);
 
-            add(noticeText);
+            idText.setHorizontalAlignment(SwingConstants.RIGHT);
+            passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
+
+            idText.setFont(Sfont);
+            passwordText.setFont(Sfont);
+            signButton.setFont(Sfont);
+            loginButton.setFont(Sfont);
+
             add(idText);
             add(idField);
             add(passwordText);

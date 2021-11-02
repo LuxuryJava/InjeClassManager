@@ -85,7 +85,7 @@ public class Main {
         //main.setCenterPanel(new Class_OpenCloseA(main));
         //main.setCenterPanel(new Class_OpenCloseB(main));
         //main.setCenterPanel(new Class_OpenCloseC(main));
-        //main.setCenterPanel(new Lecture_List(main));
+        main.setCenterPanel(new Lecture_List(main));
     }
 }
 
