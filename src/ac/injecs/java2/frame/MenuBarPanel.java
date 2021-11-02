@@ -65,18 +65,37 @@ public class MenuBarPanel extends JPanel {
             setLayout(new GridLayout(5, 1, 10, 10));
 
             JButton dashboardButton = new JButton("대시보드");
-            JButton classButton = new JButton("강의실");
-            JButton tempButton = new JButton("테스트");
-
+            JButton classReservationButton = new JButton("강의실 예약");
+            JButton classCheckButton = new JButton("강의실 조회");
+            JButton lectureButton = new JButton("특강");
 
             add(dashboardButton);
-            add(classButton);
-            add(tempButton);
+            add(classReservationButton);
+            add(classCheckButton);
+            add(lectureButton);
 
             dashboardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                }
+            });
+            classReservationButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.selectDongPanel);
+                }
+            });
+            classCheckButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.checkClass_day);
+                }
+            });
+            lectureButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.lecture_list);
                 }
             });
 
