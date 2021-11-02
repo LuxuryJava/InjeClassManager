@@ -80,30 +80,38 @@ public class MenuBarPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                    mainFrame.setMode("대시보드");
                 }
             });
             classReservationButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.selectDongPanel);
+                    mainFrame.selectDongPanel.title.setText("강의실 예약");
+
+                    mainFrame.setMode("예약");
                 }
             });
             classCheckButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.checkClass_day);
+                    mainFrame.setMode("조희");
                 }
             });
             classStateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-//                    mainFrame.setCenterPanel(mainFrame.);
+                    mainFrame.setCenterPanel(mainFrame.selectDongPanel);
+                    mainFrame.selectDongPanel.title.setText("강의실 개방");
+                    mainFrame.setMode("개방");
                 }
             });
             lectureButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.lecture_list);
+                    mainFrame.setMode("특강");
                 }
             });
 
