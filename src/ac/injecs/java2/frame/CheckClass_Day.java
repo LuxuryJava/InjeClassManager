@@ -3,12 +3,15 @@ package ac.injecs.java2.frame;
 import ac.injecs.java2.Main;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class CheckClass_Day extends JPanel {
     private Main mainFrame;
     private checkWeekly checkW = new checkWeekly();
     public CheckClass_Day(Main main) {
+        mainFrame = main;
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("강의실 예약 조회", SwingConstants.CENTER);
@@ -33,7 +36,15 @@ public class CheckClass_Day extends JPanel {
                 btn[i].setBorderPainted(false);
                 btn[i].setFocusPainted(false);
                 btn[i].setContentAreaFilled(false);
+                btn[i].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        mainFrame.setCenterPanel(mainFrame.checkClass_details);
+                    }
+                });
             }
+
+
         }
     }
 }

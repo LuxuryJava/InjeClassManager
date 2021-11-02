@@ -16,6 +16,14 @@ public class Main {
     public MenuBarPanel menuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
+    public SelectDongPanel selectDongPanel;
+    public Class_OpenCloseA class_openCloseA;
+    public Class_OpenCloseB class_openCloseB;
+    public Class_OpenCloseC class_openCloseC;
+    public CheckClass_Day checkClass_day;
+    public CheckClass_Details checkClass_details;
+    public Lecture_List lecture_list;
+    public reservation reservation;
 
     // 프레임 초기 설정
     public Main(){
@@ -76,9 +84,19 @@ public class Main {
         main.menuBarPanel = new MenuBarPanel(main); // 의존성 주입
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
+        main.selectDongPanel = new SelectDongPanel(main);
+        main.class_openCloseA = new Class_OpenCloseA(main);
+        main.class_openCloseB = new Class_OpenCloseB(main);
+        main.class_openCloseC = new Class_OpenCloseC(main);
+        main.checkClass_day = new CheckClass_Day(main);
+        main.checkClass_details = new CheckClass_Details(main);
+        main.lecture_list = new Lecture_List(main);
+        main.reservation = new reservation(main);
 
         main.setMenuPanel(main.menuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+        //main.setCenterPanel(main.dashBoardPanel);
+        //main.setCenterPanel(new reservation(main));
+        //main.setCenterPanel(main.dashBoardPanel);
         //main.setCenterPanel(new CheckClass_Day(main));
         //main.setCenterPanel(new reservation(main));
         //main.setCenterPanel(new CheckClass_Details(main));
