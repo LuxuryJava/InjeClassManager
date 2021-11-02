@@ -22,7 +22,7 @@ public class DashBoardPanel extends JPanel {
     private String[] emptyClass = {"E325", "C202", "J101", "E101", "E112"};
     private String[] realtimeClass = {"18-박성훈 컴퓨터공학부 입실 E312 오후 03:04", "학번-이름 학과 상태 장소 시간"};
     private String[] notices = {"공지사항입니다 2021.09.23(목)", "강의실관련 공지사항 2021.11.01(일)"};
-//    private Vector<String> notices = {"공지사항입니다", "2021.09.23(목)", "강의실관련 공지사항", "2021.11.01(일)"};
+    //    private Vector<String> notices = {"공지사항입니다", "2021.09.23(목)", "강의실관련 공지사항", "2021.11.01(일)"};
     public DashBoardPanel(Main main) {
         this.mainFrame = main;
         setLayout(null);
@@ -111,7 +111,7 @@ public class DashBoardPanel extends JPanel {
             JList list = new JList<>(items);
             list.setEnabled(false); // 클릭 안되게 비활성화
             if (title.indexOf("실") != -1) {
-                 x = 90;
+                x = 90;
             } else if (title.indexOf("공") != -1) {
                 x = 30;
             }

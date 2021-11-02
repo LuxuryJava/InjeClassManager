@@ -4,6 +4,8 @@ import ac.injecs.java2.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SelectDongPanel extends JPanel {
     private Main mainFrame;
@@ -32,6 +34,27 @@ public class SelectDongPanel extends JPanel {
         add(bButton);
         add(aButton);
         add(title);
+
+        aButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainFrame.setCenterPanel(mainFrame.reservation);
+            }
+        });
+
+        bButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainFrame.setCenterPanel(mainFrame.reservation);
+            }
+        });
+
+        cButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainFrame.setCenterPanel(mainFrame.reservation);
+            }
+        });
 
         setVisible(true);
     }

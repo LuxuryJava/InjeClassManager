@@ -21,14 +21,16 @@ public class reservation extends JPanel {
         setLayout(null);
 
         JLabel title = new JLabel("강의실 예약", JLabel.CENTER);
-        title.setBounds(400, 50, 200, 25);
+        title.setBounds(400, 50, 300, 25);
         title.setFont(Lfont);
 
         JComboBox<String> cb = new JComboBox<String>(unit);
         JLabel text = new JLabel("강의실 선택", JLabel.CENTER);
         text.setFont(Mfont);
-        text.setBounds(100, 100, 150, 20);
-        title.setBounds(500, 50, 100, 20);
+        text.setBounds(50, 120, 150, 20);
+        title.setBounds(400, 50, 200, 30);
+
+        cb.setBounds(200, 120, 150, 20);
 
         InfoBox infobox = new InfoBox();
         infobox.setBounds(70, 170, 400, 300);
@@ -61,15 +63,15 @@ public class reservation extends JPanel {
 
         public InfoBox() {
             setLayout(null);
-            setBackground(Color.CYAN);
+            setBackground(new Color(0x4FDAE4));
             setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             JLabel titleText = new JLabel("강의실 정보");
             titleText.setFont(Mfont);
-            titleText.setBounds(160, 20, 150, 30);
+            titleText.setBounds(150, 20, 250, 30);
 
             JLabel unitText = new JLabel("강의실:");
-            titleText.setBounds(160, 20, 100, 30);
+            unitText.setBounds(160, 20, 100, 30);
 
             JLabel beamText = new JLabel("프로젝터 여부:");
             JTextField beamField = new JTextField("여");
@@ -124,7 +126,7 @@ public class reservation extends JPanel {
 
         public ResBox() {
             setLayout(null);
-            setBackground(Color.CYAN);
+            setBackground(new Color(0x4FDAE4));
             setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             JLabel titleText = new JLabel("예약 정보");
