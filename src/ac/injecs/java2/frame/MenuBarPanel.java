@@ -62,16 +62,18 @@ public class MenuBarPanel extends JPanel {
 
     public class MenuBarButtons extends JPanel {
         public MenuBarButtons() {
-            setLayout(new GridLayout(5, 1, 10, 10));
+            setLayout(new GridLayout(5, 1, 40, 10));
 
             JButton dashboardButton = new JButton("대시보드");
             JButton classReservationButton = new JButton("강의실 예약");
             JButton classCheckButton = new JButton("강의실 조회");
+            JButton classStateButton = new JButton("강의실 개방");
             JButton lectureButton = new JButton("특강");
 
             add(dashboardButton);
             add(classReservationButton);
             add(classCheckButton);
+            add(classStateButton);
             add(lectureButton);
 
             dashboardButton.addActionListener(new ActionListener() {
@@ -90,6 +92,12 @@ public class MenuBarPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.checkClass_day);
+                }
+            });
+            classStateButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+//                    mainFrame.setCenterPanel(mainFrame.);
                 }
             });
             lectureButton.addActionListener(new ActionListener() {

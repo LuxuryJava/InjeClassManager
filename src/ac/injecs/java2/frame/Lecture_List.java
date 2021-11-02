@@ -10,28 +10,36 @@ public class Lecture_List extends JPanel {
     private Main mainFrame;
     private List list = new List();
     public Lecture_List(Main main) {
+        mainFrame = main;
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("특강 목록", SwingConstants.CENTER);
         title.setFont(new Font("나눔고딕", Font.BOLD, 30));
         add(title, BorderLayout.NORTH);
         add(list);
+
         setVisible(true);
     }
     public class List extends JPanel {
         public List() {
-            ImageIcon[] image = { new ImageIcon("images/lectures1.png"), new ImageIcon("images/lectures1.png"),
-                    new ImageIcon("images/lectures1.png"), new ImageIcon("images/lectures1.png")};
-            JButton[] btnList = {new JButton(image[0]), new JButton(image[1]), new JButton(image[2]), new JButton(image[3])};
+            setBackground(Color.WHITE);
+            setSize(FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue(), FrameConstant.HEIGHT.getValue());
+            setLayout(null);
 
-            setLayout(new GridLayout(4, 1, 0, 0));
-
-            for(int i = 0; i < image.length; i++) {
-                add(btnList[i]);
+            RoundedButton[] btnList = new RoundedButton[4];
+            for(int i = 0; i < btnList.length; i++) {
+                btnList[i] = new RoundedButton();
                 //이미지만 남기기
                 btnList[i].setBorderPainted(false);
                 btnList[i].setFocusPainted(false);
                 btnList[i].setContentAreaFilled(false);
+                btnList[i].setLocation(10, 140 * i);
+                btnList[i].setSize(getWidth() - 40, 100);
+            }
+
+
+            for(int i = 0; i < btnList.length; i++) {
+                add(btnList[i]);
             }
 
         }
