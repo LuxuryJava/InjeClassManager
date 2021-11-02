@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 public class Main {
     private JFrame MainFrame;
     private JPanel nowPanel;
+    private JPanel prevPanel;
+    private String mode;
 
     public DashBoardPanel dashBoardPanel;
     public MenuBarPanel menuBarPanel;
@@ -60,11 +62,27 @@ public class Main {
         updateContent();
     }
 
+    public void setPrevPanel(JPanel panel) {
+        prevPanel = panel;
+    }
+    public JPanel getPrevPanel() {
+        return prevPanel;
+    }
+
+    public void setMode(String mode){
+        this.mode = mode;
+    }
+
+    public String getMode(){
+        return this.mode;
+    }
+
     // 센터 패널 부착
     public void setCenterPanel(JPanel panel) {
         if (nowPanel != null) {
             MainFrame.remove(nowPanel);
         }
+        setPrevPanel(nowPanel);
         setNowPanel(panel);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
         panel.setBounds(FrameConstant.MENUWIDTH.getValue(), 0, width, 600);
