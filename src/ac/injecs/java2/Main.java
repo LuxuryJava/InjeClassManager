@@ -1,10 +1,7 @@
 package ac.injecs.java2;
 
 import ac.injecs.java2.constant.FrameConstant;
-import ac.injecs.java2.frame.DashBoardPanel;
-import ac.injecs.java2.frame.LoginPanel;
-import ac.injecs.java2.frame.MenuBarPanel;
-import ac.injecs.java2.frame.SignPanel;
+import ac.injecs.java2.frame.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,6 +79,13 @@ public class Main {
 
         main.setMenuPanel(main.menuBarPanel);
         main.setCenterPanel(main.dashBoardPanel);
+        //main.setCenterPanel(new CheckClass_Day(main));
+        //main.setCenterPanel(new reservation(main));
+        //main.setCenterPanel(new CheckClass_Details(main));
+        //main.setCenterPanel(new Class_OpenCloseA(main));
+        //main.setCenterPanel(new Class_OpenCloseB(main));
+        //main.setCenterPanel(new Class_OpenCloseC(main));
+        //main.setCenterPanel(new Lecture_List(main));
     }
 }
 
