@@ -16,6 +16,7 @@ public class Main {
     public MenuBarPanel menuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
+    public SelectDongPanel selectDongPanel;
 
     // 프레임 초기 설정
     public Main(){
@@ -76,12 +77,17 @@ public class Main {
         main.menuBarPanel = new MenuBarPanel(main); // 의존성 주입
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
+        main.selectDongPanel = new SelectDongPanel(main);
 
         main.setMenuPanel(main.menuBarPanel);
+<<<<<<< HEAD
         //main.setCenterPanel(main.dashBoardPanel);
         //main.setCenterPanel(new reservation(main));
         main.setCenterPanel(new checkClass_details(main));
         main.setCenterPanel(new reservation(main));
+=======
+        main.setCenterPanel(main.selectDongPanel);
+>>>>>>> 331142bcb66833072d69715bddecb939f8b2dba6
     }
 }
 
