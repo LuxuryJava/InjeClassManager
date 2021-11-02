@@ -135,7 +135,7 @@ public class reservation extends JPanel {
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
-            JTextField nameField = new JTextField("홍길동");
+            JTextField nameField = new JTextField("아무개");
             JLabel numText = new JLabel("이용 예정 인원:");
             JTextField numField = new JTextField();
             JLabel dayText = new JLabel("이용 요일:");

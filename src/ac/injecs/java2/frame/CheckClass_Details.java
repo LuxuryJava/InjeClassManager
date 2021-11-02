@@ -41,7 +41,7 @@ public class CheckClass_Details extends JPanel{
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
-            JTextField nameField = new JTextField("홍길동");
+            JTextField nameField = new JTextField("아무개");
             JLabel classText = new JLabel("강의실:");
             JTextField classField = new JTextField("A112");
             JLabel numText = new JLabel("이용 예정 인원:");
