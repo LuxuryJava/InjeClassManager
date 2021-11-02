@@ -66,17 +66,20 @@ public class MenuBarPanel extends JPanel {
 
             JButton dashboardButton = new JButton("대시보드");
             JButton classButton = new JButton("강의실");
-            JButton tempButton = new JButton("테스트");
-
 
             add(dashboardButton);
             add(classButton);
-            add(tempButton);
 
             dashboardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                }
+            });
+            classButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.selectDongPanel);
                 }
             });
 
