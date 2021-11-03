@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Optional;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
@@ -72,7 +74,20 @@ public class LoginPanel extends JPanel {
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    System.out.println("로그인");
+                    Optional<User> find = mainFrame.memoryUserRepository.findById(idField.getText());
+                    if(find.isEmpty()){
+                        System.out.println("존재하지 않는 계정");
+                        return;
+                    }
+                    User user = find.get();
+
+                    boolean equals = user.getPassword().equals(String.valueOf(passwordField.getPassword()));
+                    if(equals){
+                        System.out.println("로그인 성공");
+                    }
+                    else{
+                        System.out.println("비밀번호가 틀렸습니다");
+                    }
                 }
             });
 
