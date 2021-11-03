@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 public class reservation extends JPanel {
     private Main mainFrame;
     private String[] unit = {"A111", "A112", "A113", "A211", "A212", "A213"};
+    private JButton bt = new JButton("확인");
     static JTextField unitField = new JTextField();
     static Font Lfont = new Font("나눔고딕", Font.BOLD, 25);
     static Font Mfont = new Font("나눔고딕", Font.BOLD, 20);
@@ -31,6 +32,8 @@ public class reservation extends JPanel {
         title.setBounds(400, 50, 200, 30);
 
         cb.setBounds(200, 120, 150, 20);
+        bt.setBounds(830, 480, 70, 40);
+        bt.setFont(Sfont);
 
         InfoBox infobox = new InfoBox();
         infobox.setBounds(70, 170, 400, 300);
@@ -49,6 +52,7 @@ public class reservation extends JPanel {
         add(title);
         add(cb);
         add(text);
+        add(bt);
         add(infobox);
         add(resbox);
 

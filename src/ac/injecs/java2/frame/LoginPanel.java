@@ -51,7 +51,7 @@ public class LoginPanel extends JPanel {
 
             idText.setFont(Sfont);
             passwordText.setFont(Sfont);
-            signButton.setFont(Sfont);
+            signButton.setFont(new Font("나눔고딕", Font.BOLD, 13));
             loginButton.setFont(Sfont);
 
             add(idText);
