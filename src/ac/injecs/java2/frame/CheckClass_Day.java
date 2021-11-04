@@ -14,7 +14,7 @@ public class CheckClass_Day extends JPanel {
         mainFrame = main;
         setLayout(new BorderLayout());
 
-        JLabel title = new JLabel("강의실 예약 조회 Test", SwingConstants.CENTER);
+        JLabel title = new JLabel("강의실 예약 조회", SwingConstants.CENTER);
         title.setFont(new Font("나눔고딕", Font.BOLD, 30));
         add(title, BorderLayout.NORTH);
         add(checkW, BorderLayout.CENTER);
