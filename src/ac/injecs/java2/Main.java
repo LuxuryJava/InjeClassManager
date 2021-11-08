@@ -2,6 +2,8 @@ package ac.injecs.java2;
 
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.frame.*;
+import ac.injecs.java2.repository.DefaultUserRepository;
+import ac.injecs.java2.repository.MemoryUserRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
+    public MemoryUserRepository memoryUserRepository = new MemoryUserRepository(); // 임시 DB
+    public DefaultUserRepository defaultUserRepository = new DefaultUserRepository();
+
     private JFrame MainFrame;
     private JPanel nowPanel;
     private JPanel prevPanel;
