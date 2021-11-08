@@ -36,8 +36,6 @@ public class SignPanel extends JPanel {
         public SignBox() {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
-            JLabel idText = new JLabel("아이디:");
-            JTextField idField = new JTextField();
             JLabel nameText = new JLabel("이름:");
             JTextField nameField = new JTextField();
             JLabel departText = new JLabel("학과:");
@@ -57,8 +55,6 @@ public class SignPanel extends JPanel {
             doneButton.setBounds(420, 410, 100, 30);
             doneButton.setFont(Sfont);
 
-            idText.setBounds(380, 81, textWidth, textHeight);
-            idField.setBounds(400 + textWidth, 81, fieldWidth, textHeight);
             nameText.setBounds(380, 121, textWidth, textHeight);
             nameField.setBounds(400 + textWidth, 121, fieldWidth, textHeight);
             departText.setBounds(380, 121 + 40, textWidth, textHeight);
@@ -74,7 +70,6 @@ public class SignPanel extends JPanel {
             repasswordText.setBounds(300, 121 + 240, textWidth + 80, textHeight);
             repasswordField.setBounds(400 + textWidth, 121 + 240, fieldWidth, textHeight);
 
-            idText.setHorizontalAlignment(SwingConstants.RIGHT);
             nameText.setHorizontalAlignment(SwingConstants.RIGHT);
             departText.setHorizontalAlignment(SwingConstants.RIGHT);
             codeText.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -83,7 +78,6 @@ public class SignPanel extends JPanel {
             passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
             repasswordText.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            idText.setFont(Sfont);
             nameText.setFont(Sfont);
             departText.setFont(Sfont);
             codeText.setFont(Sfont);
@@ -92,8 +86,6 @@ public class SignPanel extends JPanel {
             passwordText.setFont(Sfont);
             repasswordText.setFont(Sfont);
 
-            add(idText);
-            add(idField);
             add(nameText);
             add(nameField);
             add(departText);
@@ -122,12 +114,10 @@ public class SignPanel extends JPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     // 회원가입
                     User user = new User();
-                    user.setId(idField.getText());
                     user.setDepartment(departField.getText());
                     user.setEmail(emailField.getText());
                     user.setName(nameField.getText());
                     user.setPhoneNuber(phoneField.getText());
-                    user.setStudentId(idField.getText());
                     user.setPassword(String.valueOf(passwordField.getPassword()));
                     System.out.println(user.toString());
 
