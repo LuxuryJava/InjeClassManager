@@ -16,10 +16,6 @@ public class MemoryStudentRepositoryImpl implements StudentRepository {
         System.out.println(student.toString() + "DB 저장");
         return student;
     }
-    @Override
-    public Optional<Student> findByKey(Long key) {
-        return Optional.ofNullable(store.get(key));
-    }
 
     @Override
     public Optional<Student> findById(String id) {

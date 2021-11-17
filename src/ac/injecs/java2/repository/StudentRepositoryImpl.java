@@ -1,6 +1,7 @@
 package ac.injecs.java2.repository;
 
 import ac.injecs.java2.config.DBConnect;
+import ac.injecs.java2.config.sql.StudentMapper;
 import ac.injecs.java2.entity.Student;
 
 import java.util.List;
@@ -12,19 +13,16 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public Student save(Student student) {
         String sql = "insert into student values(?, ?, ?, ?, ?, ?)";
-        dbConnect.studentInsert(sql, student);
-        return student;
-    }
+        dbConnect.insert(sql, new StudentMapper(), student);
 
-    @Override
-    public Optional<Student> findByKey(Long key) {
-        return Optional.empty();
+        return student;
     }
 
     @Override
     public Optional<Student> findById(String id) {
         String sql = "select * from student where sno like " + id;
-        Student find = dbConnect.studentSelect(sql);
+        Student find = (Student) dbConnect.select(sql, new StudentMapper());
+
         return Optional.ofNullable(find);
     }
 

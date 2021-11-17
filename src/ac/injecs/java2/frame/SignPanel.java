@@ -122,7 +122,7 @@ public class SignPanel extends JPanel {
                     student.setPassword(String.valueOf(passwordField.getPassword()));
 
                     System.out.println(student.toString());
-                    mainFrame.StudentRepository.save(student);
+                    mainFrame.studentRepository.save(student);
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                 }
             });
