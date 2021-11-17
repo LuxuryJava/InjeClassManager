@@ -17,7 +17,7 @@ create table Student (
 
   sno int(8),
 
-  spw char(20),
+  spw VARCHAR(500),
 
   sname char(10),
 

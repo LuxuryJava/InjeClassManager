@@ -1,9 +1,11 @@
 package ac.injecs.java2.entity;
 
-public class Student {
-    private Long key;
+import ac.injecs.java2.config.PasswordEncoder;
+import ac.injecs.java2.dto.StudentFormDto;
 
-    private String id;
+public class Student {
+
+    private Long id; // key
 
     private String name;
 
@@ -15,72 +17,101 @@ public class Student {
 
     private String password;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "key=" + key +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+    public Student(){}
 
-    public Long getKey() {
-        return key;
-    }
-
-    public void setKey(Long key) {
-        this.key = key;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+    public Student(Long id, String name, String department, String email, String phoneNumber, String password) {
         this.id = id;
+        this.name = name;
+        this.department = department;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDepartment() {
         return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public static class Builder{
+        private Long id; // key
+
+        private String name;
+
+        private String department;
+
+        private String email;
+
+        private String phoneNumber;
+
+        private String password;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder department(String department) {
+            this.department = department;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Student build(){
+            Student student = new Student(id, name, department, email, phoneNumber, password);
+            return student;
+        }
     }
+
+    public static Student createStudent(StudentFormDto studentFormDto) {
+        String password = PasswordEncoder.encode(studentFormDto.getPassword()).get();
+        Student student = new Builder()
+                .id(studentFormDto.getId())
+                .name(studentFormDto.getName())
+                .department(studentFormDto.getDepartment())
+                .email(studentFormDto.getEmail())
+                .phoneNumber(studentFormDto.getPhoneNumber())
+                .password(password)
+                .build();
+        return student;
+    }
+
 }

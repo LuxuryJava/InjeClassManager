@@ -74,20 +74,9 @@ public class LoginPanel extends JPanel {
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Optional<Student> find = mainFrame.studentRepository.findById(idField.getText());
-                    if(find.isEmpty()){
-                        System.out.println("존재하지 않는 계정");
-                        return;
-                    }
-                    Student student = find.get();
-
-                    boolean equals = student.getPassword().equals(String.valueOf(passwordField.getPassword()));
-                    if(equals){
-                        System.out.println("로그인 성공");
-                    }
-                    else{
-                        System.out.println("비밀번호가 틀렸습니다");
-                    }
+                    Long id = Long.valueOf(idField.getText());
+                    String password = String.valueOf(passwordField.getPassword());
+                    mainFrame.studentController.getLoginPanel(id, password);
                 }
             });
 

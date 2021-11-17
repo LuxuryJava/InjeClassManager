@@ -1,8 +1,11 @@
 package ac.injecs.java2;
 
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.controller.StudentController;
 import ac.injecs.java2.frame.*;
 import ac.injecs.java2.repository.StudentRepository;
+import ac.injecs.java2.repository.StudentRepositoryImpl;
+import ac.injecs.java2.service.StudentService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +13,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
-    public StudentRepository studentRepository = new StudentRepository();
+
+    private StudentRepository studentRepository = new StudentRepositoryImpl();
+    private StudentService studentService = new StudentService(studentRepository);
+    public StudentController studentController = new StudentController(studentService);
 
     private JFrame MainFrame;
     private JPanel nowPanel;
@@ -118,9 +124,3 @@ public class Main {
         main.setCenterPanel(main.dashBoardPanel);
     }
 }
-
-/*
-    왜 의존성 주입을 할까요? 그 이유는 패널 교체를 할떄 클래스 외부에서 접근하는게 아닌
-    생성자 함수에 MainFrame을 넘기면 MainFrame을 의존하게되어 해당 클래스 멤버를 접근할 수 있게됨
-    따라서 복잡하지 않게 패널 전환을 가능함.
- */

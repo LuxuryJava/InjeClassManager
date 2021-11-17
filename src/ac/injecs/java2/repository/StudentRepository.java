@@ -9,9 +9,7 @@ public interface StudentRepository {
 
     Student save(Student student);
 
-    Optional<Student> findByKey(Long key);
-
-    Optional<Student> findById(String id);
+    Optional<Student> findById(Long id);
 
     Optional<Student> findByName(String name);
 
