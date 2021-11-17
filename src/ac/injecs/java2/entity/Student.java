@@ -1,6 +1,6 @@
 package ac.injecs.java2.entity;
 
-public class User {
+public class Student {
     private Long key;
 
     private String id;
@@ -9,11 +9,9 @@ public class User {
 
     private String department;
 
-    private String studentId;
-
     private String email;
 
-    private String phoneNuber;
+    private String phoneNumber;
 
     private String password;
 
@@ -24,9 +22,8 @@ public class User {
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", department='" + department + '\'' +
-                ", studentId='" + studentId + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNuber='" + phoneNuber + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
@@ -63,14 +60,6 @@ public class User {
         this.department = department;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -79,12 +68,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoneNuber() {
-        return phoneNuber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhoneNuber(String phoneNuber) {
-        this.phoneNuber = phoneNuber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {

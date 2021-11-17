@@ -1,7 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
-import ac.injecs.java2.entity.User;
+import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,16 +34,16 @@ public class LoginPanel extends JPanel {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
 
-            JLabel idText = new JLabel("ID:");
+            JLabel idText = new JLabel("학번:");
             JTextField idField = new JTextField();
-            JLabel passwordText = new JLabel("PW:");
+            JLabel passwordText = new JLabel("비밀번호:");
             JPasswordField passwordField = new JPasswordField();
             JButton signButton = new JButton("회원가입");
             JButton loginButton = new JButton("로그인");
 
             idText.setBounds(380, 200, textWidth, 30);
             idField.setBounds(400 + textWidth, 200, 150, 30);
-            passwordText.setBounds(380, 240, textWidth, 30);
+            passwordText.setBounds(380, 240, textWidth + 20, 30);
             passwordField.setBounds(400 + textWidth, 240, 150, 30);
             signButton.setBounds(400, 300, 90, 30);
             loginButton.setBounds(500, 300, 90, 30);
@@ -74,14 +74,14 @@ public class LoginPanel extends JPanel {
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Optional<User> find = mainFrame.memoryUserRepository.findById(idField.getText());
+                    Optional<Student> find = mainFrame.studentRepository.findById(idField.getText());
                     if(find.isEmpty()){
                         System.out.println("존재하지 않는 계정");
                         return;
                     }
-                    User user = find.get();
+                    Student student = find.get();
 
-                    boolean equals = user.getPassword().equals(String.valueOf(passwordField.getPassword()));
+                    boolean equals = student.getPassword().equals(String.valueOf(passwordField.getPassword()));
                     if(equals){
                         System.out.println("로그인 성공");
                     }

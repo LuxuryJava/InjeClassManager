@@ -1,7 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
-import ac.injecs.java2.entity.User;
+import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,12 +36,12 @@ public class SignPanel extends JPanel {
         public SignBox() {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
+            JLabel idText = new JLabel("학번:");
+            JTextField idField = new JTextField();
             JLabel nameText = new JLabel("이름:");
             JTextField nameField = new JTextField();
             JLabel departText = new JLabel("학과:");
             JTextField departField = new JTextField();
-            JLabel codeText = new JLabel("학번:");
-            JTextField codeField = new JTextField();
             JLabel emailText = new JLabel("이메일:");
             JTextField emailField = new JTextField();
             JLabel phoneText = new JLabel("전화번호:");
@@ -59,20 +59,17 @@ public class SignPanel extends JPanel {
             nameField.setBounds(400 + textWidth, 121, fieldWidth, textHeight);
             departText.setBounds(380, 121 + 40, textWidth, textHeight);
             departField.setBounds(400 + textWidth, 121 + 40, fieldWidth, textHeight);
-            codeText.setBounds(380, 121 + 80, textWidth, textHeight);
-            codeField.setBounds(400 + textWidth, 121 + 80, fieldWidth, textHeight);
-            emailText.setBounds(370, 121 + 120, textWidth + 10, textHeight);
-            emailField.setBounds(400 + textWidth, 121 + 120, fieldWidth, textHeight);
-            phoneText.setBounds(330, 121 + 160, textWidth + 50, textHeight);
-            phoneField.setBounds(400 + textWidth, 121 + 160, fieldWidth, textHeight);
-            passwordText.setBounds(330, 121 + 200, textWidth + 50, textHeight);
-            passwordField.setBounds(400 + textWidth, 121 + 200, fieldWidth, textHeight);
-            repasswordText.setBounds(300, 121 + 240, textWidth + 80, textHeight);
-            repasswordField.setBounds(400 + textWidth, 121 + 240, fieldWidth, textHeight);
+            emailText.setBounds(370, 121 + 80, textWidth + 10, textHeight);
+            emailField.setBounds(400 + textWidth, 121 + 80, fieldWidth, textHeight);
+            phoneText.setBounds(330, 121 + 120, textWidth + 50, textHeight);
+            phoneField.setBounds(400 + textWidth, 121 + 120, fieldWidth, textHeight);
+            passwordText.setBounds(330, 121 + 160, textWidth + 50, textHeight);
+            passwordField.setBounds(400 + textWidth, 121 + 160, fieldWidth, textHeight);
+            repasswordText.setBounds(300, 121 + 200, textWidth + 80, textHeight);
+            repasswordField.setBounds(400 + textWidth, 121 + 200, fieldWidth, textHeight);
 
             nameText.setHorizontalAlignment(SwingConstants.RIGHT);
             departText.setHorizontalAlignment(SwingConstants.RIGHT);
-            codeText.setHorizontalAlignment(SwingConstants.RIGHT);
             emailText.setHorizontalAlignment(SwingConstants.RIGHT);
             phoneText.setHorizontalAlignment(SwingConstants.RIGHT);
             passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -80,7 +77,6 @@ public class SignPanel extends JPanel {
 
             nameText.setFont(Sfont);
             departText.setFont(Sfont);
-            codeText.setFont(Sfont);
             emailText.setFont(Sfont);
             phoneText.setFont(Sfont);
             passwordText.setFont(Sfont);
@@ -90,8 +86,6 @@ public class SignPanel extends JPanel {
             add(nameField);
             add(departText);
             add(departField);
-            add(codeText);
-            add(codeField);
             add(emailText);
             add(emailField);
             add(phoneText);
@@ -113,15 +107,17 @@ public class SignPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     // 회원가입
-                    User user = new User();
-                    user.setDepartment(departField.getText());
-                    user.setEmail(emailField.getText());
-                    user.setName(nameField.getText());
-                    user.setPhoneNuber(phoneField.getText());
-                    user.setPassword(String.valueOf(passwordField.getPassword()));
-                    System.out.println(user.toString());
+                    Student student = new Student();
+                    student.setId(idField.getText());
+                    student.setDepartment(departField.getText());
+                    student.setEmail(emailField.getText());
+                    student.setName(nameField.getText());
+                    student.setPhoneNumber(phoneField.getText());
+                    student.setPassword(String.valueOf(passwordField.getPassword()));
 
-                    mainFrame.memoryUserRepository.save(user);
+                    System.out.println(student.toString());
+                    mainFrame.studentRepository.save(student);
+                    mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                 }
             });
             setVisible(true);
