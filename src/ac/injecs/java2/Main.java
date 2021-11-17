@@ -115,16 +115,7 @@ public class Main {
         main.reservation = new reservation(main);
 
         main.setMenuPanel(main.menuBarPanel);
-        //main.setCenterPanel(main.dashBoardPanel);
-        //main.setCenterPanel(new reservation(main));
-        //main.setCenterPanel(main.dashBoardPanel);
-        //main.setCenterPanel(new CheckClass_Day(main));
-        //main.setCenterPanel(new reservation(main));
-        //main.setCenterPanel(new CheckClass_Details(main));
-        //main.setCenterPanel(new Class_OpenCloseA(main));
-        //main.setCenterPanel(new Class_OpenCloseB(main));
-        //main.setCenterPanel(new Class_OpenCloseC(main));
-        main.setCenterPanel(new Lecture_List(main));
+        main.setCenterPanel(main.dashBoardPanel);
     }
 }
 
