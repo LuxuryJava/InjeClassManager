@@ -11,8 +11,7 @@ create table Room (
   isProject boolean,
 
   posiMen int(4)
-
-)
+);
 
 create table Student (
 
@@ -28,7 +27,7 @@ create table Student (
 
   phone char(16)
 
-)
+);
 
 create table Manager (
 
@@ -38,7 +37,7 @@ create table Manager (
 
   mname char(10)
 
-)
+);
 
 create table Notification (
 
@@ -48,10 +47,10 @@ create table Notification (
 
   nname char(30),
 
-  ncontent char(500),
+  ncontent TEXT(500),
 
   ntime date
 
-)
+);
 
 
