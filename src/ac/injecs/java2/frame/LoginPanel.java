@@ -74,7 +74,7 @@ public class LoginPanel extends JPanel {
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Optional<User> find = mainFrame.memoryUserRepository.findById(idField.getText());
+                    Optional<User> find = mainFrame.userRepository.findById(idField.getText());
                     if(find.isEmpty()){
                         System.out.println("존재하지 않는 계정");
                         return;

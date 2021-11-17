@@ -5,10 +5,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CheckClass_Details extends JPanel{
+    
     private Main mainFrame;
     static Font Lfont = new Font("나눔고딕", Font.BOLD, 25);
     static Font Mfont = new Font("나눔고딕", Font.BOLD, 20);
     static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
+    
     public CheckClass_Details(Main main) {
         this.mainFrame = main;
         setLayout(null);

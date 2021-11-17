@@ -12,7 +12,6 @@ public class DBConnect extends DBUser{
     private ResultSet resultSet = null;
 
     public DBConnect() {
-
         System.out.print("Inje CM 접속 : ");
         try {
             Class.forName(JDBC_DRIVER); //Class 클래스의 forName()함수를 이용해서 해당 클래스를 메모리로 로드 하는 것입니다.
