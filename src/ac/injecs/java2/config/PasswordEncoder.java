@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class PasswordEncoder {
 
-    public Optional<String> encode(String password) {
+    public static Optional<String> encode(String password) {
         // sha256
         String sha = null;
 

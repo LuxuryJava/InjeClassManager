@@ -123,6 +123,7 @@ public class SignPanel extends JPanel {
                     student.setPassword(String.valueOf(passwordField.getPassword()));
 
                     System.out.println(student.toString());
+                    mainFrame.studentController.postSignPanel(student);
                 }
             });
             setVisible(true);
