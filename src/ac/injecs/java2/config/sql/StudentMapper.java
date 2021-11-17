@@ -14,7 +14,7 @@ public class StudentMapper extends SQLMapper {
 
             this.preparedStatement = preparedStatement;
 
-            preparedStatement.setInt(1, Integer.parseInt(student.getId()));
+            preparedStatement.setInt(1, Math.toIntExact(student.getId()));
             preparedStatement.setString(2, student.getPassword());
             preparedStatement.setString(3, student.getName());
             preparedStatement.setString(4, student.getDepartment());

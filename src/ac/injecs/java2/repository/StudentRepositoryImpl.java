@@ -19,7 +19,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public Optional<Student> findById(String id) {
+    public Optional<Student> findById(Long id) {
         String sql = "select * from student where sno like " + id;
         Student find = (Student) dbConnect.select(sql, new StudentMapper());
 

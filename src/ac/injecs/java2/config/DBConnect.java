@@ -85,6 +85,7 @@ public class DBConnect{
         Object object = null;
         try {
             object = sqlMapper.select(connection.prepareStatement(query));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,6 +95,7 @@ public class DBConnect{
     public void insert(String query, SQLMapper sqlMapper, Object object) {
         try {
             sqlMapper.insert(connection.prepareStatement(query), object);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
