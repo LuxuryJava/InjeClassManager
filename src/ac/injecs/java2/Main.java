@@ -118,7 +118,8 @@ public class Main {
         main.reservation = new reservation(main);
 
         main.setMenuPanel(main.menuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+        //main.setCenterPanel(main.dashBoardPanel);
+        main.setCenterPanel(new Notice(main));
     }
 }
 
