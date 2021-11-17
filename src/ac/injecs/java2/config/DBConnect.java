@@ -2,15 +2,16 @@ package ac.injecs.java2.config;
 
 import java.sql.*;
 
-public class DefaultDBConnect extends DBUser{
+public class DBConnect extends DBUser{
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String JDBC_URL = "jdbc:mysql://localhost:3306/injecm";
 
-    public DefaultDBConnect() {
-        // MySql에 사용하는여러 객체를 만들어줍니다.
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+    // MySql에 사용하는여러 객체를 만들어줍니다.
+    private Connection connection = null;
+    private Statement statement = null;
+    private ResultSet resultSet = null;
+
+    public DBConnect() {
 
         System.out.print("Inje CM 접속 : ");
         try {

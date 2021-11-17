@@ -4,7 +4,7 @@ import ac.injecs.java2.entity.User;
 
 import java.util.*;
 
-public class MemoryUserRepository implements UserRepository {
+public class MemoryUserRepositoryImpl implements UserRepository {
     private static Map<Long, User> store = new HashMap<>();
     private static long sequence = 0L;
 
