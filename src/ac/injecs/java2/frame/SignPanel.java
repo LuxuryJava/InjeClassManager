@@ -130,8 +130,6 @@ public class SignPanel extends JPanel {
                     user.setStudentId(idField.getText());
                     user.setPassword(String.valueOf(passwordField.getPassword()));
                     System.out.println(user.toString());
-
-                    mainFrame.memoryUserRepository.save(user);
                 }
             });
             setVisible(true);

@@ -1,13 +1,13 @@
 package ac.injecs.java2.repository;
 
-import ac.injecs.java2.config.DefaultDBConnect;
+import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.entity.User;
 
 import java.util.List;
 import java.util.Optional;
 
-public class DefaultUserRepository implements UserRepository {
-    static final DefaultDBConnect dbConnect = new DefaultDBConnect();
+public class UserRepositoryImpl implements UserRepository {
+    static final DBConnect dbConnect = new DBConnect();
 
     @Override
     public User save(User user) {
