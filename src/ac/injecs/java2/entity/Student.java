@@ -17,6 +17,16 @@ public class Student {
 
     private String password;
 
+    public Student(){}
+
+    public Student(Long id, String name, String department, String email, String phoneNumber, String password) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
@@ -55,9 +65,6 @@ public class Student {
 
         private String password;
 
-        public Builder() {
-        }
-
         public Builder id(Long id) {
             this.id = id;
             return this;
@@ -88,12 +95,23 @@ public class Student {
             return this;
         }
 
+        public Student build(){
+            Student student = new Student(id, name, department, email, phoneNumber, password);
+            return student;
+        }
     }
 
-    public static Student createStudent(StudentFormDto studentFormDto, PasswordEncoder passwordEncoder) {
-        String password = passwordEncoder.encode(studentFormDto.getPassword()).get();
-        Student student = new Student();
-        return null;
+    public static Student createStudent(StudentFormDto studentFormDto) {
+        String password = PasswordEncoder.encode(studentFormDto.getPassword()).get();
+        Student student = new Builder()
+                .id(studentFormDto.getId())
+                .name(studentFormDto.getName())
+                .department(studentFormDto.getDepartment())
+                .email(studentFormDto.getEmail())
+                .phoneNumber(studentFormDto.getPhoneNumber())
+                .password(password)
+                .build();
+        return student;
     }
 
 }

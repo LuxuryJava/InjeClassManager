@@ -4,6 +4,7 @@ import ac.injecs.java2.entity.Student;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class StudentMapper extends SQLMapper {
 
@@ -34,14 +35,19 @@ public class StudentMapper extends SQLMapper {
     public Object select(PreparedStatement preparedStatement) {
         Student student = null;
         try {
-
             this.preparedStatement = preparedStatement;
-
             this.resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
+                student = (new Student.Builder()
+                        .id((long) resultSet.getInt("sno"))
+                        .password(resultSet.getString("spw"))
+                        .name(resultSet.getString("sname"))
+                        .department(resultSet.getString("department"))
+                        .email(resultSet.getString("email"))
+                        .phoneNumber(resultSet.getString("phone"))
+                        .build());
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

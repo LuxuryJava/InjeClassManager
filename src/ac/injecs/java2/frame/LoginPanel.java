@@ -63,17 +63,12 @@ public class LoginPanel extends JPanel {
             add(signButton);
             add(loginButton);
 
-
-            signButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.signPanel);
-                }
-            });
-
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
+                    Long id = Long.valueOf(idField.getText());
+                    String password = String.valueOf(passwordField.getPassword());
+                    mainFrame.studentController.getLoginPanel(id, password);
                 }
             });
 

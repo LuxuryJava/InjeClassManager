@@ -4,6 +4,7 @@ import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.config.sql.StudentMapper;
 import ac.injecs.java2.entity.Student;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public List<Student> findAll() {
-        return null;
+        String sql = "select * from student";
+        List<Student> students = (List<Student>) dbConnect.select(sql, new StudentMapper());
+        return students;
     }
 }
