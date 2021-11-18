@@ -3,6 +3,8 @@ package ac.injecs.java2;
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.controller.StudentController;
 import ac.injecs.java2.frame.*;
+import ac.injecs.java2.frame.admin.AdmitClassPanel;
+import ac.injecs.java2.frame.admin.RequestLockClassPanel;
 import ac.injecs.java2.repository.StudentRepository;
 import ac.injecs.java2.repository.StudentRepositoryImpl;
 import ac.injecs.java2.service.StudentService;
@@ -35,6 +37,8 @@ public class Main {
     public CheckClass_Details checkClass_details;
     public Lecture_List lecture_list;
     public reservation reservation;
+    public AdmitClassPanel admitClassPanel;
+    public RequestLockClassPanel requestLockClassPanel;
 
     // 프레임 초기 설정
     public Main(){
@@ -119,8 +123,10 @@ public class Main {
         main.checkClass_details = new CheckClass_Details(main);
         main.lecture_list = new Lecture_List(main);
         main.reservation = new reservation(main);
+        main.admitClassPanel = new AdmitClassPanel(main);
+        main.requestLockClassPanel = new RequestLockClassPanel(main);
 
         main.setMenuPanel(main.menuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+        main.setCenterPanel(main.requestLockClassPanel);
     }
 }
