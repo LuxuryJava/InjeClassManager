@@ -13,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
-
     private StudentRepository studentRepository = new StudentRepositoryImpl();
     private StudentService studentService = new StudentService(studentRepository);
     public StudentController studentController = new StudentController(studentService);
@@ -24,7 +23,7 @@ public class Main {
     private String mode;
 
     public DashBoardPanel dashBoardPanel;
-    public MenuBarPanel menuBarPanel;
+    public Admin_MenuBarPanel menuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
     public SelectDongPanel selectDongPanel;
@@ -66,7 +65,7 @@ public class Main {
     }
 
     // 사이드 메뉴 부착
-    public void setMenuPanel(MenuBarPanel menuBarPanel) {
+    public void setMenuPanel(Admin_MenuBarPanel menuBarPanel) {
         MainFrame.add(menuBarPanel);
         updateContent();
     }
@@ -108,7 +107,8 @@ public class Main {
         Main main = new Main();
         // 사용자 정의 패널 생성
         main.dashBoardPanel = new DashBoardPanel(main);
-        main.menuBarPanel = new MenuBarPanel(main); // 의존성 주입
+        //main.menuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
+        main.menuBarPanel = new Admin_MenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
         main.selectDongPanel = new SelectDongPanel(main);
@@ -121,6 +121,7 @@ public class Main {
         main.reservation = new reservation(main);
 
         main.setMenuPanel(main.menuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+        //main.setCenterPanel(main.dashBoardPanel);
+        main.setCenterPanel(new Notice(main));
     }
 }

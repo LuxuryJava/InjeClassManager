@@ -35,9 +35,7 @@ public class StudentMapper extends SQLMapper {
     public Object select(PreparedStatement preparedStatement) {
         Student student = null;
         try {
-
             this.preparedStatement = preparedStatement;
-
             this.resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -50,7 +48,6 @@ public class StudentMapper extends SQLMapper {
                         .phoneNumber(resultSet.getString("phone"))
                         .build());
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
