@@ -37,10 +37,11 @@ public class SignPanel extends JPanel {
         public SignBox() {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
-            JLabel idText = new JLabel("학번:");
-            JTextField idField = new JTextField();
+
             JLabel nameText = new JLabel("이름:");
             JTextField nameField = new JTextField();
+            JLabel idText = new JLabel("학번:");
+            JTextField idField = new JTextField();
             JLabel departText = new JLabel("학과:");
             JTextField departField = new JTextField();
             JLabel emailText = new JLabel("이메일:");
@@ -56,10 +57,10 @@ public class SignPanel extends JPanel {
             doneButton.setBounds(420, 410, 100, 30);
             doneButton.setFont(Sfont);
 
-            idText.setBounds(380, 81, textWidth, textHeight);
-            idField.setBounds(400 + textWidth, 81, fieldWidth, textHeight);
-            nameText.setBounds(380, 121, textWidth, textHeight);
-            nameField.setBounds(400 + textWidth, 121, fieldWidth, textHeight);
+            nameText.setBounds(380, 81, textWidth, textHeight);
+            nameField.setBounds(400+textWidth, 81, fieldWidth, textHeight);
+            idText.setBounds(380, 121, textWidth, textHeight);
+            idField.setBounds(400 + textWidth, 121, fieldWidth, textHeight);
             departText.setBounds(380, 121 + 40, textWidth, textHeight);
             departField.setBounds(400 + textWidth, 121 + 40, fieldWidth, textHeight);
             emailText.setBounds(370, 121 + 80, textWidth + 10, textHeight);
@@ -71,26 +72,26 @@ public class SignPanel extends JPanel {
             repasswordText.setBounds(300, 121 + 200, textWidth + 80, textHeight);
             repasswordField.setBounds(400 + textWidth, 121 + 200, fieldWidth, textHeight);
 
-            idText.setHorizontalAlignment(SwingConstants.RIGHT);
             nameText.setHorizontalAlignment(SwingConstants.RIGHT);
+            idText.setHorizontalAlignment(SwingConstants.RIGHT);
             departText.setHorizontalAlignment(SwingConstants.RIGHT);
             emailText.setHorizontalAlignment(SwingConstants.RIGHT);
             phoneText.setHorizontalAlignment(SwingConstants.RIGHT);
             passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
             repasswordText.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            idText.setFont(Sfont);
             nameText.setFont(Sfont);
+            idText.setFont(Sfont);
             departText.setFont(Sfont);
             emailText.setFont(Sfont);
             phoneText.setFont(Sfont);
             passwordText.setFont(Sfont);
             repasswordText.setFont(Sfont);
 
-            add(idText);
-            add(idField);
             add(nameText);
             add(nameField);
+            add(idText);
+            add(idField);
             add(departText);
             add(departField);
             add(emailText);

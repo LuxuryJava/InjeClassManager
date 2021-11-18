@@ -4,18 +4,17 @@ import ac.injecs.java2.Main;
 import ac.injecs.java2.constant.FrameConstant;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MenuBarPanel extends JPanel {
+public class User_MenuBarPanel extends JPanel {
     private Main mainFrame;
     private int menuBarWidth = FrameConstant.MENUWIDTH.getValue();
 
-    public MenuBarPanel(Main main) {
+    public User_MenuBarPanel(Main main) {
         this.mainFrame = main;
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
