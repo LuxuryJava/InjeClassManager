@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.dto.StudentFormDto;
 import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
@@ -107,8 +108,8 @@ public class SignPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     // 회원가입
-                    Student student = new Student();
-                    student.setId(idField.getText());
+                    StudentFormDto student = new StudentFormDto();
+                    student.setId(Long.valueOf(idField.getText()));
                     student.setDepartment(departField.getText());
                     student.setEmail(emailField.getText());
                     student.setName(nameField.getText());
@@ -116,8 +117,6 @@ public class SignPanel extends JPanel {
                     student.setPassword(String.valueOf(passwordField.getPassword()));
 
                     System.out.println(student.toString());
-                    mainFrame.studentRepository.save(student);
-                    mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                 }
             });
             setVisible(true);

@@ -1,12 +1,13 @@
 package ac.injecs.java2.config;
 
+import ac.injecs.java2.config.sql.SQLMapper;
 import ac.injecs.java2.entity.Student;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.Optional;
+import java.util.Scanner;
 
 public class DBConnect{
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -19,9 +20,10 @@ public class DBConnect{
     private ResultSet resultSet = null;
 
     public DBConnect() {
-        System.out.print("Inje CM 접속 : ");
+        System.out.print("Inje CM DB 접속 : ");
         try {
             Class.forName(JDBC_DRIVER); //Class 클래스의 forName()함수를 이용해서 해당 클래스를 메모리로 로드 하는 것입니다.
+
             //URL, ID, password를 입력하여 데이터베이스에 접속합니다.
             connection = DriverManager.getConnection(JDBC_URL, DBUser.USER, DBUser.PASSWORD);
 
@@ -29,7 +31,7 @@ public class DBConnect{
             if (connection != null) {
                 System.out.println("성공");
 
-                //releasMode();
+                //setUpDB();
             } else {
                 System.out.println("실패");
             }
@@ -56,8 +58,17 @@ public class DBConnect{
         }
     }
 
-    private void releasMode(){
-        System.out.println("Injc CM DB 테이블 생성");
+    private void setUpDB(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("DB 초기화 후 DB 생성을 합니다. \n진행하시겠습니까? (Y/N)");
+
+        String input = scanner.next();
+        if (!input.equals("Y") && !input.equals("y")) {
+            System.out.println("DB 초기화를 중단합니다.");
+            return;
+        }
+        System.out.println("DB 초기화를 진행합니다.");
         clearDb();
         createTables();
     }
@@ -70,48 +81,24 @@ public class DBConnect{
         runScript("injecm_clear.sql");
     }
 
-    public Student studentSelect(String query){
-        Student student = null;
+    public Object select(String query, SQLMapper sqlMapper)  {
+        Object object = null;
         try {
-            preparedStatement = connection.prepareStatement(query);
-
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                student = new Student();
-                student.setId(String.valueOf(resultSet.getInt("sno")));
-                student.setPassword(resultSet.getString("spw"));
-                student.setName(resultSet.getString("sname"));
-                student.setDepartment(resultSet.getString("department"));
-                student.setEmail(resultSet.getString("email"));
-                student.setPhoneNumber(resultSet.getString("phone"));
-                System.out.println("DB에 저장된 학생" + student);
-            }
+            object = sqlMapper.select(connection.prepareStatement(query));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return object;
     }
 
-    public void studentInsert(String query, Student student){
+    public void insert(String query, SQLMapper sqlMapper, Object object) {
         try {
-            preparedStatement = connection.prepareStatement(query);
-
-            preparedStatement.setInt(1, Integer.parseInt(student.getId()));
-            preparedStatement.setString(2, student.getPassword());
-            preparedStatement.setString(3, student.getName());
-            preparedStatement.setString(4, student.getDepartment());
-            preparedStatement.setString(5, student.getEmail());
-            preparedStatement.setString(6, student.getPhoneNumber());
-
-            int row = preparedStatement.executeUpdate();
-
-            System.out.println("추가된 row : " + row);
+            sqlMapper.insert(connection.prepareStatement(query), object);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
+    }
 }

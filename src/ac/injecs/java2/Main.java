@@ -11,8 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
-    public StudentRepository studentRepository = new StudentRepositoryImpl();
-
     private JFrame MainFrame;
     private JPanel nowPanel;
     private JPanel prevPanel;
@@ -121,9 +119,3 @@ public class Main {
         main.setCenterPanel(new Notice(main));
     }
 }
-
-/*
-    왜 의존성 주입을 할까요? 그 이유는 패널 교체를 할떄 클래스 외부에서 접근하는게 아닌
-    생성자 함수에 MainFrame을 넘기면 MainFrame을 의존하게되어 해당 클래스 멤버를 접근할 수 있게됨
-    따라서 복잡하지 않게 패널 전환을 가능함.
- */
