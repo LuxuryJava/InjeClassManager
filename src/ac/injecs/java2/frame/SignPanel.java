@@ -1,8 +1,10 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.ValidateForm;
 import ac.injecs.java2.dto.StudentFormDto;
 import ac.injecs.java2.entity.Student;
+import com.mysql.cj.util.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,9 +51,13 @@ public class SignPanel extends JPanel {
             JLabel phoneText = new JLabel("전화번호:");
             JTextField phoneField = new JTextField();
             JLabel passwordText = new JLabel("비밀번호:");
-            JPasswordField passwordField = new JPasswordField();
+            JTextField passwordField = new JPasswordField();
             JLabel repasswordText = new JLabel("비밀번호 확인:");
             JTextField repasswordField = new JPasswordField();
+
+            JLabel errorMessage = new JLabel("");
+            errorMessage.setForeground(Color.RED);
+            errorMessage.setBounds(390, 360, 300, 30);
 
             JButton doneButton = new JButton("회원가입");
             doneButton.setBounds(420, 410, 100, 30);
@@ -87,6 +93,7 @@ public class SignPanel extends JPanel {
             phoneText.setFont(Sfont);
             passwordText.setFont(Sfont);
             repasswordText.setFont(Sfont);
+            errorMessage.setFont(Sfont);
 
             add(nameText);
             add(nameField);
@@ -103,6 +110,7 @@ public class SignPanel extends JPanel {
             add(repasswordText);
             add(repasswordField);
             add(doneButton);
+            add(errorMessage);
 
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -114,20 +122,49 @@ public class SignPanel extends JPanel {
             doneButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    // 회원가입
-                    StudentFormDto student = new StudentFormDto();
-                    student.setId(Long.valueOf(idField.getText()));
-                    student.setDepartment(departField.getText());
-                    student.setEmail(emailField.getText());
-                    student.setName(nameField.getText());
-                    student.setPhoneNumber(phoneField.getText());
-                    student.setPassword(String.valueOf(passwordField.getPassword()));
 
-                    System.out.println(student.toString());
-                    mainFrame.studentController.postSignPanel(student);
+                    try {
+                        // 회원가입
+                        StudentFormDto student = new StudentFormDto();
+                        student.setId(Long.valueOf(idField.getText()));
+                        student.setDepartment(departField.getText());
+                        student.setEmail(emailField.getText());
+                        student.setName(nameField.getText());
+                        student.setPhoneNumber(phoneField.getText());
+                        student.setPassword(passwordField.getText());
+
+                        // 이름, 이메일 validate
+                        if (!ValidateForm.isKorean(nameField.getText())){
+                            errorMessage.setText("이름은 한글만 입력해주세요.");
+                            return;
+                        }
+
+                        if (!ValidateForm.isEmail(emailField.getText())) {
+                            errorMessage.setText("이메일형식을 지켜서 입력해주세요.");
+                            return;
+                        }
+
+                        if (!passwordField.getText().equals(repasswordField.getText())) {
+                            errorMessage.setText("비밀번호가 서로 같지 않습니다.");
+                            return;
+                        }
+                        errorMessage.setText("");
+
+
+                        System.out.println(student.toString());
+
+                        mainFrame.studentController.signIn(student);
+                        mainFrame.studentController.login(mainFrame.session, Long.valueOf(idField.getText()), passwordField.getText());
+                        mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                    } catch (NumberFormatException e){
+                        errorMessage.setText("모든 필드를 채워주세요.");
+                    } catch (Exception e) {
+                        errorMessage.setText(e.getMessage());
+                    }
                 }
             });
             setVisible(true);
         }
+
     }
 }

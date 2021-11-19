@@ -48,7 +48,13 @@ public class User_MenuBarPanel extends JPanel {
         public MenuBarTopLabel() {
             setLayout(null);
             JLabel notice = new JLabel("인제 클래스 매니저");
-            JLabel name = new JLabel("어서오세요. 아무개님");
+            JLabel name;
+            String userName = mainFrame.session.user.getName();
+            if(mainFrame.session.isLogin)
+                name = new JLabel("어서오세요. " + userName +"님");
+            else
+                name = new JLabel("어서오세요.");
+
             notice.setBounds(20, 20, 200, 30);
             name.setBounds(20, 60, 200, 30);
 

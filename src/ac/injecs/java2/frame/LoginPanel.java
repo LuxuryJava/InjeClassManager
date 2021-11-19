@@ -40,13 +40,16 @@ public class LoginPanel extends JPanel {
             JPasswordField passwordField = new JPasswordField();
             JButton signButton = new JButton("회원가입");
             JButton loginButton = new JButton("로그인");
+            JLabel errorMessage = new JLabel("");
+            errorMessage.setForeground(Color.RED);
 
             idText.setBounds(380, 200, textWidth, 30);
             idField.setBounds(400 + textWidth, 200, 150, 30);
             passwordText.setBounds(380, 240, textWidth + 20, 30);
             passwordField.setBounds(400 + textWidth, 240, 150, 30);
-            signButton.setBounds(400, 300, 90, 30);
-            loginButton.setBounds(500, 300, 90, 30);
+            signButton.setBounds(400, 320, 90, 30);
+            loginButton.setBounds(500, 320, 90, 30);
+            errorMessage.setBounds(430, 280, 300, 30);
 
             idText.setHorizontalAlignment(SwingConstants.RIGHT);
             passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -55,6 +58,7 @@ public class LoginPanel extends JPanel {
             passwordText.setFont(Sfont);
             signButton.setFont(new Font("나눔고딕", Font.BOLD, 13));
             loginButton.setFont(Sfont);
+            errorMessage.setFont(Sfont);
 
             add(idText);
             add(idField);
@@ -62,13 +66,27 @@ public class LoginPanel extends JPanel {
             add(passwordField);
             add(signButton);
             add(loginButton);
+            add(errorMessage);
 
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Long id = Long.valueOf(idField.getText());
                     String password = String.valueOf(passwordField.getPassword());
-                    mainFrame.studentController.getLoginPanel(id, password);
+                    try {
+                        Long id = Long.valueOf(idField.getText());
+                        boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
+                        if(isLogin) {
+                            mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                            errorMessage.setText("");
+                        }
+                        else {
+                            errorMessage.setText("비밀번호를 확인해주세요");
+                        }
+                    } catch (NumberFormatException e) {
+                        errorMessage.setText("모든 필드를 채워주세요");
+                    } catch (IllegalStateException e) {
+                        errorMessage.setText(e.getMessage());
+                    }
                 }
             });
 
