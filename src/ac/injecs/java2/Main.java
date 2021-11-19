@@ -25,7 +25,7 @@ public class Main {
     private String mode;
 
     public DashBoardPanel dashBoardPanel;
-    public Admin_MenuBarPanel menuBarPanel;
+    public User_MenuBarPanel menuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
     public SelectDongPanel selectDongPanel;
@@ -35,7 +35,7 @@ public class Main {
     public CheckClass_Day checkClass_day;
     public CheckClass_Details checkClass_details;
     public Lecture_List lecture_list;
-    public reservation reservation;
+    public Reservation reservation;
     public AdmitClassPanel admitClassPanel;
     public RequestLockClassPanel requestLockClassPanel;
 
@@ -69,7 +69,7 @@ public class Main {
     }
 
     // 사이드 메뉴 부착
-    public void setMenuPanel(Admin_MenuBarPanel menuBarPanel) {
+    public void setMenuPanel(User_MenuBarPanel menuBarPanel) {
         MainFrame.add(menuBarPanel);
         updateContent();
     }
@@ -111,8 +111,8 @@ public class Main {
         Main main = new Main();
         // 사용자 정의 패널 생성
         main.dashBoardPanel = new DashBoardPanel(main);
-        //main.menuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
-        main.menuBarPanel = new Admin_MenuBarPanel(main);
+        main.menuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
+        //main.menuBarPanel = new Admin_MenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
         main.selectDongPanel = new SelectDongPanel(main);
@@ -122,7 +122,7 @@ public class Main {
         main.checkClass_day = new CheckClass_Day(main);
         main.checkClass_details = new CheckClass_Details(main);
         main.lecture_list = new Lecture_List(main);
-        main.reservation = new reservation(main);
+        main.reservation = new Reservation(main);
         main.admitClassPanel = new AdmitClassPanel(main);
         main.requestLockClassPanel = new RequestLockClassPanel(main);
 

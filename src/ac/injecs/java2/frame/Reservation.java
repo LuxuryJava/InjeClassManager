@@ -1,39 +1,36 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
-import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.config.InjeFont;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class reservation extends JPanel {
+public class Reservation extends JPanel {
     private Main mainFrame;
     private String[] unit = {"A111", "A112", "A113", "A211", "A212", "A213"};
     private JButton bt = new JButton("확인");
     static JTextField unitField = new JTextField();
-    static Font Lfont = new Font("나눔고딕", Font.BOLD, 25);
-    static Font Mfont = new Font("나눔고딕", Font.BOLD, 20);
-    static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
 
-    public reservation(Main main) {
+    public Reservation(Main main) {
         this.mainFrame = main;
         setLayout(null);
 
         JLabel title = new JLabel("강의실 예약", JLabel.CENTER);
         title.setBounds(400, 50, 300, 25);
-        title.setFont(Lfont);
+        title.setFont(InjeFont.Lfont);
 
         JComboBox<String> cb = new JComboBox<String>(unit);
         JLabel text = new JLabel("강의실 선택", JLabel.CENTER);
-        text.setFont(Mfont);
+        text.setFont(InjeFont.Mfont);
         text.setBounds(50, 120, 150, 20);
         title.setBounds(400, 50, 200, 30);
 
         cb.setBounds(200, 120, 150, 20);
         bt.setBounds(830, 480, 70, 40);
-        bt.setFont(Sfont);
+        bt.setFont(InjeFont.Sfont);
 
         InfoBox infobox = new InfoBox();
         infobox.setBounds(70, 170, 400, 300);
@@ -71,7 +68,7 @@ public class reservation extends JPanel {
             setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             JLabel titleText = new JLabel("강의실 정보");
-            titleText.setFont(Mfont);
+            titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(150, 20, 250, 30);
 
             JLabel unitText = new JLabel("강의실:");
@@ -95,8 +92,8 @@ public class reservation extends JPanel {
             unitText.setHorizontalAlignment(SwingConstants.RIGHT);
             beamText.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            unitText.setFont(Sfont);
-            beamText.setFont(Sfont);
+            unitText.setFont(InjeFont.Sfont);
+            beamText.setFont(InjeFont.Sfont);
             numText.setFont(new Font("나눔고딕", Font.BOLD, 12));
 
             unitField.setEnabled(false);
@@ -135,7 +132,7 @@ public class reservation extends JPanel {
 
             JLabel titleText = new JLabel("예약 정보");
 
-            titleText.setFont(Mfont);
+            titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
@@ -164,11 +161,11 @@ public class reservation extends JPanel {
             timeText.setHorizontalAlignment(SwingConstants.RIGHT);
             purposeText.setHorizontalAlignment((SwingConstants.RIGHT));
 
-            nameText.setFont(Sfont);
-            numText.setFont(Sfont);
-            dayText.setFont(Sfont);
-            timeText.setFont(Sfont);
-            purposeText.setFont(Sfont);
+            nameText.setFont(InjeFont.Sfont);
+            numText.setFont(InjeFont.Sfont);
+            dayText.setFont(InjeFont.Sfont);
+            timeText.setFont(InjeFont.Sfont);
+            purposeText.setFont(InjeFont.Sfont);
 
             nameField.setEnabled(false);
 

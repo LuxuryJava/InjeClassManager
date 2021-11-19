@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
@@ -13,13 +14,12 @@ import java.util.Optional;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
-    static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
     public LoginPanel(Main main) {
         this.mainFrame = main;
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("로그인", SwingConstants.CENTER);
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
 
         LoginBox loginBox = new LoginBox();
@@ -34,27 +34,27 @@ public class LoginPanel extends JPanel {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
 
-            JLabel idText = new JLabel("학번:");
+            JLabel idText = new JLabel(" 학번: ");
             JTextField idField = new JTextField();
             JLabel passwordText = new JLabel("비밀번호:");
             JPasswordField passwordField = new JPasswordField();
             JButton signButton = new JButton("회원가입");
             JButton loginButton = new JButton("로그인");
 
-            idText.setBounds(380, 200, textWidth, 30);
-            idField.setBounds(400 + textWidth, 200, 150, 30);
-            passwordText.setBounds(380, 240, textWidth + 20, 30);
-            passwordField.setBounds(400 + textWidth, 240, 150, 30);
-            signButton.setBounds(400, 300, 90, 30);
-            loginButton.setBounds(500, 300, 90, 30);
+            idText.setBounds(395, 180, textWidth, 30);
+            idField.setBounds(405 + textWidth, 180, 150, 30);
+            passwordText.setBounds(380, 230, textWidth + 20, 30);
+            passwordField.setBounds(405 + textWidth, 230, 150, 30);
+            signButton.setBounds(420, 300, 90, 30);
+            loginButton.setBounds(525, 300, 90, 30);
 
             idText.setHorizontalAlignment(SwingConstants.RIGHT);
-            passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
+            //passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            idText.setFont(Sfont);
-            passwordText.setFont(Sfont);
+            idText.setFont(InjeFont.Sfont);
+            passwordText.setFont(InjeFont.Sfont);
             signButton.setFont(new Font("나눔고딕", Font.BOLD, 13));
-            loginButton.setFont(Sfont);
+            loginButton.setFont(InjeFont.Sfont);
 
             add(idText);
             add(idField);
