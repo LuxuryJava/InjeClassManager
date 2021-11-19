@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
@@ -13,13 +14,12 @@ import java.util.Optional;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
-    static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
     public LoginPanel(Main main) {
         this.mainFrame = main;
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("로그인", SwingConstants.CENTER);
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
 
         LoginBox loginBox = new LoginBox();
@@ -34,7 +34,7 @@ public class LoginPanel extends JPanel {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
 
-            JLabel idText = new JLabel("학번:");
+            JLabel idText = new JLabel(" 학번: ");
             JTextField idField = new JTextField();
             JLabel passwordText = new JLabel("비밀번호:");
             JPasswordField passwordField = new JPasswordField();
@@ -52,13 +52,13 @@ public class LoginPanel extends JPanel {
             errorMessage.setBounds(430, 280, 300, 30);
 
             idText.setHorizontalAlignment(SwingConstants.RIGHT);
-            passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
+            //passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            idText.setFont(Sfont);
-            passwordText.setFont(Sfont);
+            idText.setFont(InjeFont.Sfont);
+            passwordText.setFont(InjeFont.Sfont);
             signButton.setFont(new Font("나눔고딕", Font.BOLD, 13));
-            loginButton.setFont(Sfont);
-            errorMessage.setFont(Sfont);
+            loginButton.setFont(InjeFont.Sfont);
+            errorMessage.setFont(InjeFont.Sfont);
 
             add(idText);
             add(idField);
@@ -77,6 +77,7 @@ public class LoginPanel extends JPanel {
                         boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
                         if(isLogin) {
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                            mainFrame.userInfoPanel.update();
                             errorMessage.setText("");
                         }
                         else {

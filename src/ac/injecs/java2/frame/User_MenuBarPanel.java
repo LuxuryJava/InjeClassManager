@@ -45,15 +45,13 @@ public class User_MenuBarPanel extends JPanel {
     }
 
     public class MenuBarTopLabel extends JPanel {
+
+        JLabel name;
         public MenuBarTopLabel() {
             setLayout(null);
             JLabel notice = new JLabel("인제 클래스 매니저");
-            JLabel name;
-            String userName = mainFrame.session.user.getName();
-            if(mainFrame.session.isLogin)
-                name = new JLabel("어서오세요. " + userName +"님");
-            else
-                name = new JLabel("어서오세요.");
+
+            updateProfile();
 
             notice.setBounds(20, 20, 200, 30);
             name.setBounds(20, 60, 200, 30);
@@ -62,6 +60,16 @@ public class User_MenuBarPanel extends JPanel {
             add(name);
 
             setVisible(true);
+        }
+
+        public void updateProfile(){
+            if(mainFrame.session.isLogin) {
+                String userName = mainFrame.session.user.getName();
+                name = new JLabel("어서오세요. " + userName + "님");
+            }
+            else
+                name = new JLabel("어서오세요.");
+            repaint();
         }
     }
 
@@ -125,13 +133,14 @@ public class User_MenuBarPanel extends JPanel {
     }
 
     public class MenuBarUser extends JPanel {
+        JButton signButton = new JButton("회원가입");
+        JButton loginButton = new JButton("로그인");
+        JButton accountButton = new JButton("계정");
+
         public MenuBarUser() {
             setLayout(new FlowLayout());
 
 //            JButton accountButton = new JButton("계정");
-            JButton signButton = new JButton("회원가입");
-            JButton loginButton = new JButton("로그인");
-            JButton accountButton = new JButton("계정");
 
 //            add(accountButton);
             add(loginButton);
@@ -151,7 +160,19 @@ public class User_MenuBarPanel extends JPanel {
                 }
             });
 
+            accountButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.userInfoPanel);
+                }
+            });
+
             setVisible(true);
+        }
+
+        public void userLogin(){
+            // TODO : 로그인 시 변경되야하는 데이터를 한군데서 처리하기
+            signButton.setVisible(false);
         }
     }
 
