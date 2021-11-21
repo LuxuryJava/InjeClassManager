@@ -4,14 +4,11 @@ import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 //Frame
 public class Notice_Add  extends JPanel {
     private Main mainFrame;
-
-
     public Notice_Add(Main main) {
         this.mainFrame = main;
         setLayout(null);
