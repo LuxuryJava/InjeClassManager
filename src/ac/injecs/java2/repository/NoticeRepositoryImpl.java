@@ -15,7 +15,14 @@ public class NoticeRepositoryImpl  implements NoticeRepository {
     @Override
     public Notice insert(Notice notice) {
         String sql = "insert into student values(?, ?, ?, ?, ?)";
+        dbConnect.insert(sql, new NoticeMapper(), notice);
 
+        return notice;
+    }
+    @Override
+    public List<Notice> findAll() {
+        String sql = "select * from notification";
+        List<Notice> notice = (List<Notice>) dbConnect.select(sql, new NoticeMapper());
         return notice;
     }
 }

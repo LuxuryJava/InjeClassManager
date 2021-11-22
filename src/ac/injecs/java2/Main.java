@@ -133,6 +133,7 @@ public class Main {
         main.userInfoPanel = new UserInfoPanel(main);
 
         main.setMenuPanel(main.userMenuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+       // main.setCenterPanel(main.dashBoardPanel);
+        main.setCenterPanel(new Notice_List(main));
     }
 }

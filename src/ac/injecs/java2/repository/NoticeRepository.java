@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface NoticeRepository {
     Notice insert(Notice notice);
+    List<Notice> findAll();
 }
