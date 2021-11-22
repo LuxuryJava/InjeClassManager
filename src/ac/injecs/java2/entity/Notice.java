@@ -1,6 +1,8 @@
 package ac.injecs.java2.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 
 public class Notice {
 
@@ -54,7 +56,7 @@ public class Notice {
         this.content = content;
     }
 
-    public String getCreatedTime() {
+    public ChronoLocalDateTime<LocalDate> getCreatedTime() {
         return createdTime;
     }
 

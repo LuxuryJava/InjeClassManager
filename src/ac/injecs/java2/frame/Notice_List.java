@@ -2,6 +2,8 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
+import  ac.injecs.java2.entity.Notice;
+import ac.injecs.java2.repository.NoticeRepository;
 import ac.injecs.java2.repository.NoticeRepositoryImpl;
 
 import javax.swing.*;
@@ -11,7 +13,7 @@ import javax.swing.JTable.*;
 
 public class Notice_List  extends JPanel {
     private Main mainFrame;
-    private  String[] list = new String[] {"글 번호", "제목", "내용", "작성자", "작성일"};
+    private  String[] Tag = new String[] {"글 번호", "제목", "내용", "작성자", "작성일"};
     public Notice_List(Main main) {
         this.mainFrame = main;
         setLayout(null);
@@ -24,6 +26,8 @@ public class Notice_List  extends JPanel {
         scrollPane.setBounds(45, 80, 900, 450);
 
         JTable table = new JTable();
+
+
 
         add(Maintitle);
         add(scrollPane);
