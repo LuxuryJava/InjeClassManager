@@ -41,6 +41,19 @@ create table Manager (
                          PRIMARY KEY(mid)
 );
 
+create table Reservation (
+
+    id int(10),
+
+    name char(10),
+
+    class char(10),
+
+    time timestamp,
+
+    state char(10)
+);
+
 create table Notification (
 
                               nno int(10),
@@ -50,9 +63,7 @@ create table Notification (
                               nname char(30),
 
                               ncontent TEXT(500),
-
                               ntime date,
-
                               PRIMARY KEY(nno)
 );
 

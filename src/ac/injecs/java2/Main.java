@@ -132,7 +132,7 @@ public class Main {
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
 
-        main.setMenuPanel(main.userMenuBarPanel);
-        main.setCenterPanel(main.dashBoardPanel);
+        main.setMenuPanel(main.menuBarPanel);
+        main.setCenterPanel(main.admitClassPanel);
     }
 }
