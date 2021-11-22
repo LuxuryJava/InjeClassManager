@@ -1,10 +1,12 @@
 package ac.injecs.java2;
 
+import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.controller.StudentController;
 import ac.injecs.java2.frame.*;
 import ac.injecs.java2.frame.admin.AdmitClassPanel;
 import ac.injecs.java2.frame.admin.RequestLockClassPanel;
+import ac.injecs.java2.frame.user.UserInfoPanel;
 import ac.injecs.java2.repository.StudentRepository;
 import ac.injecs.java2.repository.StudentRepositoryImpl;
 import ac.injecs.java2.service.StudentService;
@@ -18,6 +20,7 @@ public class Main {
     private StudentRepository studentRepository = new StudentRepositoryImpl();
     private StudentService studentService = new StudentService(studentRepository);
     public StudentController studentController = new StudentController(studentService);
+    public SessionConfig session = new SessionConfig();
 
     private JFrame MainFrame;
     private JPanel nowPanel;
@@ -25,7 +28,8 @@ public class Main {
     private String mode;
 
     public DashBoardPanel dashBoardPanel;
-    public User_MenuBarPanel menuBarPanel;
+    public Admin_MenuBarPanel adminMenuBarPanel;
+    public User_MenuBarPanel userMenuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
     public SelectDongPanel selectDongPanel;
@@ -38,6 +42,7 @@ public class Main {
     public Reservation reservation;
     public AdmitClassPanel admitClassPanel;
     public RequestLockClassPanel requestLockClassPanel;
+    public UserInfoPanel userInfoPanel;
 
     // 프레임 초기 설정
     public Main(){
@@ -69,7 +74,7 @@ public class Main {
     }
 
     // 사이드 메뉴 부착
-    public void setMenuPanel(User_MenuBarPanel menuBarPanel) {
+    public void setMenuPanel(JPanel menuBarPanel) {
         MainFrame.add(menuBarPanel);
         updateContent();
     }
@@ -111,8 +116,8 @@ public class Main {
         Main main = new Main();
         // 사용자 정의 패널 생성
         main.dashBoardPanel = new DashBoardPanel(main);
-        main.menuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
-        //main.menuBarPanel = new Admin_MenuBarPanel(main);
+        main.userMenuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
+        main.adminMenuBarPanel = new Admin_MenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
         main.selectDongPanel = new SelectDongPanel(main);
@@ -125,6 +130,7 @@ public class Main {
         main.reservation = new Reservation(main);
         main.admitClassPanel = new AdmitClassPanel(main);
         main.requestLockClassPanel = new RequestLockClassPanel(main);
+        main.userInfoPanel = new UserInfoPanel(main);
 
         main.setMenuPanel(main.menuBarPanel);
         main.setCenterPanel(main.admitClassPanel);
