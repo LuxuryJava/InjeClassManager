@@ -1,4 +1,4 @@
-package ac.injecs.java2.frame;
+package ac.injecs.java2.frame.menu;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.constant.FrameConstant;
@@ -10,12 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Admin_MenuBarPanel extends JPanel {
-    private Main mainFrame;
-    private int menuBarWidth = FrameConstant.MENUWIDTH.getValue();
+public class AdminMenuBarPanel extends MenuBarPanel {
 
-    public Admin_MenuBarPanel(Main main) {
-        this.mainFrame = main;
+    public AdminMenuBarPanel(Main main) {
+        super(main);
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
         setBackground(Color.GRAY);

@@ -1,7 +1,9 @@
-package ac.injecs.java2.frame;
+package ac.injecs.java2.frame.menu;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class User_MenuBarPanel extends JPanel {
-    private Main mainFrame;
-    private int menuBarWidth = FrameConstant.MENUWIDTH.getValue();
+public class UserMenuBarPanel extends MenuBarPanel {
 
-    public User_MenuBarPanel(Main main) {
-        this.mainFrame = main;
+    public UserMenuBarPanel(Main main) {
+        super(main);
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
         setBackground(Color.GRAY);
@@ -44,17 +44,22 @@ public class User_MenuBarPanel extends JPanel {
         });
     }
 
-    public class MenuBarTopLabel extends JPanel {
+    public void paintComponent(Graphics g){
+        mainFrame.updateContent();
+    }
 
+    public class MenuBarTopLabel extends JPanel {
         JLabel name;
         public MenuBarTopLabel() {
             setLayout(null);
+            setBackground(Color.WHITE);
             JLabel notice = new JLabel("인제 클래스 매니저");
+            notice.setFont(InjeFont.Mfont);
 
-            updateProfile();
-
+            name = new JLabel("어서오세요.");
             notice.setBounds(20, 20, 200, 30);
             name.setBounds(20, 60, 200, 30);
+            name.setFont(InjeFont.Sfont);
 
             add(notice);
             add(name);
@@ -62,14 +67,18 @@ public class User_MenuBarPanel extends JPanel {
             setVisible(true);
         }
 
-        public void updateProfile(){
-            if(mainFrame.session.isLogin) {
-                String userName = mainFrame.session.user.getName();
-                name = new JLabel("어서오세요. " + userName + "님");
+        private void profile(){
+            if(mainFrame.session.isLogin){
+                Student user = mainFrame.session.getUser();
+                name.setText("어서오세요 " + user.getName() + " 님");
+            }else
+            {
+                name.setText("어서오세요");
             }
-            else
-                name = new JLabel("어서오세요.");
-            repaint();
+        }
+
+        public void paintComponent(Graphics g) {
+            profile();
         }
     }
 
@@ -136,6 +145,7 @@ public class User_MenuBarPanel extends JPanel {
         JButton signButton = new JButton("회원가입");
         JButton loginButton = new JButton("로그인");
         JButton accountButton = new JButton("계정");
+        JButton logoutButton = new JButton("로그아웃");
 
         public MenuBarUser() {
             setLayout(new FlowLayout());
@@ -143,9 +153,12 @@ public class User_MenuBarPanel extends JPanel {
 //            JButton accountButton = new JButton("계정");
 
 //            add(accountButton);
+
+
             add(loginButton);
             add(signButton);
             add(accountButton);
+            add(logoutButton);
 
             signButton.addActionListener(new ActionListener() {
                 @Override
@@ -167,12 +180,28 @@ public class User_MenuBarPanel extends JPanel {
                 }
             });
 
+            logoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.session.outSession();
+                    mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                    repaint();
+                }
+            });
+
             setVisible(true);
         }
 
-        public void userLogin(){
-            // TODO : 로그인 시 변경되야하는 데이터를 한군데서 처리하기
-            signButton.setVisible(false);
+        private void setUserButtonVisible(boolean status){
+            accountButton.setVisible(status);
+            logoutButton.setVisible(status);
+            loginButton.setVisible(!status);
+            signButton.setVisible(!status);
+        }
+
+
+        public void paintComponent(Graphics g){
+            setUserButtonVisible(mainFrame.session.isLogin);
         }
     }
 

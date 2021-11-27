@@ -77,7 +77,6 @@ public class LoginPanel extends JPanel {
                         boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
                         if(isLogin) {
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
-                            mainFrame.userInfoPanel.update();
                             errorMessage.setText("");
                         }
                         else {
