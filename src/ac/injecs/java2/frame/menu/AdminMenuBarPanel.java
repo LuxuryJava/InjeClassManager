@@ -38,21 +38,6 @@ public class AdminMenuBarPanel extends MenuBarPanel {
         });
     }
 
-    public class MenuBarTopLabel extends JPanel {
-        public MenuBarTopLabel() {
-            setLayout(null);
-            JLabel notice = new JLabel("인제 클래스 매니저");
-            JLabel name = new JLabel("관리자님");
-            notice.setBounds(20, 20, 200, 30);
-            name.setBounds(20, 60, 200, 30);
-
-            add(notice);
-            add(name);
-
-            setVisible(true);
-        }
-    }
-
     public class MenuBarButtons extends JPanel {
         public MenuBarButtons() {
             setLayout(new GridLayout(5, 1, 40, 10));
@@ -92,7 +77,6 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                     mainFrame.session.outSession();
                     mainFrame.setMenuPanel();
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
-                    repaint();
                 }
             });
 
@@ -111,7 +95,6 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 logoutButton.setVisible(status);
             }
         }
-
 
         public void paintComponent(Graphics g){
             setUserButtonVisible(mainFrame.session.isLogin);

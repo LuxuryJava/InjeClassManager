@@ -65,6 +65,7 @@ public class Main {
         MainFrame.setTitle("인제 클래스 매니저");
         MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        MainFrame.setBackground(Color.WHITE);
         MainFrame.setLayout(null);
 
         MainFrame.setResizable(false);
@@ -75,7 +76,6 @@ public class Main {
     // 현재 센터를 가지는 패널 지정
     public void setNowPanel(JPanel panel) {
         nowPanel = panel;
-        nowPanel.setBackground(Color.WHITE);
         nowPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -129,7 +129,13 @@ public class Main {
         setNowPanel(panel);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
         panel.setBounds(FrameConstant.MENUWIDTH.getValue(), 0, width, 600);
+        panel.setBackground(Color.WHITE);
+
         MainFrame.add(panel);
+        if (prevPanel != null) {
+            if(!prevPanel.equals(nowPanel))
+                MainFrame.remove(prevPanel);
+        }
         updateContent();
     }
 
@@ -164,10 +170,10 @@ public class Main {
         main.userInfoPanel = new UserInfoPanel(main);
 
        // main.setCenterPanel(main.dashBoardPanel);
-        //main.setCenterPanel(new Notice_List(main));
+        main.setCenterPanel(new Notice_Add(main));
 
         main.adminLogin();
         main.setMenuPanel();
-        main.setCenterPanel(main.admitClassPanel);
+        //main.setCenterPanel(main.admitClassPanel);
     }
 }

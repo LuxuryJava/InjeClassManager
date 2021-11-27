@@ -68,6 +68,13 @@ public class LoginPanel extends JPanel {
             add(loginButton);
             add(errorMessage);
 
+            signButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.setCenterPanel(mainFrame.signPanel);
+                }
+            });
+
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
