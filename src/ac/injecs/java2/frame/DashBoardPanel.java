@@ -32,9 +32,10 @@ public class DashBoardPanel extends JPanel {
     public DashBoardPanel(Main main) {
         this.mainFrame = main;
         setLayout(null);
+        int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
+        setSize(width, 600);
 
-        setOpaque(true);
-        setBackground(Color.RED);
+        setBackground(Color.WHITE);
 
         JLabel title = new JLabel("대시보드");
         title.setBounds(10, 0, 300, 50);
@@ -44,13 +45,13 @@ public class DashBoardPanel extends JPanel {
         updateText.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
         updateText.setBounds(12, 40, 300, 30);
 
-        BoxPanel boxPanel1 = new BoxPanel("총 강의실", "23", new Color(0x071F6));
+        boxPanel1 = new BoxPanel("총 강의실", "23", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
-        BoxPanel boxPanel2 = new BoxPanel("예약된 강의실", "23", new Color(0x071F6));
+        boxPanel2 = new BoxPanel("예약된 강의실", "23", new Color(0x071F6));
         boxPanel2.setBounds(50 + boxWidthGap * 2, 80, boxWidth, boxHeight);
-        BoxPanel boxPanel3 = new BoxPanel("사용중 강의실", "3", new Color(0xFF6C2D));
+        boxPanel3 = new BoxPanel("사용중 강의실", "3", new Color(0xFF6C2D));
         boxPanel3.setBounds(50 + boxWidthGap * 4, 80, boxWidth, boxHeight);
-        BoxPanel boxPanel4 = new BoxPanel("남은 강의실", "40", new Color(0xC12503));
+        boxPanel4 = new BoxPanel("남은 강의실", "40", new Color(0xC12503));
         boxPanel4.setBounds(50 + boxWidthGap * 6, 80, boxWidth, boxHeight);
 
         NoticeBoxPanel noticeBoxPanel1 = new NoticeBoxPanel("비어있는 강의실", emptyClass, 300, 170);
