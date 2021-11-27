@@ -23,9 +23,18 @@ public class DashBoardPanel extends JPanel {
     private String[] realtimeClass = {"18-박성훈 컴퓨터공학부 입실 E312 오후 03:04", "학번-이름 학과 상태 장소 시간"};
     private String[] notices = {"공지사항입니다 2021.09.23(목)", "강의실관련 공지사항 2021.11.01(일)"};
     //    private Vector<String> notices = {"공지사항입니다", "2021.09.23(목)", "강의실관련 공지사항", "2021.11.01(일)"};
+
+    BoxPanel boxPanel1;
+    BoxPanel boxPanel2;
+    BoxPanel boxPanel3;
+    BoxPanel boxPanel4;
+
     public DashBoardPanel(Main main) {
         this.mainFrame = main;
         setLayout(null);
+
+        setOpaque(true);
+        setBackground(Color.RED);
 
         JLabel title = new JLabel("대시보드");
         title.setBounds(10, 0, 300, 50);
@@ -64,7 +73,14 @@ public class DashBoardPanel extends JPanel {
         setVisible(true);
     }
 
+    public void paintComponent(Graphics graphics) {
+
+    }
+
     public class BoxPanel extends JPanel{
+        JLabel titleText;
+        JLabel valueText;
+
         public BoxPanel(String title, String value, Color color){
             setLayout(null);
             setBackground(color);

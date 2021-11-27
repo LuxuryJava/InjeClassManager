@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class StudentRepositoryImpl implements StudentRepository {
-    static final DBConnect dbConnect = new DBConnect();
+    final DBConnect dbConnect = DBConnect.getInstance();
 
     @Override
     public Student save(Student student) {

@@ -1,7 +1,10 @@
-package ac.injecs.java2.frame;
+package ac.injecs.java2.frame.menu;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.entity.Student;
+import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,20 +13,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class User_MenuBarPanel extends JPanel {
-    private Main mainFrame;
-    private int menuBarWidth = FrameConstant.MENUWIDTH.getValue();
+public class UserMenuBarPanel extends MenuBarPanel {
 
-    public User_MenuBarPanel(Main main) {
-        this.mainFrame = main;
+    public UserMenuBarPanel(Main main) {
+        super(main);
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
-        setBackground(Color.GRAY);
+        setOpaque(true);
 
         // add
         MenuBarTopLabel menuBarTopLabel = new MenuBarTopLabel();
         MenuBarButtons menuBarButtons = new MenuBarButtons();
         MenuBarUser menuBarUser = new MenuBarUser();
+
 
         menuBarTopLabel.setBounds(0, 0, menuBarWidth, 100);
         menuBarButtons.setBounds(0, 100, menuBarWidth, 400);
@@ -44,17 +46,21 @@ public class User_MenuBarPanel extends JPanel {
         });
     }
 
-    public class MenuBarTopLabel extends JPanel {
+    public void paintComponent(Graphics g){
+        mainFrame.updateContent();
+    }
 
+    public class MenuBarTopLabel extends JPanel {
         JLabel name;
         public MenuBarTopLabel() {
             setLayout(null);
             JLabel notice = new JLabel("인제 클래스 매니저");
+            notice.setFont(InjeFont.Mfont);
 
-            updateProfile();
-
+            name = new JLabel("어서오세요.");
             notice.setBounds(20, 20, 200, 30);
             name.setBounds(20, 60, 200, 30);
+            name.setFont(InjeFont.Sfont);
 
             add(notice);
             add(name);
@@ -62,26 +68,52 @@ public class User_MenuBarPanel extends JPanel {
             setVisible(true);
         }
 
-        public void updateProfile(){
-            if(mainFrame.session.isLogin) {
-                String userName = mainFrame.session.user.getName();
-                name = new JLabel("어서오세요. " + userName + "님");
+        private void profile(){
+            if(mainFrame.session.isLogin){
+                User user = mainFrame.session.getUser();
+                name.setText("어서오세요 " + user.getName() + " 님");
+            }else
+            {
+                name.setText("어서오세요");
             }
-            else
-                name = new JLabel("어서오세요.");
-            repaint();
+        }
+
+        public void paintComponent(Graphics g) {
+            profile();
         }
     }
 
     public class MenuBarButtons extends JPanel {
-        public MenuBarButtons() {
-            setLayout(new GridLayout(5, 1, 40, 10));
+        private String resourcePath = "./resources/images/";
+        private ImageIcon image1 = new ImageIcon(resourcePath + "대시보드.png");
+        private ImageIcon image2 = new ImageIcon(resourcePath + "강의실예약.png");
+        private ImageIcon image3 = new ImageIcon(resourcePath + "강의실조회.png");
+        private ImageIcon image4 = new ImageIcon(resourcePath + "강의실개방.png");
+        private ImageIcon image5 = new ImageIcon(resourcePath + "특강.png");
 
-            JButton dashboardButton = new JButton("대시보드");
-            JButton classReservationButton = new JButton("강의실 예약");
-            JButton classCheckButton = new JButton("강의실 조회");
-            JButton classStateButton = new JButton("강의실 개방");
-            JButton lectureButton = new JButton("특강");
+        private void addButtonImage(ImageIcon image, JButton target){
+            Image img = image.getImage().getScaledInstance(200, 40, Image.SCALE_SMOOTH);
+            target.setIcon(new ImageIcon(img));
+            target.setBorderPainted(false);
+            target.setContentAreaFilled(false);
+        }
+        public MenuBarButtons() {
+            setLayout(new GridLayout(7, 1, 0, 15));
+
+            JButton dashboardButton = new JButton();
+            addButtonImage(image1, dashboardButton);
+
+            JButton classReservationButton = new JButton();
+            addButtonImage(image2, classReservationButton);
+
+            JButton classCheckButton = new JButton();
+            addButtonImage(image3, classCheckButton);
+
+            JButton classStateButton = new JButton();
+            addButtonImage(image4, classStateButton);
+
+            JButton lectureButton = new JButton();
+            addButtonImage(image5, lectureButton);
 
             add(dashboardButton);
             add(classReservationButton);
@@ -136,16 +168,24 @@ public class User_MenuBarPanel extends JPanel {
         JButton signButton = new JButton("회원가입");
         JButton loginButton = new JButton("로그인");
         JButton accountButton = new JButton("계정");
+        JButton logoutButton = new JButton("로그아웃");
 
         public MenuBarUser() {
             setLayout(new FlowLayout());
-
+            setOpaque(true);
+            setForeground(Color.WHITE);
 //            JButton accountButton = new JButton("계정");
 
 //            add(accountButton);
+            signButton.setFont(InjeFont.Sfont);
+            loginButton.setFont(InjeFont.Sfont);
+            accountButton.setFont(InjeFont.Sfont);
+            logoutButton.setFont(InjeFont.Sfont);
+
             add(loginButton);
             add(signButton);
             add(accountButton);
+            add(logoutButton);
 
             signButton.addActionListener(new ActionListener() {
                 @Override
@@ -167,12 +207,43 @@ public class User_MenuBarPanel extends JPanel {
                 }
             });
 
+            logoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    mainFrame.session.outSession();
+                    mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                    repaint();
+                }
+            });
+
             setVisible(true);
         }
 
-        public void userLogin(){
-            // TODO : 로그인 시 변경되야하는 데이터를 한군데서 처리하기
-            signButton.setVisible(false);
+        private void setUserButtonVisible(boolean status){
+            if (mainFrame.session.getUser() == null) {
+                accountButton.setVisible(status);
+                logoutButton.setVisible(status);
+                loginButton.setVisible(!status);
+                signButton.setVisible(!status);
+                return;
+            }
+            if (mainFrame.session.getUser().getName().equals("관리자")) {
+                accountButton.setVisible(false);
+                logoutButton.setVisible(true);
+                loginButton.setVisible(false);
+                signButton.setVisible(false);
+            }
+            else{
+                accountButton.setVisible(status);
+                logoutButton.setVisible(status);
+                loginButton.setVisible(!status);
+                signButton.setVisible(!status);
+            }
+        }
+
+
+        public void paintComponent(Graphics g){
+            setUserButtonVisible(mainFrame.session.isLogin);
         }
     }
 

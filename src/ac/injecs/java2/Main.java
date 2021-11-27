@@ -2,13 +2,20 @@ package ac.injecs.java2;
 
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.controller.ManagerController;
 import ac.injecs.java2.controller.StudentController;
 import ac.injecs.java2.frame.*;
 import ac.injecs.java2.frame.admin.AdmitClassPanel;
 import ac.injecs.java2.frame.admin.RequestLockClassPanel;
+import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
+import ac.injecs.java2.frame.menu.MenuBarPanel;
+import ac.injecs.java2.frame.menu.UserMenuBarPanel;
 import ac.injecs.java2.frame.user.UserInfoPanel;
+import ac.injecs.java2.repository.ManagerRepository;
+import ac.injecs.java2.repository.ManagerRepositoryImpl;
 import ac.injecs.java2.repository.StudentRepository;
 import ac.injecs.java2.repository.StudentRepositoryImpl;
+import ac.injecs.java2.service.ManagerService;
 import ac.injecs.java2.service.StudentService;
 
 import javax.swing.*;
@@ -17,9 +24,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
+
+    // DB
     private StudentRepository studentRepository = new StudentRepositoryImpl();
     private StudentService studentService = new StudentService(studentRepository);
     public StudentController studentController = new StudentController(studentService);
+
+    private ManagerRepository managerRepository = new ManagerRepositoryImpl();
+    private ManagerService managerService = new ManagerService(managerRepository);
+    public ManagerController managerController = new ManagerController(managerService);
+
+
     public SessionConfig session = new SessionConfig();
 
     private JFrame MainFrame;
@@ -28,8 +43,8 @@ public class Main {
     private String mode;
 
     public DashBoardPanel dashBoardPanel;
-    public Admin_MenuBarPanel adminMenuBarPanel;
-    public User_MenuBarPanel userMenuBarPanel;
+    public AdminMenuBarPanel adminMenuBarPanel;
+    public UserMenuBarPanel userMenuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
     public SelectDongPanel selectDongPanel;
@@ -74,8 +89,19 @@ public class Main {
     }
 
     // 사이드 메뉴 부착
-    public void setMenuPanel(JPanel menuBarPanel) {
-        MainFrame.add(menuBarPanel);
+    public void setMenuPanel() {
+        if (session.getUser() == null) {
+            MainFrame.remove(adminMenuBarPanel);
+            MainFrame.add(userMenuBarPanel);
+            return;
+        }
+        if (session.getUser().getName().equals("관리자")) {
+            MainFrame.remove(userMenuBarPanel);
+            MainFrame.add(adminMenuBarPanel);
+        } else {
+            MainFrame.remove(adminMenuBarPanel);
+            MainFrame.add(userMenuBarPanel);
+        }
         updateContent();
     }
 
@@ -112,12 +138,17 @@ public class Main {
         MainFrame.revalidate();
     }
 
+    private void adminLogin(){
+        boolean isAdminLogin = managerController.login(session, "1234", "1234");
+        updateContent();
+    }
+
     public static void main(String[] args) {
         Main main = new Main();
         // 사용자 정의 패널 생성
         main.dashBoardPanel = new DashBoardPanel(main);
-        main.userMenuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
-        main.adminMenuBarPanel = new Admin_MenuBarPanel(main);
+        main.userMenuBarPanel = new UserMenuBarPanel(main); // 의존성 주입
+        main.adminMenuBarPanel = new AdminMenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
         main.selectDongPanel = new SelectDongPanel(main);
@@ -132,8 +163,11 @@ public class Main {
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
 
-        main.setMenuPanel(main.userMenuBarPanel);
        // main.setCenterPanel(main.dashBoardPanel);
-        main.setCenterPanel(new Notice_List(main));
+        //main.setCenterPanel(new Notice_List(main));
+
+        main.adminLogin();
+        main.setMenuPanel();
+        main.setCenterPanel(main.admitClassPanel);
     }
 }

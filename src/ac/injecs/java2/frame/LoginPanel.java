@@ -74,15 +74,17 @@ public class LoginPanel extends JPanel {
                     String password = String.valueOf(passwordField.getPassword());
                     try {
                         Long id = Long.valueOf(idField.getText());
-                        boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
-                        if(isLogin) {
+                        boolean isUserLogin = mainFrame.studentController.login(mainFrame.session, id, password);
+
+                        if(isUserLogin) {
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
-                            mainFrame.userInfoPanel.update();
+                            mainFrame.setMenuPanel();
                             errorMessage.setText("");
                         }
                         else {
                             errorMessage.setText("비밀번호를 확인해주세요");
                         }
+
                     } catch (NumberFormatException e) {
                         errorMessage.setText("모든 필드를 채워주세요");
                     } catch (IllegalStateException e) {
