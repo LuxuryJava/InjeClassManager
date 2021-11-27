@@ -16,7 +16,7 @@ public class NoticeMapper extends SQLMapper {
             preparedStatement.setString(2, notice.getTitle());
             preparedStatement.setString(3, notice.getContent());
             preparedStatement.setString(4, notice.getWriter());
-            preparedStatement.setString(5, notice.getCreatedTime());
+            //preparedStatement.setString(5, notice.getCreatedTime());
 
             int row = preparedStatement.executeUpdate();
 
