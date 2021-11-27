@@ -23,15 +23,8 @@ public class UserMenuBarPanel extends MenuBarPanel {
 
         // add
         MenuBarTopLabel menuBarTopLabel = new MenuBarTopLabel();
-        menuBarTopLabel.setOpaque(true);
-        menuBarTopLabel.setBackground(Color.WHITE);
         MenuBarButtons menuBarButtons = new MenuBarButtons();
-        menuBarButtons.setOpaque(true);
-        menuBarButtons.setBackground(Color.WHITE);
-
         MenuBarUser menuBarUser = new MenuBarUser();
-        menuBarUser.setOpaque(true);
-        menuBarUser.setBackground(Color.WHITE);
 
 
         menuBarTopLabel.setBounds(0, 0, menuBarWidth, 100);
