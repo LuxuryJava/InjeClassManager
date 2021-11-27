@@ -4,6 +4,7 @@ import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.entity.Student;
+import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +19,20 @@ public class UserMenuBarPanel extends MenuBarPanel {
         super(main);
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
-        setBackground(Color.GRAY);
+        setOpaque(true);
 
         // add
         MenuBarTopLabel menuBarTopLabel = new MenuBarTopLabel();
+        menuBarTopLabel.setOpaque(true);
+        menuBarTopLabel.setBackground(Color.WHITE);
         MenuBarButtons menuBarButtons = new MenuBarButtons();
+        menuBarButtons.setOpaque(true);
+        menuBarButtons.setBackground(Color.WHITE);
+
         MenuBarUser menuBarUser = new MenuBarUser();
+        menuBarUser.setOpaque(true);
+        menuBarUser.setBackground(Color.WHITE);
+
 
         menuBarTopLabel.setBounds(0, 0, menuBarWidth, 100);
         menuBarButtons.setBounds(0, 100, menuBarWidth, 400);
@@ -52,7 +61,6 @@ public class UserMenuBarPanel extends MenuBarPanel {
         JLabel name;
         public MenuBarTopLabel() {
             setLayout(null);
-            setBackground(Color.WHITE);
             JLabel notice = new JLabel("인제 클래스 매니저");
             notice.setFont(InjeFont.Mfont);
 
@@ -69,7 +77,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
 
         private void profile(){
             if(mainFrame.session.isLogin){
-                Student user = mainFrame.session.getUser();
+                User user = mainFrame.session.getUser();
                 name.setText("어서오세요 " + user.getName() + " 님");
             }else
             {
@@ -83,14 +91,36 @@ public class UserMenuBarPanel extends MenuBarPanel {
     }
 
     public class MenuBarButtons extends JPanel {
-        public MenuBarButtons() {
-            setLayout(new GridLayout(5, 1, 40, 10));
+        private String resourcePath = "./resources/images/";
+        private ImageIcon image1 = new ImageIcon(resourcePath + "대시보드.png");
+        private ImageIcon image2 = new ImageIcon(resourcePath + "강의실예약.png");
+        private ImageIcon image3 = new ImageIcon(resourcePath + "강의실조회.png");
+        private ImageIcon image4 = new ImageIcon(resourcePath + "강의실개방.png");
+        private ImageIcon image5 = new ImageIcon(resourcePath + "특강.png");
 
-            JButton dashboardButton = new JButton("대시보드");
-            JButton classReservationButton = new JButton("강의실 예약");
-            JButton classCheckButton = new JButton("강의실 조회");
-            JButton classStateButton = new JButton("강의실 개방");
-            JButton lectureButton = new JButton("특강");
+        private void addButtonImage(ImageIcon image, JButton target){
+            Image img = image.getImage().getScaledInstance(200, 40, Image.SCALE_SMOOTH);
+            target.setIcon(new ImageIcon(img));
+            target.setBorderPainted(false);
+            target.setContentAreaFilled(false);
+        }
+        public MenuBarButtons() {
+            setLayout(new GridLayout(7, 1, 0, 15));
+
+            JButton dashboardButton = new JButton();
+            addButtonImage(image1, dashboardButton);
+
+            JButton classReservationButton = new JButton();
+            addButtonImage(image2, classReservationButton);
+
+            JButton classCheckButton = new JButton();
+            addButtonImage(image3, classCheckButton);
+
+            JButton classStateButton = new JButton();
+            addButtonImage(image4, classStateButton);
+
+            JButton lectureButton = new JButton();
+            addButtonImage(image5, lectureButton);
 
             add(dashboardButton);
             add(classReservationButton);
@@ -149,11 +179,15 @@ public class UserMenuBarPanel extends MenuBarPanel {
 
         public MenuBarUser() {
             setLayout(new FlowLayout());
-
+            setOpaque(true);
+            setForeground(Color.WHITE);
 //            JButton accountButton = new JButton("계정");
 
 //            add(accountButton);
-
+            signButton.setFont(InjeFont.Sfont);
+            loginButton.setFont(InjeFont.Sfont);
+            accountButton.setFont(InjeFont.Sfont);
+            logoutButton.setFont(InjeFont.Sfont);
 
             add(loginButton);
             add(signButton);
@@ -193,10 +227,25 @@ public class UserMenuBarPanel extends MenuBarPanel {
         }
 
         private void setUserButtonVisible(boolean status){
-            accountButton.setVisible(status);
-            logoutButton.setVisible(status);
-            loginButton.setVisible(!status);
-            signButton.setVisible(!status);
+            if (mainFrame.session.getUser() == null) {
+                accountButton.setVisible(status);
+                logoutButton.setVisible(status);
+                loginButton.setVisible(!status);
+                signButton.setVisible(!status);
+                return;
+            }
+            if (mainFrame.session.getUser().getName().equals("관리자")) {
+                accountButton.setVisible(false);
+                logoutButton.setVisible(true);
+                loginButton.setVisible(false);
+                signButton.setVisible(false);
+            }
+            else{
+                accountButton.setVisible(status);
+                logoutButton.setVisible(status);
+                loginButton.setVisible(!status);
+                signButton.setVisible(!status);
+            }
         }
 
 

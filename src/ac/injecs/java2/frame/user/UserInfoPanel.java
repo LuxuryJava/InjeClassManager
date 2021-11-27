@@ -90,7 +90,10 @@ public class UserInfoPanel extends JPanel {
 
 
     public void updateComponent(){
-        Student user = mainFrame.session.getUser();
+        if (mainFrame.session.getUser().getName().equals("관리자")) {
+            return;
+        }
+        Student user = (Student) mainFrame.session.getUser();
         userLabel.name.setText(user.getName());
         userLabel.id.setText(user.getId().toString());
         userLabel.depart.setText(user.getDepartment());

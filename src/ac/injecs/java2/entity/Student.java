@@ -3,7 +3,7 @@ package ac.injecs.java2.entity;
 import ac.injecs.java2.config.PasswordEncoder;
 import ac.injecs.java2.dto.StudentFormDto;
 
-public class Student {
+public class Student extends User{
 
     private Long id; // key
 
