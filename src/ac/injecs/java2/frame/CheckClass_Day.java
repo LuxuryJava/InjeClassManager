@@ -37,12 +37,7 @@ public class CheckClass_Day extends JPanel {
                 btn[i].setBorderPainted(false);
                 btn[i].setFocusPainted(false);
                 btn[i].setContentAreaFilled(false);
-                btn[i].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        mainFrame.setCenterPanel(mainFrame.checkClass_details);
-                    }
-                });
+                
             }
 
 

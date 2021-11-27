@@ -38,7 +38,7 @@ public class LoginPanel extends JPanel {
             JTextField idField = new JTextField();
             JLabel passwordText = new JLabel("비밀번호:");
             JPasswordField passwordField = new JPasswordField();
-            JButton signButton = new JButton("회원가입");
+            //JButton signButton = new JButton("회원가입");
             JButton loginButton = new JButton("로그인");
             JLabel errorMessage = new JLabel("");
             errorMessage.setForeground(Color.RED);
@@ -47,8 +47,8 @@ public class LoginPanel extends JPanel {
             idField.setBounds(400 + textWidth, 200, 150, 30);
             passwordText.setBounds(380, 240, textWidth + 20, 30);
             passwordField.setBounds(400 + textWidth, 240, 150, 30);
-            signButton.setBounds(400, 320, 90, 30);
-            loginButton.setBounds(500, 320, 90, 30);
+            //signButton.setBounds(400, 320, 90, 30);
+            loginButton.setBounds(640, 200, 90, 70);
             errorMessage.setBounds(430, 280, 300, 30);
 
             idText.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -56,7 +56,7 @@ public class LoginPanel extends JPanel {
 
             idText.setFont(InjeFont.Sfont);
             passwordText.setFont(InjeFont.Sfont);
-            signButton.setFont(new Font("나눔고딕", Font.BOLD, 13));
+           // signButton.setFont(new Font("나눔고딕", Font.BOLD, 13));
             loginButton.setFont(InjeFont.Sfont);
             errorMessage.setFont(InjeFont.Sfont);
 
@@ -64,7 +64,7 @@ public class LoginPanel extends JPanel {
             add(idField);
             add(passwordText);
             add(passwordField);
-            add(signButton);
+           // add(signButton);
             add(loginButton);
             add(errorMessage);
 
@@ -74,17 +74,20 @@ public class LoginPanel extends JPanel {
                     String password = String.valueOf(passwordField.getPassword());
                     try {
                         Long id = Long.valueOf(idField.getText());
-                        boolean isUserLogin = mainFrame.studentController.login(mainFrame.session, id, password);
-
-                        if(isUserLogin) {
+                        boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
+                        if(isLogin) {
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
-                            mainFrame.setMenuPanel();
+                            mainFrame.userInfoPanel.update();
+                            mainFrame.setsno(id);
                             errorMessage.setText("");
+                            mainFrame.userMenuBarPanel.btnshow();
+                            idField.setText("");
+                            passwordField.setText("");
+                            mainFrame.reservation.setid(id.toString());
                         }
                         else {
                             errorMessage.setText("비밀번호를 확인해주세요");
                         }
-
                     } catch (NumberFormatException e) {
                         errorMessage.setText("모든 필드를 채워주세요");
                     } catch (IllegalStateException e) {

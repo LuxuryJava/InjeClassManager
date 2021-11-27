@@ -1,16 +1,33 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.entity.ResInfo;
+
 import javax.swing.*;
 import java.awt.*;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class CheckClass_Details extends JPanel{
     
     private Main mainFrame;
     static Font Lfont = new Font("나눔고딕", Font.BOLD, 25);
     static Font Mfont = new Font("나눔고딕", Font.BOLD, 20);
     static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
-    
+    JTextField nameField = new JTextField("");
+    JTextField classField = new JTextField("");
+    JTextField numField = new JTextField("");
+    JTextField dayField = new JTextField("");
+    JTextField timeField = new JTextField("");
+    JTextField purposeField = new JTextField("");
+    public void setInfo() {
+    		ResInfo ri=mainFrame.studentRepository.getResinfo(mainFrame.session.user.getId().toString());
+    		nameField.setText(Integer.toString(ri.getsno()));
+    		classField.setText(ri.getrinfo());
+    		numField.setText(Integer.toString(ri.getmemcnt()));
+    		dayField.setText(ri.getuseday());
+    		timeField.setText(ri.getusetime());
+    		purposeField.setText(ri.getpurpose());	
+    }
     public CheckClass_Details(Main main) {
         this.mainFrame = main;
         setLayout(null);
@@ -43,17 +60,17 @@ public class CheckClass_Details extends JPanel{
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
-            JTextField nameField = new JTextField("아무개");
+            
             JLabel classText = new JLabel("강의실:");
-            JTextField classField = new JTextField("A112");
+            
             JLabel numText = new JLabel("이용 예정 인원:");
-            JTextField numField = new JTextField("25");
+            
             JLabel dayText = new JLabel("이용 요일:");
-            JTextField dayField = new JTextField("수");
+            
             JLabel timeText = new JLabel("이용 시간:");
-            JTextField timeField = new JTextField("20:00 ~ 20:50");
+            
             JLabel purposeText = new JLabel("이용 목적:");
-            JTextField purposeField = new JTextField("동아리 자바 세미나");
+            
 
             nameText.setBounds(60, textStartY - 20, textWidth, textHeight);
             nameField.setBounds(80 + textWidth, textStartY - 20, fieldWidth, textHeight);

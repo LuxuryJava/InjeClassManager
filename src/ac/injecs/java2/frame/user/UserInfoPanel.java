@@ -7,67 +7,46 @@ import ac.injecs.java2.entity.Student;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.*;
+import java.sql.SQLException;
 
 public class UserInfoPanel extends JPanel {
     Main mainFrame = null;
-    UserLabel userLabel = new UserLabel();
-
-    class UserLabel {
-        public JLabel name;
-        public JLabel id;
-        public JLabel depart;
-        public JLabel email;
-        public JLabel phone;
-    }
+    JTextField jt[]= new JTextField[5];
+    //JLabel jl[]=new JLabel[5];
 
     public UserInfoPanel(Main mainFrame) {
         this.mainFrame = mainFrame;
         setLayout(null);
+        
+        	
 
         JLabel title = new JLabel("내 정보");
         title.setBounds(10, 0, 300, 50);
         title.setFont(InjeFont.Mfont);
-
+        
+        
 
         JLabel nameText = new JLabel("이름");
         nameText.setBounds(270, 150, 100, 30);
         nameText.setFont(InjeFont.Sfont);
 
-        userLabel.name = new JLabel("박성훈");
-        userLabel.name.setBounds(350, 150, 300, 30);
-        userLabel.name.setFont(InjeFont.Mfont);
-
         JLabel idText = new JLabel("학번");
         idText.setBounds(270, 200, 100, 30);
         idText.setFont(InjeFont.Sfont);
-
-        userLabel.id = new JLabel("20182621");
-        userLabel.id.setBounds(350, 200, 300, 30);
-        userLabel.id.setFont(InjeFont.Mfont);
 
         JLabel departText = new JLabel("소속");
         departText.setBounds(270, 250, 100, 30);
         departText.setFont(InjeFont.Sfont);
 
-        userLabel.depart = new JLabel("컴퓨터공학부");
-        userLabel.depart.setBounds(350, 250, 300, 30);
-        userLabel.depart.setFont(InjeFont.Mfont);
-
         JLabel emailText = new JLabel("이메일");
         emailText.setBounds(260, 300, 100, 30);
         emailText.setFont(InjeFont.Sfont);
 
-        userLabel.email = new JLabel("shonn@naver.com");
-        userLabel.email.setBounds(350, 300, 300, 30);
-        userLabel.email.setFont(InjeFont.Mfont);
 
         JLabel phoneText = new JLabel("전화번호");
         phoneText.setBounds(250, 350, 100, 30);
         phoneText.setFont(InjeFont.Sfont);
-
-        userLabel.phone = new JLabel("0100213");
-        userLabel.phone.setBounds(350, 350, 300, 30);
-        userLabel.phone.setFont(InjeFont.Mfont);
 
         add(title);
         add(nameText);
@@ -75,29 +54,54 @@ public class UserInfoPanel extends JPanel {
         add(departText);
         add(emailText);
         add(phoneText);
-        add(userLabel.name);
-        add(userLabel.id);
-        add(userLabel.depart);
-        add(userLabel.email);
-        add(userLabel.phone);
+        JButton logout=new JButton("로그아웃");
+        
+        logout.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		mainFrame.session.removeUser();
+        		mainFrame.setCenterPanel(mainFrame.admitClassPanel);
+        		for(int i=0;i<5;i++) {
+        			jt[i].setText("");
+        		}
+        		mainFrame.userMenuBarPanel.btnhide();
+        	}        	
+        	
+        });
+        
+        JButton resinfo=new JButton("예약정보");
+        resinfo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		mainFrame.setCenterPanel(mainFrame.checkClass_details);
+        		
+					mainFrame.checkClass_details.setInfo();
+				
+        	}        	
+        	
+        });
+        
+        logout.setBounds(773, 508,100,30);
+        resinfo.setBounds(663,508,100,30);
+        add(logout);
+        add(resinfo);
+        for(int i=0;i<5;i++) {
+        	jt[i]=new JTextField(10);
+        	jt[i].setBounds(340,(150+i*50),200,30);
+        	add(jt[i]);
+        }
 
         setVisible(true);
     }
 
-    public void paintComponent(Graphics g){
-        updateComponent();
-    }
+    public void update(){
+        Student user = mainFrame.session.getUser();
+        jt[0].setText(user.getName().toString());
+        jt[1].setText(user.getId().toString());
+        jt[2].setText(user.getDepartment().toString());
+        jt[3].setText(user.getEmail().toString());
+        jt[4].setText(user.getPhoneNumber().toString());
 
-
-    public void updateComponent(){
-        if (mainFrame.session.getUser().getName().equals("관리자")) {
-            return;
-        }
-        Student user = (Student) mainFrame.session.getUser();
-        userLabel.name.setText(user.getName());
-        userLabel.id.setText(user.getId().toString());
-        userLabel.depart.setText(user.getDepartment());
-        userLabel.email.setText(user.getEmail());
-        userLabel.phone.setText(user.getPhoneNumber());
+        JLabel name = new JLabel("");
+        name.setBounds(300, 100, 100, 30);
+        add(name);
     }
 }

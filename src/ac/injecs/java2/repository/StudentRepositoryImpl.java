@@ -2,14 +2,17 @@ package ac.injecs.java2.repository;
 
 import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.config.sql.StudentMapper;
+import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.Student;
 
 import javax.swing.text.html.Option;
+
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
 public class StudentRepositoryImpl implements StudentRepository {
-    final DBConnect dbConnect = DBConnect.getInstance();
+    static final DBConnect dbConnect = new DBConnect();
 
     @Override
     public Student save(Student student) {
@@ -37,5 +40,11 @@ public class StudentRepositoryImpl implements StudentRepository {
         String sql = "select * from student";
         List<Student> students = (List<Student>) dbConnect.select(sql, new StudentMapper());
         return students;
+    }
+    public void insertres(ResInfo res) {
+    	dbConnect.resinsert(res);
+    }
+    public ResInfo getResinfo(String id) {
+    	return dbConnect.getResinfo(id);
     }
 }
