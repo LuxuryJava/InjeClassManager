@@ -4,6 +4,7 @@ import ac.injecs.java2.Main;
 import ac.injecs.java2.constant.FrameConstant;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MenuBarPanel extends JPanel {
     protected Main mainFrame;

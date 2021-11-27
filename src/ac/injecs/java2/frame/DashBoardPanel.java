@@ -33,6 +33,9 @@ public class DashBoardPanel extends JPanel {
         this.mainFrame = main;
         setLayout(null);
 
+        setOpaque(true);
+        setBackground(Color.RED);
+
         JLabel title = new JLabel("대시보드");
         title.setBounds(10, 0, 300, 50);
         title.setFont(new Font("맑은 고딕", Font.BOLD, 30));

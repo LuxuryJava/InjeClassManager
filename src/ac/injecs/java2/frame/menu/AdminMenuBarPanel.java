@@ -16,7 +16,6 @@ public class AdminMenuBarPanel extends MenuBarPanel {
         super(main);
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
-        setBackground(Color.GRAY);
 
         MenuBarTopLabel menuBarTopLabel = new MenuBarTopLabel();
         MenuBarButtons menuBarButtons = new MenuBarButtons();
@@ -75,33 +74,47 @@ public class AdminMenuBarPanel extends MenuBarPanel {
     }
 
     public class MenuBarUser extends JPanel {
+        JButton signButton = null;
+        JButton logoutButton = null;
         public MenuBarUser() {
             setLayout(new FlowLayout());
 
 //            JButton accountButton = new JButton("계정");
-            JButton signButton = new JButton("회원가입");
-            JButton loginButton = new JButton("로그인");
-            JButton accountButton = new JButton("계정");
+            logoutButton = new JButton("로그아웃");
 
 //            add(accountButton);
-            add(loginButton);
-            add(signButton);
-            add(accountButton);
+            add(logoutButton);
 
-            signButton.addActionListener(new ActionListener() {
+            logoutButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.signPanel);
-                }
-            });
-            loginButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.loginPanel);
+                    // 로그아웃
+                    mainFrame.session.outSession();
+                    mainFrame.setMenuPanel();
+                    mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                    repaint();
                 }
             });
 
             setVisible(true);
+        }
+
+        private void setUserButtonVisible(boolean status){
+            if (mainFrame.session.getUser() == null) {
+                logoutButton.setVisible(status);
+                return;
+            }
+            if (mainFrame.session.getUser().getName().equals("관리자")) {
+                logoutButton.setVisible(true);
+            }
+            else{
+                logoutButton.setVisible(status);
+            }
+        }
+
+
+        public void paintComponent(Graphics g){
+            setUserButtonVisible(mainFrame.session.isLogin);
         }
     }
 }
