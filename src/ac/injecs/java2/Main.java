@@ -81,7 +81,7 @@ public class Main {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("센터 좌표 : "+ e.getX() + ", " + e.getY());
             }
-        });
+        }); 
     }
 
     public JPanel getNowPanel(){
@@ -166,6 +166,6 @@ public class Main {
         main.adminLogin();
 
         main.setMenuPanel();
-        main.setCenterPanel(main.admitClassPanel);
+        main.setCenterPanel(main.dashBoardPanel);
     }
 }
