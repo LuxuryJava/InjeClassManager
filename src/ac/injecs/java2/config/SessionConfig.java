@@ -1,12 +1,10 @@
 package ac.injecs.java2.config;
 
-import ac.injecs.java2.entity.Manager;
 import ac.injecs.java2.entity.Student;
-import ac.injecs.java2.entity.User;
 
 public class SessionConfig {
     public boolean isLogin = false;
-    public User user = null;
+    public Student user = null;
     // Manager 추가 예정
 
     public SessionConfig(){
@@ -21,9 +19,9 @@ public class SessionConfig {
                 '}';
     }
 
-    public void newSession(boolean isLogin, User user) {
+    public void newSession(boolean isLogin, Student student) {
         this.isLogin = isLogin;
-        this.user = user;
+        this.user = student;
 
         System.out.println(toString());
     }
@@ -33,8 +31,11 @@ public class SessionConfig {
         this.user = null;
     }
 
-    public User getUser() {
+    public Student getUser() {
         return this.user;
+    }
+    public void removeUser() {
+    	user=null;
     }
 
     public boolean isLogin(){
