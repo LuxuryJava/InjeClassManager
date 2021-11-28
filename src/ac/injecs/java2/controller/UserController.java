@@ -35,8 +35,6 @@ public class UserController {
             throw new IllegalStateException("가입되지 않은 회원입니다.");
 
         }
-        password = PasswordEncoder.encode(password).get();
-
         // 입력한 비밀번호 암호화 후 매칭
         if (login.get().getPassword().equals(password)) {
             session.newSession(true, login.get());
