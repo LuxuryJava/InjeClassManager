@@ -19,19 +19,11 @@ public class UserMenuBarPanel extends MenuBarPanel {
         super(main);
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
-        setOpaque(true);
 
         // add
         MenuBarTopLabel menuBarTopLabel = new MenuBarTopLabel();
-        menuBarTopLabel.setOpaque(true);
-        menuBarTopLabel.setBackground(Color.WHITE);
         MenuBarButtons menuBarButtons = new MenuBarButtons();
-        menuBarButtons.setOpaque(true);
-        menuBarButtons.setBackground(Color.WHITE);
-
         MenuBarUser menuBarUser = new MenuBarUser();
-        menuBarUser.setOpaque(true);
-        menuBarUser.setBackground(Color.WHITE);
 
 
         menuBarTopLabel.setBounds(0, 0, menuBarWidth, 100);
@@ -54,41 +46,10 @@ public class UserMenuBarPanel extends MenuBarPanel {
     }
 
     public void paintComponent(Graphics g){
+        setBackground(Color.WHITE);
         mainFrame.updateContent();
     }
 
-    public class MenuBarTopLabel extends JPanel {
-        JLabel name;
-        public MenuBarTopLabel() {
-            setLayout(null);
-            JLabel notice = new JLabel("인제 클래스 매니저");
-            notice.setFont(InjeFont.Mfont);
-
-            name = new JLabel("어서오세요.");
-            notice.setBounds(20, 20, 200, 30);
-            name.setBounds(20, 60, 200, 30);
-            name.setFont(InjeFont.Sfont);
-
-            add(notice);
-            add(name);
-
-            setVisible(true);
-        }
-
-        private void profile(){
-            if(mainFrame.session.isLogin){
-                User user = mainFrame.session.getUser();
-                name.setText("어서오세요 " + user.getName() + " 님");
-            }else
-            {
-                name.setText("어서오세요");
-            }
-        }
-
-        public void paintComponent(Graphics g) {
-            profile();
-        }
-    }
 
     public class MenuBarButtons extends JPanel {
         private String resourcePath = "./resources/images/";
@@ -99,7 +60,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
         private ImageIcon image5 = new ImageIcon(resourcePath + "특강.png");
 
         private void addButtonImage(ImageIcon image, JButton target){
-            Image img = image.getImage().getScaledInstance(200, 40, Image.SCALE_SMOOTH);
+            Image img = image.getImage().getScaledInstance(200, 30, Image.SCALE_SMOOTH);
             target.setIcon(new ImageIcon(img));
             target.setBorderPainted(false);
             target.setContentAreaFilled(false);
@@ -163,7 +124,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.lecture_list);
-                    mainFrame.setMode("특강");
+                    mainFrame.setMode("공지사항 및 특강");
                 }
             });
 
@@ -179,11 +140,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
 
         public MenuBarUser() {
             setLayout(new FlowLayout());
-            setOpaque(true);
-            setForeground(Color.WHITE);
-//            JButton accountButton = new JButton("계정");
 
-//            add(accountButton);
             signButton.setFont(InjeFont.Sfont);
             loginButton.setFont(InjeFont.Sfont);
             accountButton.setFont(InjeFont.Sfont);
