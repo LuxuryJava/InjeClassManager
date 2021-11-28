@@ -2,14 +2,8 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
-import  ac.injecs.java2.entity.Notice;
-import ac.injecs.java2.repository.NoticeRepository;
-import ac.injecs.java2.repository.NoticeRepositoryImpl;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.JTable.*;
 
 public class Notice_List  extends JPanel {
     private Main mainFrame;

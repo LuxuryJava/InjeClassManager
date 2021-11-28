@@ -13,6 +13,7 @@ import java.util.Vector;
 import ac.injecs.java2.entity.*;
 public class DBConnect{
     private static DBConnect dbConnect = new DBConnect();
+
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/injecm";
     private final String sqlScriptRoot = "./resources/sql/";
@@ -25,6 +26,7 @@ public class DBConnect{
     public static DBConnect getInstance() {
         return dbConnect;
     }
+
     public DBConnect() {
         System.out.print("Inje CM DB 접속 : ");
         try {
