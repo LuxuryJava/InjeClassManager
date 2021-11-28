@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
 
 import javax.swing.*;
@@ -34,16 +35,19 @@ public class DashBoardPanel extends JPanel {
         setLayout(null);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
         setSize(width, 600);
+        setOpaque(true);
 
         setBackground(Color.WHITE);
 
         JLabel title = new JLabel("대시보드");
         title.setBounds(10, 0, 300, 50);
-        title.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+        title.setFont(InjeFont.XLfont);
+
 
         JLabel updateText = new JLabel("최근 업데이트 : " + LocalDate.now());
-        updateText.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+        updateText.setFont(InjeFont.PSfont);
         updateText.setBounds(12, 40, 300, 30);
+
 
         boxPanel1 = new BoxPanel("총 강의실", "23", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
@@ -88,11 +92,11 @@ public class DashBoardPanel extends JPanel {
 
             JLabel titleText = new JLabel(title);
             titleText.setForeground(Color.WHITE);
-            titleText.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+            titleText.setFont(InjeFont.PSfont);
 
             JLabel valueText = new JLabel(value);
             valueText.setForeground(Color.WHITE);
-            valueText.setFont(new Font("맑은 고딕", Font.PLAIN, 25));
+            valueText.setFont(InjeFont.Lfont);
 
             titleText.setBounds(5, 5, 100, 50);
             valueText.setBounds(50, 30, 100, 50);
@@ -114,7 +118,7 @@ public class DashBoardPanel extends JPanel {
             // 타이틀 설정
             JLabel text = new JLabel(title);
             text.setBounds(10, 10, width, 20);
-            text.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+            text.setFont(InjeFont.Mfont);
             text.setForeground(Color.BLACK);
 
             // 리스트 아이템 추가
@@ -141,7 +145,7 @@ public class DashBoardPanel extends JPanel {
                 public Component getListCellRendererComponent(JList list, Object value, int index,
                                                               boolean isSelected, boolean cellHasFocus) {
                     JLabel label = new JLabel(value.toString());
-                    label.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+                    label.setFont(InjeFont.PSfont);
                     label.setForeground(Color.BLACK);
 
                     return label;
