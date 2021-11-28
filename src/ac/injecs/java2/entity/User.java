@@ -18,6 +18,7 @@ public class User {
 
     private boolean isManager;
 
+
     public User(){}
 
     public User(String id, String name, String department, String email, String phoneNumber, String password) {
@@ -52,6 +53,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isManager() {
+        return isManager;
     }
 
     public static class Builder{

@@ -123,13 +123,13 @@ public class SignPanel extends JPanel {
 
                     try {
                         // 회원가입
-                        UserFormDto student = new UserFormDto();
-                        student.setId(idField.getText());
-                        student.setDepartment(departField.getText());
-                        student.setEmail(emailField.getText());
-                        student.setName(nameField.getText());
-                        student.setPhoneNumber(phoneField.getText());
-                        student.setPassword(passwordField.getText());
+                        UserFormDto user = new UserFormDto();
+                        user.setId(idField.getText());
+                        user.setDepartment(departField.getText());
+                        user.setEmail(emailField.getText());
+                        user.setName(nameField.getText());
+                        user.setPhoneNumber(phoneField.getText());
+                        user.setPassword(passwordField.getText());
 
                         // 이름, 이메일 validate
                         if (!ValidateForm.isKorean(nameField.getText())){
@@ -149,10 +149,11 @@ public class SignPanel extends JPanel {
                         errorMessage.setText("");
 
 
-                        System.out.println(student.toString());
+                        System.out.println(user.toString());
 
-                        mainFrame.studentController.signIn(student);
-                        mainFrame.studentController.login(mainFrame.session, idField.getText(), passwordField.getText());
+                        mainFrame.userController.signIn(user);
+                        mainFrame.userController.login(mainFrame.session, idField.getText(), passwordField.getText());
+                        mainFrame.userInfoPanel.update();
                         mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                     } catch (NumberFormatException e){
                         errorMessage.setText("모든 필드를 채워주세요.");

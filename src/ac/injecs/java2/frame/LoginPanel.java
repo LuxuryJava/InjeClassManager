@@ -79,7 +79,7 @@ public class LoginPanel extends JPanel {
                     String password = String.valueOf(passwordField.getPassword());
                     try {
                         String id = idField.getText();
-                        boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
+                        boolean isLogin = mainFrame.userController.login(mainFrame.session, id, password);
                         if(isLogin) {
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                             mainFrame.userInfoPanel.update();
