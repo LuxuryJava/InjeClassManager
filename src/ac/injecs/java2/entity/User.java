@@ -125,7 +125,8 @@ public class User {
     }
 
     public static User createUser(UserFormDto userFormDto) {
-        String password = PasswordEncoder.encode(userFormDto.getPassword()).get();
+        String password = userFormDto.getPassword();
+
         User user = new Builder()
                 .id(userFormDto.getId())
                 .name(userFormDto.getName())
