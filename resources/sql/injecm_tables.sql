@@ -13,7 +13,7 @@ create table Room (
                       PRIMARY KEY(rinfo)
 );
 
-create table Student (
+create table user (
 
                          sno int(8),
 
@@ -28,30 +28,6 @@ create table Student (
                          phone char(16),
 
                          PRIMARY KEY(sno)
-);
-
-create table Manager (
-
-                         mid char(20),
-
-                         mpw char(20),
-
-                         mname char(10),
-
-                         PRIMARY KEY(mid)
-);
-
-create table Reservation (
-
-    id int(10),
-
-    name char(10),
-
-    class char(10),
-
-    time timestamp,
-
-    state char(10)
 );
 
 create table Notification (
