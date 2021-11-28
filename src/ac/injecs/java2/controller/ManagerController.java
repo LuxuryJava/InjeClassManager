@@ -1,6 +1,6 @@
 package ac.injecs.java2.controller;
 
-import ac.injecs.java2.config.PasswordEncoder;
+
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.entity.Manager;
 import ac.injecs.java2.entity.Student;

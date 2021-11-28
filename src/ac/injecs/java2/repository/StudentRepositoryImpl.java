@@ -17,7 +17,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public Student save(Student student) {
-        String sql = "insert into student values(?, ?, ?, ?, ?, ?)";
+        String sql = "insert into user values(?, ?, ?, ?, ?, ?)";
         dbConnect.insert(sql, new StudentMapper(), student);
 
         return student;
@@ -25,7 +25,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public Optional<Student> findById(Long id) {
-        String sql = "select * from student where sno like " + id;
+        String sql = "select * from user where sno like " + id;
         Student find = (Student) dbConnect.select(sql, new StudentMapper());
 
         return Optional.ofNullable(find);
@@ -38,7 +38,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public List<Student> findAll() {
-        String sql = "select * from student";
+        String sql = "select * from user";
         List<Student> students = (List<Student>) dbConnect.select(sql, new StudentMapper());
         return students;
     }

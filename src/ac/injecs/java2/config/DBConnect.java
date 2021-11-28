@@ -140,7 +140,11 @@ public class DBConnect{
     	Vector<ResInfo> res=new Vector<ResInfo>();
     	
     	try {
-    		preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
+    		if(id=="admin")
+    			preparedStatement=connection.prepareStatement("select * from reservation");
+    		else
+    			preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
+    		
     		resultSet=preparedStatement.executeQuery();
     		while(resultSet.next()) {
     			ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));

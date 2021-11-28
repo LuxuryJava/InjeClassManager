@@ -1,6 +1,6 @@
 package ac.injecs.java2.entity;
 
-import ac.injecs.java2.config.PasswordEncoder;
+
 import ac.injecs.java2.dto.StudentFormDto;
 
 public class Student extends User{
@@ -102,7 +102,7 @@ public class Student extends User{
     }
 
     public static Student createStudent(StudentFormDto studentFormDto) {
-        String password = PasswordEncoder.encode(studentFormDto.getPassword()).get();
+        String password = studentFormDto.getPassword();
         Student student = new Builder()
                 .id(studentFormDto.getId())
                 .name(studentFormDto.getName())
