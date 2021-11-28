@@ -46,6 +46,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
     }
 
     public void paintComponent(Graphics g){
+        setOpaque(true);
         setBackground(Color.WHITE);
         mainFrame.updateContent();
     }
