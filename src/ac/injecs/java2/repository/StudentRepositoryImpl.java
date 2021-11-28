@@ -10,6 +10,7 @@ import javax.swing.text.html.Option;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Vector;
 
 public class StudentRepositoryImpl implements StudentRepository {
     static final DBConnect dbConnect = new DBConnect();
@@ -44,7 +45,10 @@ public class StudentRepositoryImpl implements StudentRepository {
     public void insertres(ResInfo res) {
     	dbConnect.resinsert(res);
     }
-    public ResInfo getResinfo(String id) {
+    public Vector<ResInfo> getResinfo(String id) {
     	return dbConnect.getResinfo(id);
+    }
+    public void deleteres(String id,String rinfo) {
+    	dbConnect.delres(id,rinfo);
     }
 }

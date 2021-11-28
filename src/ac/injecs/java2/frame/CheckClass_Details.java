@@ -5,8 +5,11 @@ import ac.injecs.java2.entity.ResInfo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 public class CheckClass_Details extends JPanel{
     
     private Main mainFrame;
@@ -19,14 +22,36 @@ public class CheckClass_Details extends JPanel{
     JTextField dayField = new JTextField("");
     JTextField timeField = new JTextField("");
     JTextField purposeField = new JTextField("");
+    Vector<ResInfo> ri;
+    int cnt;
     public void setInfo() {
-    		ResInfo ri=mainFrame.studentRepository.getResinfo(mainFrame.session.user.getId().toString());
-    		nameField.setText(Integer.toString(ri.getsno()));
-    		classField.setText(ri.getrinfo());
-    		numField.setText(Integer.toString(ri.getmemcnt()));
-    		dayField.setText(ri.getuseday());
-    		timeField.setText(ri.getusetime());
-    		purposeField.setText(ri.getpurpose());	
+    	ri=null;
+    	ri=mainFrame.studentRepository.getResinfo(mainFrame.session.user.getId().toString());
+    	if(ri.size()==0)
+    	{
+    		nameField.setText("");;
+    	    classField.setText("");
+    	    numField.setText("");
+    	    dayField.setText("");
+    	    timeField.setText("");
+    	    purposeField.setText("");
+    		JOptionPane aa=new JOptionPane();
+    		aa.showMessageDialog(null,"예약정보가 없습니다.");
+    		return;
+    	}
+    	cnt=0;
+    	setField();
+    	
+    	 			
+    }
+    
+	public void setField() {
+    	nameField.setText(Integer.toString(ri.get(cnt).getsno()));
+		classField.setText(ri.get(cnt).getrinfo());
+		numField.setText(Integer.toString(ri.get(cnt).getmemcnt()));
+		dayField.setText(ri.get(cnt).getuseday());
+		timeField.setText(ri.get(cnt).getusetime());
+		purposeField.setText(ri.get(cnt).getpurpose());
     }
     public CheckClass_Details(Main main) {
         this.mainFrame = main;
@@ -38,6 +63,51 @@ public class CheckClass_Details extends JPanel{
 
         DetailBox detailbox = new DetailBox();
         detailbox.setBounds(300, 150, 400, 350);
+        
+        JButton pre=new JButton("이전");
+        JButton next=new JButton("다음");
+        JButton cancel=new JButton("예약취소");
+        pre.setBounds(300, 512, 70, 30);
+        next.setBounds(380, 512, 70, 30);
+        cancel.setBounds(600, 512, 100, 30);
+        pre.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(ri.size()==0)
+        			return;
+        		if(cnt==0)
+        			return;
+        		cnt--;
+        		setField();
+        		
+        	}
+        	
+        	
+        });
+        next.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if(ri.size()==0)
+        			return;
+        		if(cnt==ri.size()-1)
+        			return;
+        		cnt++;
+        		setField();
+        		
+        	}
+        	
+        	
+        });
+        cancel.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		mainFrame.studentRepository.deleteres(nameField.getText(), classField.getText());
+        		setInfo();
+        		
+        	}
+        	
+        	
+        });
+        add(pre);
+        add(next);
+        add(cancel);
 
         add(title);
         add(detailbox);
