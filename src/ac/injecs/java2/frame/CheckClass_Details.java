@@ -2,13 +2,11 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.entity.ResInfo;
-import ac.injecs.java2.entity.Student;
+import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 public class CheckClass_Details extends JPanel{
@@ -26,9 +24,9 @@ public class CheckClass_Details extends JPanel{
     Vector<ResInfo> ri;
     int cnt;
     public void setInfo() {
-            Student user = (Student)mainFrame.session.user;
+            User user = mainFrame.session.user;
     	    ri=null;
-    	    ri = mainFrame.repository.getResinfo(user.getId().toString());
+    	    ri = mainFrame.repository.getResinfo(user.getId());
     	    if(ri.size()==0)
     	{
     		nameField.setText("");;

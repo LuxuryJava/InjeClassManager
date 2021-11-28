@@ -14,20 +14,21 @@ create table Room (
 );
 
 create table user (
+                      uno VARCHAR(20),
 
-                         sno int(8),
+                      upw VARCHAR(500),
 
-                         spw VARCHAR(500),
+                      uname char(10),
 
-                         sname char(10),
+                      department char(40),
 
-                         department char(40),
+                      email char(40),
 
-                         email char(40),
+                      phone char(16),
 
-                         phone char(16),
+                      isManaer boolean,
 
-                         PRIMARY KEY(sno)
+                      PRIMARY KEY(uno)
 );
 
 create table Notification (
@@ -39,13 +40,14 @@ create table Notification (
                               nname char(30),
 
                               ncontent TEXT(500),
+
                               ntime date,
+
                               PRIMARY KEY(nno)
 );
 
 create table Reservation(
-
-                            sno int(8),
+                            uno varchar(20),
 
                             rinfo char(10),
 
@@ -57,9 +59,9 @@ create table Reservation(
 
                             purpose char(100),
 
-                            PRIMARY KEY(rinfo, sno),
+                            PRIMARY KEY(rinfo, uno),
 
                             foreign key(rinfo) references Room(rinfo) ON DELETE CASCADE,
 
-                            foreign key(sno) references Student(sno)ON DELETE CASCADE
+                            foreign key(uno) references User(uno)ON DELETE CASCADE
 );

@@ -1,9 +1,7 @@
 package ac.injecs.java2.controller;
 
-import ac.injecs.java2.config.PasswordEncoder;
 import ac.injecs.java2.config.SessionConfig;
-import ac.injecs.java2.entity.Manager;
-import ac.injecs.java2.entity.Student;
+import ac.injecs.java2.entity.User;
 import ac.injecs.java2.service.ManagerService;
 
 import java.util.Optional;
@@ -17,7 +15,7 @@ public class ManagerController {
     }
 
     public boolean login(SessionConfig session, String id, String password) {
-        Optional<Manager> manager = managerService.loginManger(id);
+        Optional<User> manager = managerService.loginManger(id);
         if (manager.isEmpty()) {
             throw new IllegalStateException("가입되지 않은 회원입니다.");
         }
