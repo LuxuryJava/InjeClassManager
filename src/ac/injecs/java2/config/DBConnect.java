@@ -1,7 +1,6 @@
 package ac.injecs.java2.config;
 
 import ac.injecs.java2.config.sql.SQLMapper;
-import ac.injecs.java2.entity.Student;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

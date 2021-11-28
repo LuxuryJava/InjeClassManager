@@ -1,21 +1,23 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
-import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.config.InjeFont;
-import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ac.injecs.java2.entity.ResInfo;
+import ac.injecs.java2.entity.User;
+
 public class Reservation extends JPanel {
     private Main mainFrame;
     private String[] unit = {"A111", "A112", "A113", "A211", "A212", "A213"};
     private JButton bt = new JButton("확인");
     static JTextField unitField = new JTextField();
-    private Student user;
+
+    private User user;
+
     JTextField nameField = new JTextField("아무개");
     JTextField numField = new JTextField();
     JTextField purposeField = new JTextField();
@@ -31,7 +33,7 @@ public class Reservation extends JPanel {
     public Reservation(Main main) {
         this.mainFrame = main;
         setLayout(null);
-        user = (Student) mainFrame.session.getUser();
+        user = mainFrame.session.getUser();
 
         JLabel title = new JLabel("강의실 예약", JLabel.CENTER);
         title.setBounds(400, 50, 300, 25);

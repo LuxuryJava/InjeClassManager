@@ -2,9 +2,7 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.ValidateForm;
-import ac.injecs.java2.dto.StudentFormDto;
-import ac.injecs.java2.entity.Student;
-import com.mysql.cj.util.StringUtils;
+import ac.injecs.java2.dto.UserFormDto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -125,8 +123,8 @@ public class SignPanel extends JPanel {
 
                     try {
                         // 회원가입
-                        StudentFormDto student = new StudentFormDto();
-                        student.setId(Long.valueOf(idField.getText()));
+                        UserFormDto student = new UserFormDto();
+                        student.setId(idField.getText());
                         student.setDepartment(departField.getText());
                         student.setEmail(emailField.getText());
                         student.setName(nameField.getText());
@@ -154,7 +152,7 @@ public class SignPanel extends JPanel {
                         System.out.println(student.toString());
 
                         mainFrame.studentController.signIn(student);
-                        mainFrame.studentController.login(mainFrame.session, Long.valueOf(idField.getText()), passwordField.getText());
+                        mainFrame.studentController.login(mainFrame.session, idField.getText(), passwordField.getText());
                         mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                     } catch (NumberFormatException e){
                         errorMessage.setText("모든 필드를 채워주세요.");

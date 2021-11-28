@@ -10,7 +10,7 @@ import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
 import ac.injecs.java2.frame.menu.UserMenuBarPanel;
 import ac.injecs.java2.frame.user.UserInfoPanel;
 import ac.injecs.java2.repository.Repository;
-import ac.injecs.java2.service.StudentService;
+import ac.injecs.java2.service.UserService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +18,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
-    public Repository repository = new Repository();
-    private StudentService studentService = new StudentService(repository);
-    public StudentController studentController = new StudentController(studentService);
+    public Repository repository = new Repository(); // 통합 DB 접근 객체
+
+    private UserService userService = new UserService(repository);
+    public StudentController studentController = new StudentController(userService);
     public SessionConfig session = new SessionConfig();
     
-    private Long sno;
+    private String sno;
     private JFrame MainFrame;
     private JPanel nowPanel;
     private JPanel prevPanel;
@@ -95,10 +96,11 @@ public class Main {
     public String getMode(){
         return this.mode;
     }
-    public void setsno(Long sno) {
+
+    public void setsno(String sno) {
     	this.sno=sno;
     }
-    public Long getsno() {
+    public String getsno() {
     	return sno;
     }
 

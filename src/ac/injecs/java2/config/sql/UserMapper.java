@@ -1,26 +1,26 @@
 package ac.injecs.java2.config.sql;
 
-import ac.injecs.java2.entity.Student;
+import ac.injecs.java2.entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
-public class StudentMapper extends SQLMapper {
+public class UserMapper extends SQLMapper {
 
     @Override
     public void insert(PreparedStatement preparedStatement, Object object) {
         try {
-            Student student = (Student)object;
+            User user = (User)object;
 
             this.preparedStatement = preparedStatement;
 
-            preparedStatement.setInt(1, Math.toIntExact(student.getId()));
-            preparedStatement.setString(2, student.getPassword());
-            preparedStatement.setString(3, student.getName());
-            preparedStatement.setString(4, student.getDepartment());
-            preparedStatement.setString(5, student.getEmail());
-            preparedStatement.setString(6, student.getPhoneNumber());
+            preparedStatement.setString(1, user.getId());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getDepartment());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setString(6, user.getPhoneNumber());
+            preparedStatement.setBoolean(7, false);
 
             int row = preparedStatement.executeUpdate();
 
@@ -33,16 +33,16 @@ public class StudentMapper extends SQLMapper {
 
     @Override
     public Object select(PreparedStatement preparedStatement) {
-        Student student = null;
+        User user = null;
         try {
             this.preparedStatement = preparedStatement;
             this.resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                student = (new Student.Builder()
-                        .id((long) resultSet.getInt("sno"))
-                        .password(resultSet.getString("spw"))
-                        .name(resultSet.getString("sname"))
+                user = (new User.Builder()
+                        .id(resultSet.getString("uno"))
+                        .password(resultSet.getString("upw"))
+                        .name(resultSet.getString("uname"))
                         .department(resultSet.getString("department"))
                         .email(resultSet.getString("email"))
                         .phoneNumber(resultSet.getString("phone"))
@@ -51,6 +51,6 @@ public class StudentMapper extends SQLMapper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return user;
     }
 }

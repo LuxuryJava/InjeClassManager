@@ -2,13 +2,10 @@ package ac.injecs.java2.frame.user;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
-import ac.injecs.java2.entity.Student;
+import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 
 public class UserInfoPanel extends JPanel {
     Main mainFrame = null;
@@ -58,11 +55,9 @@ public class UserInfoPanel extends JPanel {
         
         logout.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		mainFrame.session.removeUser();
-        		mainFrame.setCenterPanel(mainFrame.admitClassPanel);
-        		for(int i=0;i<5;i++) {
-        			jt[i].setText("");
-        		}
+        		mainFrame.session.outSession();
+        		mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+
         		//mainFrame.userMenuBarPanel.btnhide();
         	}        	
         	
@@ -93,7 +88,7 @@ public class UserInfoPanel extends JPanel {
     }
 
     public void update(){
-        Student user = (Student)mainFrame.session.getUser();
+        User user = mainFrame.session.getUser();
         jt[0].setText(user.getName().toString());
         jt[1].setText(user.getId().toString());
         jt[2].setText(user.getDepartment().toString());

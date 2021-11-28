@@ -3,8 +3,6 @@ package ac.injecs.java2.frame.menu;
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
-import ac.injecs.java2.entity.Student;
-import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import java.awt.*;

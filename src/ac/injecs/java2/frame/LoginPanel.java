@@ -2,7 +2,6 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
-import ac.injecs.java2.entity.Student;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Optional;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
@@ -80,7 +78,7 @@ public class LoginPanel extends JPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     String password = String.valueOf(passwordField.getPassword());
                     try {
-                        Long id = Long.valueOf(idField.getText());
+                        String id = idField.getText();
                         boolean isLogin = mainFrame.studentController.login(mainFrame.session, id, password);
                         if(isLogin) {
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
