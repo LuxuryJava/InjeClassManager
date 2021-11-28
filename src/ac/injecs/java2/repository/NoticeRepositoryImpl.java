@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class NoticeRepositoryImpl  implements NoticeRepository {
-    static final DBConnect dbConnect = new DBConnect();
+    final DBConnect dbConnect = DBConnect.getInstance();
 
     @Override
     public Notice insert(Notice notice) {

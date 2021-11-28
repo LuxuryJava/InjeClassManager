@@ -6,6 +6,8 @@ import ac.injecs.java2.controller.StudentController;
 import ac.injecs.java2.frame.*;
 import ac.injecs.java2.frame.admin.AdmitClassPanel;
 import ac.injecs.java2.frame.admin.RequestLockClassPanel;
+import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
+import ac.injecs.java2.frame.menu.UserMenuBarPanel;
 import ac.injecs.java2.frame.user.UserInfoPanel;
 import ac.injecs.java2.repository.StudentRepository;
 import ac.injecs.java2.repository.StudentRepositoryImpl;
@@ -29,8 +31,8 @@ public class Main {
     private String mode;
 
     public DashBoardPanel dashBoardPanel;
-    public Admin_MenuBarPanel adminMenuBarPanel;
-    public User_MenuBarPanel userMenuBarPanel;
+    public AdminMenuBarPanel adminMenuBarPanel;
+    public UserMenuBarPanel userMenuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
     public SelectDongPanel selectDongPanel;
@@ -129,8 +131,8 @@ public class Main {
         Main main = new Main();
         // 사용자 정의 패널 생성
         main.dashBoardPanel = new DashBoardPanel(main);
-        main.userMenuBarPanel = new User_MenuBarPanel(main); // 의존성 주입
-        main.adminMenuBarPanel = new Admin_MenuBarPanel(main);
+        main.userMenuBarPanel = new UserMenuBarPanel(main); // 의존성 주입
+        main.adminMenuBarPanel = new AdminMenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
         main.selectDongPanel = new SelectDongPanel(main);
@@ -148,6 +150,7 @@ public class Main {
        // main.setCenterPanel(main.dashBoardPanel);
        // main.setCenterPanel(new Notice_Add(main));
         //main.setCenterPanel(main.admitClassPanel);
+
         main.setMenuPanel(main.userMenuBarPanel);
         main.setCenterPanel(main.admitClassPanel);
     }

@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Vector;
 
 public class StudentRepositoryImpl implements StudentRepository {
-    static final DBConnect dbConnect = new DBConnect();
+    final DBConnect dbConnect = DBConnect.getInstance();
 
     @Override
     public Student save(Student student) {

@@ -63,7 +63,7 @@ public class UserInfoPanel extends JPanel {
         		for(int i=0;i<5;i++) {
         			jt[i].setText("");
         		}
-        		mainFrame.userMenuBarPanel.btnhide();
+        		//mainFrame.userMenuBarPanel.btnhide();
         	}        	
         	
         });
