@@ -2,7 +2,7 @@ package ac.injecs.java2;
 
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.constant.FrameConstant;
-import ac.injecs.java2.controller.StudentController;
+import ac.injecs.java2.controller.UserController;
 import ac.injecs.java2.frame.*;
 import ac.injecs.java2.frame.admin.AdmitClassPanel;
 import ac.injecs.java2.frame.admin.RequestLockClassPanel;
@@ -21,7 +21,7 @@ public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
 
     private UserService userService = new UserService(repository);
-    public StudentController studentController = new StudentController(userService);
+    public UserController userController = new UserController(userService);
     public SessionConfig session = new SessionConfig();
     
     private String sno;

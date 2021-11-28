@@ -8,11 +8,11 @@ import ac.injecs.java2.service.UserService;
 
 import java.util.Optional;
 
-public class StudentController {
+public class UserController {
 
     private final UserService userService;
 
-    public StudentController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
