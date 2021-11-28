@@ -144,11 +144,6 @@ public class Reservation extends JPanel {
         private int textHeight = 30;
         private int fieldWidth = 150;
 
-        
-        
-        
-        
-
         public ResBox() {
             setLayout(null);
             setBackground(new Color(0x4FDAE4));
@@ -159,7 +154,7 @@ public class Reservation extends JPanel {
             titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(170, 20, 100, 30);
 
-            JLabel nameText = new JLabel("ID(이름):");
+            JLabel nameText = new JLabel("ID(학번):");
             
             JLabel numText = new JLabel("이용 예정 인원:");
             

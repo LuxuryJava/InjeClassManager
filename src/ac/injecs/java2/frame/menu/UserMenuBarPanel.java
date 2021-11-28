@@ -98,10 +98,16 @@ public class UserMenuBarPanel extends MenuBarPanel {
             classReservationButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.selectDongPanel);
-                    mainFrame.selectDongPanel.title.setText("강의실 예약");
+                    if (mainFrame.session.getUser() == null) {
+                        JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else {
+                        mainFrame.setCenterPanel(mainFrame.selectDongPanel);
+                        mainFrame.selectDongPanel.title.setText("강의실 예약");
 
-                    mainFrame.setMode("예약");
+                        mainFrame.setMode("예약");
+                    }
+
                 }
             });
             classCheckButton.addActionListener(new ActionListener() {
