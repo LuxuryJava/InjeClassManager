@@ -8,10 +8,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
+import java.util.Vector;
+
 import ac.injecs.java2.entity.*;
 public class DBConnect{
-	private static DBConnect dbConnect = new DBConnect();
-	
+    private static DBConnect dbConnect = new DBConnect();
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/injecm";
     private final String sqlScriptRoot = "./resources/sql/";
@@ -20,11 +21,10 @@ public class DBConnect{
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    
-    public static DBConnect getInstance() {
-    	return dbConnect;
-    }
 
+    public static DBConnect getInstance() {
+        return dbConnect;
+    }
     public DBConnect() {
         System.out.print("Inje CM DB 접속 : ");
         try {
@@ -136,13 +136,15 @@ public class DBConnect{
         
         
     } 
-    public ResInfo getResinfo(String id) {
-    	ResInfo ri=null;
+    public Vector<ResInfo> getResinfo(String id) {
+    	Vector<ResInfo> res=new Vector<ResInfo>();
+    	
     	try {
     		preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
     		resultSet=preparedStatement.executeQuery();
     		while(resultSet.next()) {
-    			ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
+    			ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
+    			res.add(ri);
     		}
             
         } catch (Exception e) {
@@ -156,8 +158,34 @@ public class DBConnect{
             } catch (Exception e2) {}
         }
         
-    	return ri;
+    	return res;
     } 
+    public void delres(String id, String rinfo) {
+    	String sql="delete from reservation where sno=? && rinfo=?";
+    	
+    	try {
+    		preparedStatement = connection.prepareStatement(sql);
+    		preparedStatement.setString(1, id);
+    		preparedStatement.setString(2, rinfo);
+            
+            int result = preparedStatement.executeUpdate();
+            if(result==1) {
+                System.out.println("reservation데이터 삭제 성공!");
+                
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }    finally {
+            try {
+                if(preparedStatement!=null && !preparedStatement.isClosed()) {
+                	preparedStatement.close();
+                }
+            } catch (Exception e2) {}
+        }
+    }
+
+	
     
 }
 

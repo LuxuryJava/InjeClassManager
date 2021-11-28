@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Vector;
 
 public interface StudentRepository {
 
@@ -18,5 +19,6 @@ public interface StudentRepository {
     List<Student> findAll();
     void insertres(ResInfo res);
 
-    ResInfo getResinfo(String id); 
+    Vector<ResInfo> getResinfo(String id); 
+    void deleteres(String id,String rinfo);
 }
