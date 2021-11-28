@@ -28,7 +28,7 @@ public class CheckClass_Details extends JPanel{
     public void setInfo() {
             Student user = (Student)mainFrame.session.user;
     	    ri=null;
-    	    ri = mainFrame.studentRepository.getResinfo(user.getId().toString());
+    	    ri = mainFrame.repository.getResinfo(user.getId().toString());
     	    if(ri.size()==0)
     	{
     		nameField.setText("");;
@@ -100,7 +100,7 @@ public class CheckClass_Details extends JPanel{
         });
         cancel.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		mainFrame.studentRepository.deleteres(nameField.getText(), classField.getText());
+        		mainFrame.repository.deleteres(nameField.getText(), classField.getText());
         		setInfo();
         		
         	}

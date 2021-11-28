@@ -9,8 +9,7 @@ import ac.injecs.java2.frame.admin.RequestLockClassPanel;
 import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
 import ac.injecs.java2.frame.menu.UserMenuBarPanel;
 import ac.injecs.java2.frame.user.UserInfoPanel;
-import ac.injecs.java2.repository.StudentRepository;
-import ac.injecs.java2.repository.StudentRepositoryImpl;
+import ac.injecs.java2.repository.Repository;
 import ac.injecs.java2.service.StudentService;
 
 import javax.swing.*;
@@ -19,8 +18,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
-    public StudentRepository studentRepository = new StudentRepositoryImpl();
-    private StudentService studentService = new StudentService(studentRepository);
+    public Repository repository = new Repository();
+    private StudentService studentService = new StudentService(repository);
     public StudentController studentController = new StudentController(studentService);
     public SessionConfig session = new SessionConfig();
     
