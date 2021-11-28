@@ -32,3 +32,5 @@ public class ManagerRepositoryImpl implements ManagerRepository {
         return null;
     }
 }
+
+//

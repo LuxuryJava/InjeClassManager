@@ -152,11 +152,11 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             setOpaque(true);
             setForeground(Color.white);
 
-//            JButton accountButton = new JButton("계정");
+            JButton accountButton = new JButton("관리");
             
             logoutButton.setFont(InjeFont.Sfont);
         
-//            add(accountButton);
+            add(accountButton);
             add(logoutButton);
 
             logoutButton.addActionListener(new ActionListener() {
@@ -164,7 +164,7 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     // 로그아웃
                     mainFrame.session.outSession();
-                    //mainFrame.setMenuPanel();
+                    mainFrame.setMenuPanel(mainFrame.adminMenuBarPanel);
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                 }
             });

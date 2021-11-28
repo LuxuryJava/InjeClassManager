@@ -87,7 +87,7 @@ public class LoginPanel extends JPanel {
                             mainFrame.userInfoPanel.update();
                             mainFrame.setsno(id);
                             errorMessage.setText("");
-                            mainFrame.userMenuBarPanel.btnshow();
+                            //mainFrame.userMenuBarPanel.btnshow();
                             idField.setText("");
                             passwordField.setText("");
                             mainFrame.reservation.setid(id.toString());
