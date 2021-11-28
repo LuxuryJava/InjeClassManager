@@ -18,17 +18,29 @@ public class User {
 
     private boolean isManager;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", isManager=" + isManager +
+                '}';
+    }
 
     public User(){}
 
-    public User(String id, String name, String department, String email, String phoneNumber, String password) {
+    public User(String id, String name, String department, String email, String phoneNumber, String password, boolean isManager) {
         this.id = id;
         this.name = name;
         this.department = department;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.isManager = false;
+        this.isManager = isManager;
     }
 
     public String getId() {
@@ -110,7 +122,7 @@ public class User {
         }
 
         public User build(){
-            User student = new User(id, name, department, email, phoneNumber, password);
+            User student = new User(id, name, department, email, phoneNumber, password, isManager);
             return student;
         }
     }
@@ -134,6 +146,7 @@ public class User {
                 .email(userFormDto.getEmail())
                 .phoneNumber(userFormDto.getPhoneNumber())
                 .password(password)
+                .isManager(false)
                 .build();
         return user;
     }

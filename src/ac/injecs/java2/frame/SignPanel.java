@@ -131,6 +131,7 @@ public class SignPanel extends JPanel {
                         user.setPhoneNumber(phoneField.getText());
                         user.setPassword(passwordField.getText());
 
+
                         // 이름, 이메일 validate
                         if (!ValidateForm.isKorean(nameField.getText())){
                             errorMessage.setText("이름은 한글만 입력해주세요.");

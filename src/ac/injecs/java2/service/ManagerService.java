@@ -17,7 +17,7 @@ public class ManagerService {
     public Optional<User> loginManger(String id) {
         // TODO : 리포지터리에서 id로 매니저를 불러오면 isManager True인지 확인하기
 
-        return repository.findManagerById(id);
+        return repository.findUserById(id);
     }
 
 }
