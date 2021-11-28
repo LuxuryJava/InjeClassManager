@@ -163,9 +163,10 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     // 로그아웃
-                    mainFrame.session.outSession();
-                    mainFrame.setMenuPanel(mainFrame.adminMenuBarPanel);
+                    mainFrame.userMode();
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
+                    mainFrame.session.outSession();
+
                 }
             });
 

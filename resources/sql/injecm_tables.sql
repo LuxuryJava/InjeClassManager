@@ -26,7 +26,7 @@ create table user (
 
                       phone char(16),
 
-                      isManaer boolean,
+                      isManager boolean,
 
                       PRIMARY KEY(uno)
 );

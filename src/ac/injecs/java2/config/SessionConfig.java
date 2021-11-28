@@ -16,6 +16,7 @@ public class SessionConfig {
         return "SessionConfig{" +
                 "isLogin=" + isLogin +
                 ", user=" + user +
+                ", 관리자여부 =" + user.isManager() +
                 '}';
     }
 
