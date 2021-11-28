@@ -20,7 +20,7 @@ public class UserMapper extends SQLMapper {
             preparedStatement.setString(4, user.getDepartment());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setString(6, user.getPhoneNumber());
-            preparedStatement.setBoolean(7, false);
+            preparedStatement.setBoolean(7, user.isManager());
 
             int row = preparedStatement.executeUpdate();
 
@@ -46,7 +46,9 @@ public class UserMapper extends SQLMapper {
                         .department(resultSet.getString("department"))
                         .email(resultSet.getString("email"))
                         .phoneNumber(resultSet.getString("phone"))
+                        .isManager(resultSet.getBoolean("isManager"))
                         .build());
+                System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();

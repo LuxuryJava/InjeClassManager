@@ -80,7 +80,14 @@ public class LoginPanel extends JPanel {
                     try {
                         String id = idField.getText();
                         boolean isLogin = mainFrame.userController.login(mainFrame.session, id, password);
+
+
                         if(isLogin) {
+                            // 관리자인지 확인
+                            if (mainFrame.session.getUser().isManager()){
+                                mainFrame.managerMode();
+                                System.out.println("관리자임");
+                            }
                             mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                             mainFrame.userInfoPanel.update();
                             mainFrame.setsno(id);

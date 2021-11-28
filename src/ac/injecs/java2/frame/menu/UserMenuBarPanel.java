@@ -180,6 +180,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.session.outSession();
+                    mainFrame.userMode();
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                     repaint();
                 }

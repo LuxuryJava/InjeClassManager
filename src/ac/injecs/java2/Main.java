@@ -82,6 +82,18 @@ public class Main {
         updateContent();
     }
 
+    public void managerMode(){
+        MainFrame.remove(userMenuBarPanel);
+        MainFrame.add(adminMenuBarPanel);
+        updateContent();
+    }
+
+    public void userMode(){
+        MainFrame.remove(adminMenuBarPanel);
+        MainFrame.add(userMenuBarPanel);
+        updateContent();
+    }
+
     public void setPrevPanel(JPanel panel) {
         prevPanel = panel;
     }

@@ -40,23 +40,24 @@ public class Repository {
     }
 
     // --------------- Manager ------------------------//
-    public User saveManager(User manager) {
-        return null;
-    }
-
-    public Optional<User> findManagerById(String id) {
-        String sql = "select * from user where mid like " + id;
-        User find = (User) dbConnect.select(sql, new UserMapper());
-        return Optional.ofNullable(find);
-    }
-
-    public Optional<User> findManagerByName(String name) {
-        return Optional.empty();
-    }
-
-    public List<User> findManagerAll() {
-        return null;
-    }
+    // 관리자는 isManager만 true로 주면 되므로 User 위에 메소드를 이용하면 될듯
+//    public User saveManager(User manager) {
+//        return null;
+//    }
+//
+//    public Optional<User> findManagerById(String id) {
+//        String sql = "select * from user where mid like " + id;
+//        User find = (User) dbConnect.select(sql, new UserMapper());
+//        return Optional.ofNullable(find);
+//    }
+//
+//    public Optional<User> findManagerByName(String name) {
+//        return Optional.empty();
+//    }
+//
+//    public List<User> findManagerAll() {
+//        return null;
+//    }
 
     // --------------- Reservation  ------------------------//
 
