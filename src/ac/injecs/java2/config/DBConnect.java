@@ -8,10 +8,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
-
+import ac.injecs.java2.entity.*;
 public class DBConnect{
-    private static DBConnect dbConnect = new DBConnect();
-
+	private static DBConnect dbConnect = new DBConnect();
+	
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/injecm";
     private final String sqlScriptRoot = "./resources/sql/";
@@ -20,9 +20,9 @@ public class DBConnect{
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-
+    
     public static DBConnect getInstance() {
-        return dbConnect;
+    	return dbConnect;
     }
 
     public DBConnect() {
@@ -37,7 +37,7 @@ public class DBConnect{
             if (connection != null) {
                 System.out.println("성공");
 
-                setUpDB();
+                //setUpDB();
             } else {
                 System.out.println("실패");
             }
@@ -107,4 +107,57 @@ public class DBConnect{
         }
 
     }
+    public void resinsert(ResInfo res) {
+    	String sql="insert into reservation values(?,?,?,?,?,?)";
+    	try {
+    		preparedStatement = connection.prepareStatement(sql);
+    		preparedStatement.setInt(1, res.getsno());
+    		preparedStatement.setString(2, res.getrinfo());
+    		preparedStatement.setInt(3, res.getmemcnt());
+            preparedStatement.setString(4, res.getuseday());
+            preparedStatement.setString(5, res.getusetime());
+            preparedStatement.setString(6, res.getpurpose());
+            
+            int result = preparedStatement.executeUpdate();
+            if(result==1) {
+                System.out.println("reservation데이터 삽입 성공!");
+                
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }    finally {
+            try {
+                if(preparedStatement!=null && !preparedStatement.isClosed()) {
+                	preparedStatement.close();
+                }
+            } catch (Exception e2) {}
+        }
+        
+        
+    } 
+    public ResInfo getResinfo(String id) {
+    	ResInfo ri=null;
+    	try {
+    		preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
+    		resultSet=preparedStatement.executeQuery();
+    		while(resultSet.next()) {
+    			ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
+    		}
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("에에러러");
+        }    finally {
+            try {
+                if(preparedStatement!=null && !preparedStatement.isClosed()) {
+                	preparedStatement.close();
+                }
+            } catch (Exception e2) {}
+        }
+        
+    	return ri;
+    } 
+    
 }
+

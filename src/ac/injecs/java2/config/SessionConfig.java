@@ -1,7 +1,5 @@
 package ac.injecs.java2.config;
 
-import ac.injecs.java2.entity.Manager;
-import ac.injecs.java2.entity.Student;
 import ac.injecs.java2.entity.User;
 
 public class SessionConfig {
@@ -35,6 +33,9 @@ public class SessionConfig {
 
     public User getUser() {
         return this.user;
+    }
+    public void removeUser() {
+    	user=null;
     }
 
     public boolean isLogin(){
