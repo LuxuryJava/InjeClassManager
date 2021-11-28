@@ -17,7 +17,7 @@ public class UserController {
     }
 
     // 회원가입 전달
-    public User signIn(UserFormDto userFormDto){
+    public User signUp(UserFormDto userFormDto){
         User user = null;
         try {
             user = User.createUser(userFormDto);

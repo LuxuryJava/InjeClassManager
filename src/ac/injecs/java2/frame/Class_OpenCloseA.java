@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
 
 import javax.swing.*;
@@ -11,13 +12,14 @@ public class Class_OpenCloseA extends JPanel {
     public Class_OpenCloseA(Main main) {
         setLayout(new BorderLayout());
         JLabel title = new JLabel("강의실 개방 여부", SwingConstants.CENTER);
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
         classP panel = new classP();
         add(panel, BorderLayout.CENTER);
     }
     public class classP extends JPanel {
         public classP() {
+            setBackground(Color.WHITE);
             ImageIcon[] image = { new ImageIcon("images/classopenclose.png"),
                     new ImageIcon("images/classopenclose.png"), new ImageIcon("images/classopenclose.png"),
                     new ImageIcon("images/classopenclose.png"), new ImageIcon("images/classopenclose.png"),
