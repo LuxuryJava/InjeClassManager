@@ -1,22 +1,21 @@
 package ac.injecs.java2.service;
 
 import ac.injecs.java2.entity.Manager;
-import ac.injecs.java2.repository.ManagerRepository;
-import ac.injecs.java2.repository.StudentRepository;
+import ac.injecs.java2.repository.Repository;
 
 import java.util.Optional;
 
 public class ManagerService {
 
-    private final ManagerRepository managerRepository;
+    private final Repository repository;
 
-    public ManagerService(ManagerRepository managerRepository) {
-        this.managerRepository = managerRepository;
+    public ManagerService(Repository repository) {
+        this.repository = repository;
     }
 
 
     public Optional<Manager> loginManger(String id) {
-        return managerRepository.findById(id);
+        return repository.findManagerById(id);
     }
 
 }

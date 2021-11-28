@@ -1,33 +1,32 @@
 package ac.injecs.java2.service;
 
-import ac.injecs.java2.config.PasswordEncoder;
 import ac.injecs.java2.entity.Student;
-import ac.injecs.java2.repository.StudentRepository;
+import ac.injecs.java2.repository.Repository;
 
 import java.util.Optional;
 
 public class StudentService {
 
-    private final StudentRepository studentRepository;
+    private final Repository repository;
 
-    public StudentService(StudentRepository studentRepository){
-        this.studentRepository = studentRepository;
+    public StudentService(Repository repository){
+        this.repository = repository;
     }
 
     // 회원가입
     public Student saveStudent(Student student) {
         validateDuplicateStudent(student);  // 중복 검사
-        return studentRepository.save(student);
+        return repository.saveStudent(student);
     }
 
     private void validateDuplicateStudent(Student student) {
-        Optional<Student> findStudent = studentRepository.findById(student.getId());
+        Optional<Student> findStudent = repository.findStudentById(student.getId());
         if (!findStudent.isEmpty()) {
             throw new IllegalStateException();
         }
     }
 
     public Optional<Student> loginStudent(Long id) {
-        return studentRepository.findById(id);
+        return repository.findStudentById(id);
     }
 }

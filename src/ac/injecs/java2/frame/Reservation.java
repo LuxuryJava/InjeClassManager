@@ -52,7 +52,7 @@ public class Reservation extends JPanel {
             	
                 ResInfo res=new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(), Integer.parseInt(numField.getText()),
                 		Daycb.getSelectedItem().toString(), Timecb.getSelectedItem().toString(), purposeField.getText());
-                mainFrame.studentRepository.insertres(res);
+                mainFrame.repository.insertres(res);
                 
             }
         });
