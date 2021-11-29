@@ -83,9 +83,9 @@ public class Repository {
         return notice;
     }
 
-    public Notice findNoticeByTitle(String title){
+    public Optional<Notice> findNoticeByTitle(String title){
         String sql = "select * from notification where ntitle like " +"\"" +title + "\"";
-        return (Notice)  dbConnect.select(sql, new NoticeMapper());
+        return Optional.ofNullable((Notice)dbConnect.select(sql, new NoticeMapper()));
     }
     
     // --------------- Room ------------------------//
