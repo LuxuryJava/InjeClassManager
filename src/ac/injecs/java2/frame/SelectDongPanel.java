@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,20 +16,20 @@ public class SelectDongPanel extends JPanel {
         this.mainFrame = main;
         setLayout(null);
 
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        title.setFont(InjeFont.XLfont);
         title.setBounds(450, 20, 200, 30);
 
         RoundedButton aButton = new RoundedButton("A동");
         aButton.setBounds(200, 200, 150, 150);
-        aButton.setFont(new Font("나눔고딕", Font.PLAIN, 30));
+        aButton.setFont(InjeFont.XLfont);
 
         RoundedButton bButton = new RoundedButton("B동");
         bButton.setBounds(450, 200, 150, 150);
-        bButton.setFont(new Font("나눔고딕", Font.PLAIN, 30));
+        bButton.setFont(InjeFont.XLfont);
 
         RoundedButton cButton = new RoundedButton("C동");
         cButton.setBounds(700, 200, 150, 150);
-        cButton.setFont(new Font("나눔고딕", Font.PLAIN, 30));
+        cButton.setFont(InjeFont.XLfont);
 
         add(cButton);
         add(bButton);
@@ -56,7 +57,7 @@ public class SelectDongPanel extends JPanel {
                     mainFrame.setCenterPanel(mainFrame.reservation);
                     return;
                 }
-                mainFrame.setCenterPanel(mainFrame.class_openCloseB);
+                mainFrame.setCenterPanel(mainFrame.class_openCloseA);
             }
         });
 
@@ -68,7 +69,7 @@ public class SelectDongPanel extends JPanel {
                     mainFrame.setCenterPanel(mainFrame.reservation);
                     return;
                 }
-                mainFrame.setCenterPanel(mainFrame.class_openCloseC);
+                mainFrame.setCenterPanel(mainFrame.class_openCloseA);
             }
         });
 

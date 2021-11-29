@@ -1,6 +1,7 @@
 package ac.injecs.java2.config;
 
 import ac.injecs.java2.config.sql.SQLMapper;
+import ac.injecs.java2.Main;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,8 +10,11 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
+
 import ac.injecs.java2.entity.*;
 public class DBConnect{
+	protected Main mainFrame;
     private static DBConnect dbConnect = new DBConnect();
 
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -109,22 +113,32 @@ public class DBConnect{
 
     }
     public void resinsert(ResInfo res) {
-    	String sql="insert into reservation values(?,?,?,?,?,?)";
+    	String sql="insert into reservation values(?,?,?,?,?,?,?)";
+    	JOptionPane aa=new JOptionPane();
     	try {
-    		preparedStatement = connection.prepareStatement(sql);
-    		preparedStatement.setInt(1, res.getsno());
-    		preparedStatement.setString(2, res.getrinfo());
-    		preparedStatement.setInt(3, res.getmemcnt());
-            preparedStatement.setString(4, res.getuseday());
-            preparedStatement.setString(5, res.getusetime());
-            preparedStatement.setString(6, res.getpurpose());
-            
-            int result = preparedStatement.executeUpdate();
-            if(result==1) {
-                System.out.println("reservation데이터 삽입 성공!");
+    		Room rm=getRoom(res.getrinfo());
+    		if(rm.getroomPeople()>=res.getmemcnt()) {
+    			preparedStatement = connection.prepareStatement(sql);
+        		preparedStatement.setInt(1, res.getsno());
+        		preparedStatement.setString(2, res.getrinfo());
+        		preparedStatement.setInt(3, res.getmemcnt());
+                preparedStatement.setString(4, res.getuseday());
+                preparedStatement.setString(5, res.getusetime());
+                preparedStatement.setString(6, res.getpurpose());
+                preparedStatement.setBoolean(7, false);
                 
-            }
-            
+                int result = preparedStatement.executeUpdate();
+                if(result==1) {
+                    System.out.println("reservation데이터 삽입 성공!");  
+                    
+            		aa.showMessageDialog(null,"예약 성공");
+                }    			
+    		}
+    		else {
+    			
+        		aa.showMessageDialog(null,"최대인원 초과");
+    		}
+    		   
         } catch (Exception e) {
             System.out.println(e);
         }    finally {
@@ -138,10 +152,15 @@ public class DBConnect{
         
     } 
     public Vector<ResInfo> getResinfo(String id) {
+    	
     	Vector<ResInfo> res=new Vector<ResInfo>();
     	
     	try {
-    		preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
+    		if(mainFrame.session.getUser().isManager())
+    			preparedStatement=connection.prepareStatement("select * from reservation");
+    		else
+    			preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
+    		
     		resultSet=preparedStatement.executeQuery();
     		while(resultSet.next()) {
     			ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
@@ -184,6 +203,30 @@ public class DBConnect{
                 }
             } catch (Exception e2) {}
         }
+    }
+    public Room getRoom(String room) {
+    	String sql="select * from room where rinfo='"+room+"'";
+    	Room rm = null;
+    	try {
+    		preparedStatement = connection.prepareStatement(sql);
+    		
+    		resultSet=preparedStatement.executeQuery();
+    		while(resultSet.next()) {
+    			rm=new Room(resultSet.getString(1),resultSet.getBoolean(2),resultSet.getBoolean(3),resultSet.getBoolean(4),resultSet.getInt(5));
+    			
+    		}
+    		
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }    finally {
+            try {
+                if(preparedStatement!=null && !preparedStatement.isClosed()) {
+                	preparedStatement.close();
+                }
+            } catch (Exception e2) {}
+        }
+		return rm;
     }
 
 	

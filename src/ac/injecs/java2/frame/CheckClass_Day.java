@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ public class CheckClass_Day extends JPanel {
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("강의실 예약 조회", SwingConstants.CENTER);
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
         add(checkW, BorderLayout.CENTER);
         setVisible(true);

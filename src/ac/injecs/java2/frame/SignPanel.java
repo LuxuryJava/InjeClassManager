@@ -152,7 +152,7 @@ public class SignPanel extends JPanel {
 
                         System.out.println(user.toString());
 
-                        mainFrame.userController.signIn(user);
+                        mainFrame.userController.signUp(user);
                         mainFrame.userController.login(mainFrame.session, idField.getText(), passwordField.getText());
                         mainFrame.userInfoPanel.update();
                         mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
@@ -164,6 +164,10 @@ public class SignPanel extends JPanel {
                 }
             });
             setVisible(true);
+        }
+
+        private void fieldClear(){
+
         }
 
     }
