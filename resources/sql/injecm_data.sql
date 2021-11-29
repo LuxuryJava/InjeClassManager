@@ -22,4 +22,4 @@ INSERT INTO injecm.notification (ntitle, ncontent) VALUES ('[USG공유대학 학
 INSERT INTO injecm.notification (ntitle, ncontent) VALUES ('2021-2 기말고사 시간표 안내
 ', 'https://cs.inje.ac.kr/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/?uid=3465&mod=document&pageid=1');
 INSERT INTO injecm.notification (ntitle, ncontent) VALUES ('ICT InnoFesta 2021
-', 'https://cs.inje.ac.kr/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/?uid=3358&mod=document&pageid=1');
+', 'https://cs.inje.ac.kr/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%+95%AD/?uid=3358&mod=document&pageid=1');
