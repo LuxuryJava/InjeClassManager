@@ -10,7 +10,7 @@ public class Room {
     private boolean hasProjector;
 
     private int roomPeople;
-    
+
     public Room(String roomInfo,boolean doorOpen,boolean roomUsing,boolean hasProjector,int roomPeople) {
     	this.roomInfo=roomInfo;
     	this.doorOpen=doorOpen;
@@ -34,5 +34,58 @@ public class Room {
     }
     public int getroomPeople() {
     	return roomPeople;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomInfo='" + roomInfo + '\'' +
+                ", doorOpen=" + doorOpen +
+                ", roomUsing=" + roomUsing +
+                ", hasProjector=" + hasProjector +
+                ", roomPeople=" + roomPeople +
+                '}';
+    }
+
+    public static class Builder{
+        private String roomInfo;
+
+        private boolean doorOpen;
+
+        private boolean roomUsing;
+
+        private boolean hasProjector;
+
+        private int roomPeople;
+
+        public Builder roomInfo(String roomInfo) {
+            this.roomInfo = roomInfo;
+            return this;
+        }
+        public Builder doorOpen(boolean doorOpen) {
+            this.doorOpen = doorOpen;
+            return this;
+        }
+
+        public Builder roomUsing(boolean roomUsing) {
+            this.roomUsing = roomUsing;
+            return this;
+        }
+
+        public Builder hasProjector(boolean hasProjector) {
+            this.hasProjector = hasProjector;
+            return this;
+        }
+
+        public Builder roomPeople(int roomPeople) {
+            this.roomPeople =roomPeople;
+            return this;
+        }
+
+        public Room build(){
+            Room room = new Room(roomInfo, doorOpen, roomUsing, hasProjector, roomPeople);
+            return room;
+        }
+
     }
 }

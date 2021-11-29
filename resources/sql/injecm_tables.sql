@@ -39,14 +39,22 @@ create table Notification (
                               PRIMARY KEY(ntitle)
 );
 
+ create table week
+ (
+     day char(3) not null,
+
+     primary key(day)
+ );
+
+
 create table Reservation(
                                 uno varchar(20),
 
                                 rinfo char(10),
 
-                                mencnt int(3),
+                                day char(3),
 
-                                useday char(2),
+                                mencnt int(3),
 
                                 usetime char(100),
 
@@ -54,9 +62,11 @@ create table Reservation(
 
                                 accept boolean,
 
-                                PRIMARY KEY(rinfo, uno),
+                                PRIMARY KEY(rinfo, uno, day),
 
                                 foreign key(rinfo) references Room(rinfo) ON DELETE CASCADE,
 
-                                foreign key(uno) references User(uno)ON DELETE CASCADE
+                                foreign key(uno) references User(uno)ON DELETE CASCADE,
+
+                                foreign key(day) references Week(day)ON DELETE CASCADE
  );

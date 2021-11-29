@@ -3,6 +3,8 @@ package ac.injecs.java2.frame;
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.entity.Room;
+import com.mysql.cj.util.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -10,6 +12,7 @@ import java.awt.*;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.Vector;
@@ -49,13 +52,13 @@ public class DashBoardPanel extends JPanel {
         updateText.setBounds(12, 40, 300, 30);
 
 
-        boxPanel1 = new BoxPanel("총 강의실", "23", new Color(0x071F6));
+        boxPanel1 = new BoxPanel("총 강의실", "NULL", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
-        boxPanel2 = new BoxPanel("예약된 강의실", "23", new Color(0x071F6));
+        boxPanel2 = new BoxPanel("예약된 강의실", "NULL", new Color(0x071F6));
         boxPanel2.setBounds(50 + boxWidthGap * 2, 80, boxWidth, boxHeight);
-        boxPanel3 = new BoxPanel("사용중 강의실", "3", new Color(0xFF6C2D));
+        boxPanel3 = new BoxPanel("사용중 강의실", "NULL", new Color(0xFF6C2D));
         boxPanel3.setBounds(50 + boxWidthGap * 4, 80, boxWidth, boxHeight);
-        boxPanel4 = new BoxPanel("남은 강의실", "40", new Color(0xC12503));
+        boxPanel4 = new BoxPanel("남은 강의실", "NULL", new Color(0xC12503));
         boxPanel4.setBounds(50 + boxWidthGap * 6, 80, boxWidth, boxHeight);
 
         NoticeBoxPanel noticeBoxPanel1 = new NoticeBoxPanel("비어있는 강의실", emptyClass, 300, 170);
@@ -76,6 +79,18 @@ public class DashBoardPanel extends JPanel {
         add(noticeBoxPanel3);
 
         setVisible(true);
+
+        getDatas();
+    }
+
+    private void getDatas(){
+        // 모든 강의실 가져오기
+        List<Room> rooms = mainFrame.repository.findRoomAll();
+
+        for (Room Item : rooms) {
+            System.out.println(Item);
+        }
+        boxPanel1.setValueText(String.valueOf(rooms.size()));
     }
 
     public void paintComponent(Graphics graphics) {
@@ -90,11 +105,11 @@ public class DashBoardPanel extends JPanel {
             setLayout(null);
             setBackground(color);
 
-            JLabel titleText = new JLabel(title);
+            titleText = new JLabel(title);
             titleText.setForeground(Color.WHITE);
             titleText.setFont(InjeFont.PSfont);
 
-            JLabel valueText = new JLabel(value);
+            valueText = new JLabel(value);
             valueText.setForeground(Color.WHITE);
             valueText.setFont(InjeFont.Lfont);
 
@@ -105,6 +120,11 @@ public class DashBoardPanel extends JPanel {
 
             setVisible(true);
         }
+
+        public void setValueText(String valueText){
+            this.valueText.setText(valueText);
+        }
+
     }
 
     // 공지사항
