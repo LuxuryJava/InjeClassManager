@@ -16,13 +16,9 @@ public class UserInfoPanel extends JPanel {
         this.mainFrame = mainFrame;
         setLayout(null);
         
-        	
-
         JLabel title = new JLabel("내 정보");
         title.setBounds(10, 0, 300, 50);
-        title.setFont(InjeFont.Mfont);
-        
-        
+        title.setFont(InjeFont.Mfont);       
 
         JLabel nameText = new JLabel("이름");
         nameText.setBounds(270, 150, 100, 30);
@@ -39,7 +35,6 @@ public class UserInfoPanel extends JPanel {
         JLabel emailText = new JLabel("이메일");
         emailText.setBounds(260, 300, 100, 30);
         emailText.setFont(InjeFont.Sfont);
-
 
         JLabel phoneText = new JLabel("전화번호");
         phoneText.setBounds(250, 350, 100, 30);
@@ -78,6 +73,7 @@ public class UserInfoPanel extends JPanel {
         resinfo.setBounds(663,508,100,30);
         add(logout);
         add(resinfo);
+        
         for(int i=0;i<5;i++) {
         	jt[i]=new JTextField(10);
         	jt[i].setBounds(340,(150+i*50),200,30);

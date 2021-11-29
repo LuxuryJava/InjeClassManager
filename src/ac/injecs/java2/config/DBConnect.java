@@ -1,6 +1,7 @@
 package ac.injecs.java2.config;
 
 import ac.injecs.java2.config.sql.SQLMapper;
+import ac.injecs.java2.Main;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import ac.injecs.java2.entity.*;
 public class DBConnect{
+	protected Main mainFrame;
     private static DBConnect dbConnect = new DBConnect();
 
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -149,10 +151,11 @@ public class DBConnect{
         
     } 
     public Vector<ResInfo> getResinfo(String id) {
+    	
     	Vector<ResInfo> res=new Vector<ResInfo>();
     	
     	try {
-    		if(id=="admin")
+    		if(mainFrame.session.getUser().isManager())
     			preparedStatement=connection.prepareStatement("select * from reservation");
     		else
     			preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
