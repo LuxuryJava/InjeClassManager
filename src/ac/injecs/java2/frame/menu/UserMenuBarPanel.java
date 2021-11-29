@@ -102,8 +102,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
                         JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     }
                     else {
-                        mainFrame.setCenterPanel(mainFrame.selectDongPanel);
-                        mainFrame.selectDongPanel.title.setText("강의실 예약");
+                    	mainFrame.setCenterPanel(mainFrame.reservation);
 
                         mainFrame.setMode("예약");
                     }

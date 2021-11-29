@@ -1,6 +1,7 @@
 package ac.injecs.java2.config;
 
 import ac.injecs.java2.config.sql.SQLMapper;
+import ac.injecs.java2.Main;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import ac.injecs.java2.entity.*;
 public class DBConnect{
+	protected Main mainFrame;
     private static DBConnect dbConnect = new DBConnect();
 
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -40,7 +42,7 @@ public class DBConnect{
             if (connection != null) {
                 System.out.println("성공");
 
-                //setUpDB();
+                setUpDB();
             } else {
                 System.out.println("실패");
             }
@@ -111,7 +113,7 @@ public class DBConnect{
 
     }
     public void resinsert(ResInfo res) {
-    	String sql="insert into reservation values(?,?,?,?,?,?)";
+    	String sql="insert into reservation values(?,?,?,?,?,?,?)";
     	JOptionPane aa=new JOptionPane();
     	try {
     		Room rm=getRoom(res.getrinfo());
@@ -123,6 +125,7 @@ public class DBConnect{
                 preparedStatement.setString(4, res.getuseday());
                 preparedStatement.setString(5, res.getusetime());
                 preparedStatement.setString(6, res.getpurpose());
+                preparedStatement.setBoolean(7, false);
                 
                 int result = preparedStatement.executeUpdate();
                 if(result==1) {
@@ -149,10 +152,11 @@ public class DBConnect{
         
     } 
     public Vector<ResInfo> getResinfo(String id) {
+    	
     	Vector<ResInfo> res=new Vector<ResInfo>();
     	
     	try {
-    		if(id=="admin")
+    		if(mainFrame.session.getUser().isManager())
     			preparedStatement=connection.prepareStatement("select * from reservation");
     		else
     			preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
