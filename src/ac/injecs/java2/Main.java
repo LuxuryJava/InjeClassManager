@@ -23,9 +23,11 @@ public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
 
     private UserService userService = new UserService(repository);
-    private NoticeService noticeService = new NoticeService(repository);
     public UserController userController = new UserController(userService);
+
+    private NoticeService noticeService = new NoticeService(repository);
     public NoticeController noticeController = new NoticeController(noticeService);
+
     public SessionConfig session = new SessionConfig();
     
     private String sno;
@@ -43,11 +45,11 @@ public class Main {
     public CheckClass_Day checkClass_day;
     public CheckClass_Details checkClass_details;
     public Lecture_List lecture_list;
+    public Notice_Add notice_add;
     public Reservation reservation;
     public AdmitClassPanel admitClassPanel;
     public RequestLockClassPanel requestLockClassPanel;
     public UserInfoPanel userInfoPanel;
-    public SelectDongPanel selectDongPanel;
     // 프레임 초기 설정
     public Main(){
         MainFrame = new JFrame();
@@ -153,17 +155,14 @@ public class Main {
         main.checkClass_day = new CheckClass_Day(main);
         main.checkClass_details = new CheckClass_Details(main);
         main.lecture_list = new Lecture_List(main);
+        main.notice_add = new Notice_Add(main);
         main.reservation = new Reservation(main);
         main.admitClassPanel = new AdmitClassPanel(main);
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
-        main.selectDongPanel = new SelectDongPanel(main);
+
 
         main.setCenterPanel(main.dashBoardPanel);
-       //main.setCenterPanel(new Notice_Add(main));
-        //main.setCenterPanel(main.admitClassPanel);
-
         main.setMenuPanel(main.userMenuBarPanel);
-        //main.setCenterPanel(main.admitClassPanel);
     }
 }

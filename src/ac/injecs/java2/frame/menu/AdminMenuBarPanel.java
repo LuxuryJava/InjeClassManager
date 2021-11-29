@@ -126,7 +126,7 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             classStateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-//                    mainFrame.setCenterPanel(mainFrame.class_openCloseA);
+                    mainFrame.setCenterPanel(mainFrame.notice_add);
 
                     mainFrame.setMode("수업및특강등록");
                 }
@@ -134,7 +134,7 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             lectureButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-//                    mainFrame.setCenterPanel(mainFrame);
+                    mainFrame.setCenterPanel(mainFrame.lecture_list);
                     mainFrame.setMode("공지사항");
                 }
             });

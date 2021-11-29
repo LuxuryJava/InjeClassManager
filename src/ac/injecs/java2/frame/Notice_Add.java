@@ -9,10 +9,13 @@ import ac.injecs.java2.entity.ResInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Writer;
 
 //Frame
 public class Notice_Add  extends JPanel {
     private Main mainFrame;
+    private JTextField WriterFelid;
+
     public Notice_Add(Main main) {
         this.mainFrame = main;
         setLayout(null);
@@ -40,25 +43,13 @@ public class Notice_Add  extends JPanel {
         Nwriter.setBounds(375, 330, 57, 20);
         Nwriter.setFont(InjeFont.Mfont);
 
-        JTextField WriterFelid = new JTextField("아무개");
+        WriterFelid = new JTextField("아무개");
         WriterFelid.setBounds(450, 330, 116, 21);
         WriterFelid.setEnabled(false);
 
         JButton Endbtn = new JButton("작성완료");
         Endbtn.setBounds(500, 400, 150, 25);
         Endbtn.setFont(InjeFont.Sfont);
-
-        JLabel errorMessage = new JLabel("");
-        errorMessage.setFont(InjeFont.Sfont);
-        errorMessage.setForeground(Color.RED);
-        errorMessage.setBounds(390, 360, 300, 30);
-
-        Endbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
         add(Maintitle);
         add(Ntitle);
@@ -68,7 +59,6 @@ public class Notice_Add  extends JPanel {
         add(Nwriter);
         add(WriterFelid);
         add(Endbtn);
-        add(errorMessage);
 
 
         Endbtn.addActionListener(new ActionListener() {
@@ -79,18 +69,25 @@ public class Notice_Add  extends JPanel {
                     NoticeDto notice = new NoticeDto();
                     notice.setTitle(TitleFelid.getText());
                     notice.setContent(NtextArea.getText());
+                    System.out.println(notice);
 
-                    errorMessage.setText("");
-
+                    mainFrame.noticeController.post(notice);
 
                     System.out.println(notice.toString());
 
-                } catch (Exception e) {
-                    errorMessage.setText(e.getMessage());
+                } catch (IllegalStateException e) {
+                    JOptionPane.showMessageDialog(null, "필드를 채워주세요.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                } catch (IllegalArgumentException e){
+                    JOptionPane.showMessageDialog(null, "다른 제목으로 지어주세요.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
-
         setVisible(true);
+    }
+    public void paintComponent(Graphics g){
+        if(mainFrame.session.isLogin){
+            String name = mainFrame.session.getUser().getName();
+            WriterFelid.setText(name);
+        }
     }
 }

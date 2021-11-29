@@ -130,7 +130,7 @@ public class DBConnect{
         		preparedStatement.setInt(4, res.getmemcnt());
                 preparedStatement.setString(5, res.getusetime());
                 preparedStatement.setString(6, res.getpurpose());
-                preparedStatement.setBoolean(7, false);
+                preparedStatement.setBoolean(7,  false);
                 
                 int result = preparedStatement.executeUpdate();
                 if(result==1) {

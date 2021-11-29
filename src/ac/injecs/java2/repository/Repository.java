@@ -74,15 +74,19 @@ public class Repository {
     // --------------- Notice ------------------------//
 
     public Notice insertNotice(Notice notice) {
-        String sql = "insert into student values(?, ?)";
+        String sql = "insert into notification values(?, ?)";
         dbConnect.insert(sql, new NoticeMapper(), notice);
-
         return notice;
     }
     public List<Notice> findNoticeAll() {
         String sql = "select * from notification";
         List<Notice> notice = (List<Notice>) dbConnect.select(sql, new NoticeMapper());
         return notice;
+    }
+
+    public Optional<Notice> findNoticeByTitle(String title){
+        String sql = "select * from notification where ntitle like " +"\"" +title + "\"";
+        return Optional.ofNullable((Notice)dbConnect.select(sql, new NoticeMapper()));
     }
     
     // --------------- Room ------------------------//
