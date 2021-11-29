@@ -1,5 +1,7 @@
 package ac.injecs.java2.frame;
 
+import ac.injecs.java2.config.InjeFont;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,8 +38,8 @@ public class RoundedButton extends JButton {
         int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
 
         graphics.setColor(o);
-        graphics.setFont(getFont());
-        graphics.drawString(getText(), textX, textY);
+        graphics.setFont(InjeFont.Mfont);
+        graphics.drawString("<공지사항> "+getText(), 30, textY);
         graphics.dispose();
 
         super.paintComponent(g);

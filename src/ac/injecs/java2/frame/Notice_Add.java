@@ -65,6 +65,11 @@ public class Notice_Add  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
+                    int size = mainFrame.repository.findNoticeAll().size();
+                    if(size >= 5){
+                        JOptionPane.showMessageDialog(null, "게시글 최대 개수를 넘었습니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                     //공지사항 등록
                     NoticeDto notice = new NoticeDto();
                     notice.setTitle(TitleFelid.getText());
