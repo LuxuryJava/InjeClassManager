@@ -52,8 +52,6 @@ public class UserInfoPanel extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		mainFrame.session.outSession();
         		mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
-
-        		//mainFrame.userMenuBarPanel.btnhide();
         	}        	
         	
         });

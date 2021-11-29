@@ -28,9 +28,8 @@ public class NoticeService {
     }
 
     private void checkSamePost(String title){
-        Notice find = repository.findNoticeByTitle(title);
-
-        if(find.getTitle().equals(title)){
+        Optional<Notice> find = repository.findNoticeByTitle(title);
+        if(find.isPresent() && find.get().getTitle().equals(title)){
             throw new IllegalArgumentException();
         }
     }
