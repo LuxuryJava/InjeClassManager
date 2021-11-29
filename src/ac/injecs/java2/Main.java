@@ -33,7 +33,7 @@ public class Main {
     private JPanel nowPanel;
     private JPanel prevPanel;
     private String mode;
-
+ 
     public DashBoardPanel dashBoardPanel;
     public AdminMenuBarPanel adminMenuBarPanel;
     public UserMenuBarPanel userMenuBarPanel;
