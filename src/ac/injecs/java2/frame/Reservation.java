@@ -52,8 +52,13 @@ public class Reservation extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                ResInfo res=new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(), Integer.parseInt(numField.getText()),
-                        Daycb.getSelectedItem().toString(), Timecb.getSelectedItem().toString(), purposeField.getText());
+                ResInfo res = new ResInfo(Integer.parseInt(nameField.getText())
+                        , cb.getSelectedItem().toString()
+                        , Daycb.getSelectedItem().toString()
+                        ,Integer.parseInt(numField.getText())
+                        , Timecb.getSelectedItem().toString()
+                        , purposeField.getText()
+                        , false);
                 mainFrame.repository.insertres(res);
 
             }
