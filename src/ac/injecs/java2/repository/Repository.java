@@ -2,6 +2,7 @@ package ac.injecs.java2.repository;
 
 import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.config.sql.NoticeMapper;
+import ac.injecs.java2.config.sql.RoomMapper;
 import ac.injecs.java2.config.sql.UserMapper;
 import ac.injecs.java2.entity.*;
 
@@ -91,6 +92,12 @@ public class Repository {
     // --------------- Room ------------------------//
     public Room getRoom(String room) {
     	return dbConnect.getRoom(room);
+    }
+
+    public List<Room> findRoomAll(){
+        String sql = "select * from room";
+        List<Room> finds = (List<Room>) dbConnect.select(sql, new RoomMapper());
+        return finds;
     }
 
 }
