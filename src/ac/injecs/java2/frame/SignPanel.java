@@ -166,5 +166,9 @@ public class SignPanel extends JPanel {
             setVisible(true);
         }
 
+        private void fieldClear(){
+
+        }
+
     }
 }

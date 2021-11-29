@@ -22,7 +22,7 @@ public class Reservation extends JPanel {
     JTextField numField = new JTextField();
     JTextField purposeField = new JTextField();
     private String[] day = {"일", "월", "화", "수", "목", "금", "토"};
-    
+
     private String[] time = {"09:00 ~ 09:50", "10:00 ~ 10:50", "11:00 ~ 11:50", "12:00 ~ 12:50",
             "13:00 ~ 13:50", "14:00 ~ 14:50", "15:00 ~ 15:50", "16:00 ~ 16:50", "17:00 ~ 17:50",
             "18:00 ~ 18:50", "19:00 ~ 19:50", "20:00 ~ 20:50", "21:00 ~ 21:50", "22:00 ~ 22:50",
@@ -51,11 +51,11 @@ public class Reservation extends JPanel {
         bt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+
                 ResInfo res=new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(), Integer.parseInt(numField.getText()),
-                		Daycb.getSelectedItem().toString(), Timecb.getSelectedItem().toString(), purposeField.getText());
+                        Daycb.getSelectedItem().toString(), Timecb.getSelectedItem().toString(), purposeField.getText());
                 mainFrame.repository.insertres(res);
-                
+
             }
         });
 
@@ -144,6 +144,11 @@ public class Reservation extends JPanel {
         private int textHeight = 30;
         private int fieldWidth = 150;
 
+
+
+
+
+
         public ResBox() {
             setLayout(null);
             setBackground(new Color(0x4FDAE4));
@@ -154,14 +159,14 @@ public class Reservation extends JPanel {
             titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(170, 20, 100, 30);
 
-            JLabel nameText = new JLabel("ID(학번):");
-            
+            JLabel nameText = new JLabel("ID(이름):");
+
             JLabel numText = new JLabel("이용 예정 인원:");
-            
+
             JLabel dayText = new JLabel("이용 요일:");
             JLabel timeText = new JLabel("이용 시간:");
             JLabel purposeText = new JLabel("이용 목적:");
-           
+
 
             nameText.setBounds(60, textStartY - 20, textWidth, textHeight);
             nameField.setBounds(80 + textWidth, textStartY - 20, fieldWidth, textHeight);
@@ -207,6 +212,6 @@ public class Reservation extends JPanel {
         }
     }
     public void setid(String id) {
-    	nameField.setText(id);
+        nameField.setText(id);
     }
 }

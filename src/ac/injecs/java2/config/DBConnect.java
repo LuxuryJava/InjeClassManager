@@ -42,7 +42,7 @@ public class DBConnect{
             if (connection != null) {
                 System.out.println("성공");
 
-                //setUpDB();
+                setUpDB();
             } else {
                 System.out.println("실패");
             }

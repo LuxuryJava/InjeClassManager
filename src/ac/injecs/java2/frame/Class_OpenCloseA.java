@@ -52,5 +52,4 @@ public class Class_OpenCloseA extends JPanel {
 			}
 		}
 	}
-
 }

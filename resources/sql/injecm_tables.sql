@@ -40,23 +40,35 @@ create table Notification (
 );
 
 create table Reservation(
-                            uno varchar(20),
+                                uno varchar(20),
 
-                            rinfo char(10),
+                                rinfo char(10),
 
-                            mencnt int(3),
+                                mencnt int(3),
 
+<<<<<<< HEAD
                             useday char(2),
 
                             usetime char(100),
+=======
+                                useday char(2),
 
-                            purpose char(100),
+                                usetime char(100),
+>>>>>>> 29bf59fc4890c54f36b2b2ff3cfb2318dd38bb5b
 
+                                purpose char(100),
+
+<<<<<<< HEAD
                             accept boolean,
 
                             PRIMARY KEY(rinfo, uno),
+=======
+                                accept boolean,
+>>>>>>> 29bf59fc4890c54f36b2b2ff3cfb2318dd38bb5b
 
-                            foreign key(rinfo) references Room(rinfo) ON DELETE CASCADE,
+                                PRIMARY KEY(rinfo, uno),
 
-                            foreign key(uno) references User(uno)ON DELETE CASCADE
-);
+                                foreign key(rinfo) references Room(rinfo) ON DELETE CASCADE,
+
+                                foreign key(uno) references User(uno)ON DELETE CASCADE
+ );

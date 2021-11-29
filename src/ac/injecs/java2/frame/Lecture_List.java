@@ -67,6 +67,13 @@ public class Lecture_List extends JPanel {
                         }
                     }
                 });
+
+                AddBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mainFrame.setCenterPanel(mainFrame.notice_add);
+                    }
+                });
             }
 
         }
