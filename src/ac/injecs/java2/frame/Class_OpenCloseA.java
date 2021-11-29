@@ -2,7 +2,6 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
-import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.entity.*;
 import javax.swing.*;
 import java.awt.*;
@@ -26,14 +25,13 @@ public class Class_OpenCloseA extends JPanel {
 
 	public class classP extends JPanel {
 		public classP() {
-
 			setLayout(new GridLayout(2, 3, 0, 0));
 			for (int i = 0; i < 6; i++) {
 				rm = mainFrame.repository.getRoom(strArr[i]);
 
 				if (rm.getdoorOpen() == true) {
 					label[i] = new JLabel(strArr[i], image[1], SwingConstants.CENTER);
-				} 
+				}
 				else {
 					label[i] = new JLabel(strArr[i], image[0], SwingConstants.CENTER);
 				}

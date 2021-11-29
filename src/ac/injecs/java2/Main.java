@@ -23,9 +23,11 @@ public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
 
     private UserService userService = new UserService(repository);
-    private NoticeService noticeService = new NoticeService(repository);
     public UserController userController = new UserController(userService);
+
+    private NoticeService noticeService = new NoticeService(repository);
     public NoticeController noticeController = new NoticeController(noticeService);
+
     public SessionConfig session = new SessionConfig();
     
     private String sno;
@@ -158,8 +160,8 @@ public class Main {
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
 
-        main.setCenterPanel(main.dashBoardPanel);
-       //main.setCenterPanel(new Notice_Add(main));
+        //main.setCenterPanel(main.lecture_list);
+       main.setCenterPanel(new Notice_Add(main));
         //main.setCenterPanel(main.admitClassPanel);
 
         main.setMenuPanel(main.userMenuBarPanel);

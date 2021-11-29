@@ -46,11 +46,13 @@ create table Reservation(
 
                             mencnt int(3),
 
-                            stime TIMESTAMP,
+                            useday char(2),
 
-                            ftime TIMESTAMP,
+                            usetime char(100),
 
                             purpose char(100),
+
+                            accept boolean,
 
                             PRIMARY KEY(rinfo, uno),
 

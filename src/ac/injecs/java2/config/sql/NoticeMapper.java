@@ -12,8 +12,8 @@ public class NoticeMapper extends SQLMapper {
 
             this.preparedStatement = preparedStatement;
 
-            preparedStatement.setString(2, notice.getTitle());
-            preparedStatement.setString(3, notice.getContent());
+            preparedStatement.setString(1, notice.getTitle());
+            preparedStatement.setString(2, notice.getContent());
 
             int row = preparedStatement.executeUpdate();
 
@@ -34,7 +34,7 @@ public class NoticeMapper extends SQLMapper {
             while (resultSet.next()) {
                 notice = (new Notice.Builder()
                         .title(resultSet.getString("ntitle"))
-                        .content(resultSet.getString("scontent"))
+                        .content(resultSet.getString("ncontent"))
                         .build());
             }
         } catch (SQLException e) {

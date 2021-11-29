@@ -4,11 +4,19 @@ public class NoticeDto {
     private  String title;
     private String content;
 
+    @Override
+    public String toString() {
+        return "NoticeDto{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String id) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

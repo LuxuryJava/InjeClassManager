@@ -113,7 +113,7 @@ public class DBConnect{
 
     }
     public void resinsert(ResInfo res) {
-    	String sql="insert into reservation values(?,?,?,?,?,?)";
+    	String sql="insert into reservation values(?,?,?,?,?,?,?)";
     	JOptionPane aa=new JOptionPane();
     	try {
     		Room rm=getRoom(res.getrinfo());
@@ -125,6 +125,7 @@ public class DBConnect{
                 preparedStatement.setString(4, res.getuseday());
                 preparedStatement.setString(5, res.getusetime());
                 preparedStatement.setString(6, res.getpurpose());
+                preparedStatement.setBoolean(7,  false);
                 
                 int result = preparedStatement.executeUpdate();
                 if(result==1) {
