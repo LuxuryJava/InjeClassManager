@@ -82,12 +82,13 @@ public class Lecture_List extends JPanel {
             for (int i = 0; i < lectures.length; i++) {
                 lectures[i] = new Lecture();
                 //이미지만 남기기
-
+                lectures[i].getBtn().setHorizontalAlignment(SwingConstants.CENTER);
                 lectures[i].getBtn().setBorderPainted(false);
                 lectures[i].getBtn().setFocusPainted(false);
                 lectures[i].getBtn().setContentAreaFilled(false);
-                lectures[i].getBtn().setLocation(50, 90 * i + 50);
-                lectures[i].getBtn().setSize(getWidth() - 100, 80);
+                lectures[i].getBtn().setLocation(40, 90 * i + 50);
+                lectures[i].getBtn().setSize(900, 80);
+                System.out.println(getWidth()-100);
                 lectures[i].getBtn().setText("");
 
                 add(lectures[i].getBtn());
