@@ -47,7 +47,7 @@ public class Main {
     public AdmitClassPanel admitClassPanel;
     public RequestLockClassPanel requestLockClassPanel;
     public UserInfoPanel userInfoPanel;
-
+    public SelectDongPanel selectDongPanel;
     // 프레임 초기 설정
     public Main(){
         MainFrame = new JFrame();
@@ -157,6 +157,7 @@ public class Main {
         main.admitClassPanel = new AdmitClassPanel(main);
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
+        main.selectDongPanel = new SelectDongPanel(main);
 
         main.setCenterPanel(main.dashBoardPanel);
        //main.setCenterPanel(new Notice_Add(main));

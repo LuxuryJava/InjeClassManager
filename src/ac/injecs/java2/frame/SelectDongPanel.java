@@ -57,7 +57,7 @@ public class SelectDongPanel extends JPanel {
                     mainFrame.setCenterPanel(mainFrame.reservation);
                     return;
                 }
-                mainFrame.setCenterPanel(mainFrame.class_openCloseB);
+                mainFrame.setCenterPanel(mainFrame.class_openCloseA);
             }
         });
 
@@ -69,7 +69,7 @@ public class SelectDongPanel extends JPanel {
                     mainFrame.setCenterPanel(mainFrame.reservation);
                     return;
                 }
-                mainFrame.setCenterPanel(mainFrame.class_openCloseC);
+                mainFrame.setCenterPanel(mainFrame.class_openCloseA);
             }
         });
 

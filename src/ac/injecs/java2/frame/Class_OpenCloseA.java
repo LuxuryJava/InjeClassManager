@@ -24,9 +24,6 @@ public class Class_OpenCloseA extends JPanel {
     }
     public class classP extends JPanel {
         public classP() {
-<<<<<<< HEAD
-            
-=======
             setBackground(Color.WHITE);
             ImageIcon[] image = { new ImageIcon("images/classopenclose.png"),
                     new ImageIcon("images/classopenclose.png"), new ImageIcon("images/classopenclose.png"),
@@ -35,8 +32,6 @@ public class Class_OpenCloseA extends JPanel {
             JLabel[] label = { new JLabel("A101",image[0], SwingConstants.CENTER), new JLabel("A102", image[1], SwingConstants.CENTER),
                     new JLabel("A103", image[2], SwingConstants.CENTER), new JLabel("A201", image[3], SwingConstants.CENTER),
                     new JLabel("A202", image[4], SwingConstants.CENTER), new JLabel("A203", image[5], SwingConstants.CENTER)};
-
->>>>>>> ac9cc340892d4d62dc340afcaf0acb76c90813d5
             setLayout(new GridLayout(2, 3, 0, 0 ));
             for(int i = 0; i < 6; i++) {
                 rm=mainFrame.repository.getRoom(strArr[i]);
