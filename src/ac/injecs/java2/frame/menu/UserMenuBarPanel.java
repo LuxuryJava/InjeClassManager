@@ -98,9 +98,8 @@ public class UserMenuBarPanel extends MenuBarPanel {
             classReservationButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.selectDongPanel);
-                    mainFrame.selectDongPanel.title.setText("강의실 예약");
-
+                    mainFrame.setCenterPanel(mainFrame.reservation);
+        
                     mainFrame.setMode("예약");
                 }
             });
@@ -114,8 +113,8 @@ public class UserMenuBarPanel extends MenuBarPanel {
             classStateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.selectDongPanel);
-                    mainFrame.selectDongPanel.title.setText("강의실 개방");
+                    mainFrame.setCenterPanel(mainFrame.class_openCloseA);
+         
                     mainFrame.setMode("개방");
                 }
             });

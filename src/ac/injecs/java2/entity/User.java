@@ -1,6 +1,6 @@
 package ac.injecs.java2.entity;
 
-import ac.injecs.java2.config.PasswordEncoder;
+
 import ac.injecs.java2.dto.UserFormDto;
 
 public class User {

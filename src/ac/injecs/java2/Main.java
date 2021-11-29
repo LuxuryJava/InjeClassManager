@@ -35,10 +35,7 @@ public class Main {
     public UserMenuBarPanel userMenuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
-    public SelectDongPanel selectDongPanel;
     public Class_OpenCloseA class_openCloseA;
-    public Class_OpenCloseB class_openCloseB;
-    public Class_OpenCloseC class_openCloseC;
     public CheckClass_Day checkClass_day;
     public CheckClass_Details checkClass_details;
     public Lecture_List lecture_list;
@@ -148,10 +145,7 @@ public class Main {
         main.adminMenuBarPanel = new AdminMenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
-        main.selectDongPanel = new SelectDongPanel(main);
         main.class_openCloseA = new Class_OpenCloseA(main);
-        main.class_openCloseB = new Class_OpenCloseB(main);
-        main.class_openCloseC = new Class_OpenCloseC(main);
         main.checkClass_day = new CheckClass_Day(main);
         main.checkClass_details = new CheckClass_Details(main);
         main.lecture_list = new Lecture_List(main);

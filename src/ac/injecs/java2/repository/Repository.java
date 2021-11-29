@@ -3,9 +3,8 @@ package ac.injecs.java2.repository;
 import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.config.sql.NoticeMapper;
 import ac.injecs.java2.config.sql.UserMapper;
-import ac.injecs.java2.entity.Notice;
-import ac.injecs.java2.entity.ResInfo;
-import ac.injecs.java2.entity.User;
+import ac.injecs.java2.entity.*;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class Repository {
     }
 
     public List<User> findUserAll() {
-        String sql = "select * from student";
+        String sql = "select * from user";
         List<User> users = (List<User>) dbConnect.select(sql, new UserMapper());
         return users;
     }
@@ -84,6 +83,11 @@ public class Repository {
         String sql = "select * from notification";
         List<Notice> notice = (List<Notice>) dbConnect.select(sql, new NoticeMapper());
         return notice;
+    }
+    
+    // --------------- Room ------------------------//
+    public Room getRoom(String room) {
+    	return dbConnect.getRoom(room);
     }
 
 }
