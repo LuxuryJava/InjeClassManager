@@ -32,18 +32,11 @@ create table user (
 );
 
 create table Notification (
-
-                              nno int(10),
-
-                              nwriter char(10),
-
-                              nname char(30),
+                              ntitle char(30),
 
                               ncontent TEXT(500),
 
-                              ntime date,
-
-                              PRIMARY KEY(nno)
+                              PRIMARY KEY(ntitle)
 );
 
 create table Reservation(

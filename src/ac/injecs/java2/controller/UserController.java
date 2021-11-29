@@ -1,6 +1,6 @@
 package ac.injecs.java2.controller;
 
-import ac.injecs.java2.config.PasswordEncoder;
+
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.dto.UserFormDto;
 import ac.injecs.java2.entity.User;
@@ -17,7 +17,7 @@ public class UserController {
     }
 
     // 회원가입 전달
-    public User signIn(UserFormDto userFormDto){
+    public User signUp(UserFormDto userFormDto){
         User user = null;
         try {
             user = User.createUser(userFormDto);

@@ -3,6 +3,7 @@ package ac.injecs.java2;
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.controller.UserController;
+import  ac.injecs.java2.controller.NoticeController;
 import ac.injecs.java2.frame.*;
 import ac.injecs.java2.frame.admin.AdmitClassPanel;
 import ac.injecs.java2.frame.admin.RequestLockClassPanel;
@@ -10,6 +11,7 @@ import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
 import ac.injecs.java2.frame.menu.UserMenuBarPanel;
 import ac.injecs.java2.frame.user.UserInfoPanel;
 import ac.injecs.java2.repository.Repository;
+import ac.injecs.java2.service.NoticeService;
 import ac.injecs.java2.service.UserService;
 
 import javax.swing.*;
@@ -21,7 +23,9 @@ public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
 
     private UserService userService = new UserService(repository);
+    private NoticeService noticeService = new NoticeService(repository);
     public UserController userController = new UserController(userService);
+    public NoticeController noticeController = new NoticeController(noticeService);
     public SessionConfig session = new SessionConfig();
     
     private String sno;
@@ -29,16 +33,13 @@ public class Main {
     private JPanel nowPanel;
     private JPanel prevPanel;
     private String mode;
-
+ 
     public DashBoardPanel dashBoardPanel;
     public AdminMenuBarPanel adminMenuBarPanel;
     public UserMenuBarPanel userMenuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
-    public SelectDongPanel selectDongPanel;
     public Class_OpenCloseA class_openCloseA;
-    public Class_OpenCloseB class_openCloseB;
-    public Class_OpenCloseC class_openCloseC;
     public CheckClass_Day checkClass_day;
     public CheckClass_Details checkClass_details;
     public Lecture_List lecture_list;
@@ -148,10 +149,7 @@ public class Main {
         main.adminMenuBarPanel = new AdminMenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
-        main.selectDongPanel = new SelectDongPanel(main);
         main.class_openCloseA = new Class_OpenCloseA(main);
-        main.class_openCloseB = new Class_OpenCloseB(main);
-        main.class_openCloseC = new Class_OpenCloseC(main);
         main.checkClass_day = new CheckClass_Day(main);
         main.checkClass_details = new CheckClass_Details(main);
         main.lecture_list = new Lecture_List(main);
@@ -160,11 +158,11 @@ public class Main {
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
 
-       // main.setCenterPanel(main.dashBoardPanel);
-       // main.setCenterPanel(new Notice_Add(main));
+        main.setCenterPanel(main.dashBoardPanel);
+       //main.setCenterPanel(new Notice_Add(main));
         //main.setCenterPanel(main.admitClassPanel);
 
         main.setMenuPanel(main.userMenuBarPanel);
-        main.setCenterPanel(main.admitClassPanel);
+        //main.setCenterPanel(main.admitClassPanel);
     }
 }

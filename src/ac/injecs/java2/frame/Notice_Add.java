@@ -2,8 +2,12 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
+import ac.injecs.java2.dto.NoticeDto;
+import ac.injecs.java2.entity.Notice;
+import ac.injecs.java2.entity.ResInfo;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 //Frame
@@ -21,14 +25,14 @@ public class Notice_Add  extends JPanel {
         Ntitle.setBounds(375, 150, 57, 20);
         Ntitle.setFont(InjeFont.Mfont);
 
-        JTextField TitleFelid = new JTextField("글제목입니다.");
+        JTextField TitleFelid = new JTextField();
         TitleFelid.setBounds(450, 150, 200, 20);
 
         JLabel  Ncontent = new JLabel("글내용");
         Ncontent.setBounds(375, 200, 60, 20);
         Ncontent.setFont(InjeFont.Mfont);
 
-        JTextArea NtextArea = new JTextArea("글내용 글내용..");
+        JTextArea NtextArea = new JTextArea();
         NtextArea.setLineWrap(true);
         NtextArea.setBounds(450, 200, 340, 130);
 
@@ -43,6 +47,11 @@ public class Notice_Add  extends JPanel {
         JButton Endbtn = new JButton("작성완료");
         Endbtn.setBounds(500, 400, 150, 25);
         Endbtn.setFont(InjeFont.Sfont);
+
+        JLabel errorMessage = new JLabel("");
+        errorMessage.setFont(InjeFont.Sfont);
+        errorMessage.setForeground(Color.RED);
+        errorMessage.setBounds(390, 360, 300, 30);
 
         Endbtn.addActionListener(new ActionListener() {
             @Override
@@ -59,6 +68,28 @@ public class Notice_Add  extends JPanel {
         add(Nwriter);
         add(WriterFelid);
         add(Endbtn);
+        add(errorMessage);
+
+
+        Endbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    //공지사항 등록
+                    NoticeDto notice = new NoticeDto();
+                    notice.setTitle(TitleFelid.getText());
+                    notice.setContent(NtextArea.getText());
+
+                    errorMessage.setText("");
+
+
+                    System.out.println(notice.toString());
+
+                } catch (Exception e) {
+                    errorMessage.setText(e.getMessage());
+                }
+            }
+        });
 
         setVisible(true);
     }

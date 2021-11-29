@@ -1,5 +1,4 @@
 package ac.injecs.java2.controller;
-
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.entity.User;
 import ac.injecs.java2.service.ManagerService;
