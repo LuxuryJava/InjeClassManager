@@ -39,7 +39,7 @@ public class RoundedButton extends JButton {
 
         graphics.setColor(o);
         graphics.setFont(InjeFont.Mfont);
-        graphics.drawString(getText(), textX, textY);
+        graphics.drawString("<공지사항> "+getText(), 30, textY);
         graphics.dispose();
 
         super.paintComponent(g);
