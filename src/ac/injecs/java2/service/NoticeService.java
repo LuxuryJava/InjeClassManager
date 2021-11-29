@@ -1,6 +1,9 @@
 package ac.injecs.java2.service;
 
+import ac.injecs.java2.entity.Notice;
 import ac.injecs.java2.repository.Repository;
+
+import java.util.Optional;
 
 public class NoticeService {
 
@@ -10,5 +13,26 @@ public class NoticeService {
         this.repository = repository;
     }
 
+    public  Notice post(Notice notice){
+        checkText(notice);
+        System.out.println();
+        checkSamePost(notice.getTitle());
+
+        return repository.insertNotice(notice);
+    }
+
+    private void checkText(Notice notice){
+        if (notice.getTitle().isEmpty() || notice.getContent().isEmpty()){
+            throw new IllegalStateException();
+        }
+    }
+
+    private void checkSamePost(String title){
+        Notice find = repository.findNoticeByTitle(title);
+
+        if(find.getTitle().equals(title)){
+            throw new IllegalArgumentException();
+        }
+    }
 
 }

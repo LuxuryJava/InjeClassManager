@@ -125,7 +125,7 @@ public class DBConnect{
                 preparedStatement.setString(4, res.getuseday());
                 preparedStatement.setString(5, res.getusetime());
                 preparedStatement.setString(6, res.getpurpose());
-                preparedStatement.setBoolean(7, false);
+                preparedStatement.setBoolean(7,  false);
                 
                 int result = preparedStatement.executeUpdate();
                 if(result==1) {

@@ -63,7 +63,7 @@ public class UserInfoPanel extends JPanel {
         	public void actionPerformed(ActionEvent e) {
         		mainFrame.setCenterPanel(mainFrame.checkClass_details);
         		
-					mainFrame.checkClass_details.setInfo();
+        		mainFrame.checkClass_details.setInfo();
 				
         	}        	
         	

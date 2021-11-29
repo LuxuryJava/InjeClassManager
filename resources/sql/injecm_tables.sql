@@ -46,13 +46,25 @@ create table Reservation(
 
                                 mencnt int(3),
 
+<<<<<<< HEAD
+                            useday char(2),
+
+                            usetime char(100),
+=======
                                 useday char(2),
 
                                 usetime char(100),
+>>>>>>> 29bf59fc4890c54f36b2b2ff3cfb2318dd38bb5b
 
                                 purpose char(100),
 
+<<<<<<< HEAD
+                            accept boolean,
+
+                            PRIMARY KEY(rinfo, uno),
+=======
                                 accept boolean,
+>>>>>>> 29bf59fc4890c54f36b2b2ff3cfb2318dd38bb5b
 
                                 PRIMARY KEY(rinfo, uno),
 
