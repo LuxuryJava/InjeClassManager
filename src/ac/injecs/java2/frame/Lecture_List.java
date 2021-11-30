@@ -86,7 +86,6 @@ public class Lecture_List extends JPanel {
                 lectures[i].getBtn().setText("");
 
                 add(lectures[i].getBtn());
-                //목록 버튼 클릭 시 해당 공지사항 링크로 연결
                 //글쓰기 버튼 클릭 시
                 AddBtn.addActionListener(new ActionListener() {
                     @Override
@@ -113,14 +112,14 @@ public class Lecture_List extends JPanel {
             java.util.List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
             for (int i = 0; i < noticeAll.size();  i++){
                 Notice item = noticeAll.get(i);
-                lectures[i].getBtn().setText(item.getTitle());
+                lectures[i].getBtn().setText( item.getTitle());
                 lectures[i].setURL(item.getContent());
 
                 lectures[i].getBtn().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        try {
-                            Desktop.getDesktop().browse(new URL(item.getContent()).toURI());//www.google.com").toURI());
+                        try { //해당 공지사항 클릭 시 웹 페이지로 이동
+                            Desktop.getDesktop().browse(new URL(item.getContent()).toURI());
                         } catch (Exception exe) {
                              System.out.println(exe.getMessage());
                         }

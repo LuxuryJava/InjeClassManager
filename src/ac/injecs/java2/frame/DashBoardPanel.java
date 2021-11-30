@@ -119,6 +119,9 @@ public class DashBoardPanel extends JPanel {
 
     private void getReservationData(){
         List<ResInfo> reservationAll = mainFrame.repository.findReservationAll();
+        if (reservationAll == null){
+            return;
+        }
         for (int i = 0; i < reservationAll.size(); i++){
             ResInfo resInfo = reservationAll.get(i);
             if (resInfo == null) {

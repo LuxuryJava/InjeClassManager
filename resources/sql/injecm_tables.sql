@@ -32,7 +32,7 @@ create table user (
 );
 
 create table Notification (
-                              ntitle char(30),
+                              ntitle char(100),
 
                               ncontent TEXT(500),
 

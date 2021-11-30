@@ -79,8 +79,11 @@ public class DBConnect{
         System.out.println("DB 초기화를 진행합니다.");
         clearDb();
         createTables();
+        createData();
     }
-
+    private void createData(){
+        runScript("injecm_data.sql");
+    }
     private void createTables() {
         runScript("injecm_tables.sql");
     }
