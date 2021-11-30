@@ -176,6 +176,7 @@ public class DBConnect{
 
         return res;
     }
+
     public void delres(String id, String rinfo) {
         String sql="delete from reservation where uno=? && rinfo=?";
 

@@ -124,6 +124,7 @@ public class Main {
         if (nowPanel != null) {
             MainFrame.remove(nowPanel);
         }
+
         setPrevPanel(nowPanel);
         setNowPanel(panel);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
@@ -135,6 +136,17 @@ public class Main {
             if(!prevPanel.equals(nowPanel))
                 MainFrame.remove(prevPanel);
         }
+
+        if (panel.equals(dashBoardPanel)) {
+            //System.out.println("업데이트");
+            dashBoardPanel.updateContent();
+        }
+        if (panel.equals(reservation)){
+            System.out.println("예약 데이터 갱신!");
+            // 업데이트
+            reservation.setid(session.getUser().getId());
+        }
+
         updateContent();
     }
 
