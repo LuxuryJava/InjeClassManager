@@ -17,8 +17,8 @@ public class CheckClass_Details extends JPanel{
     static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
     JTextField nameField = new JTextField("");
     JTextField classField = new JTextField("");
-    JTextField numField = new JTextField("");
     JTextField dayField = new JTextField("");
+    JTextField numField = new JTextField("");
     JTextField timeField = new JTextField("");
     JTextField purposeField = new JTextField("");
     Vector<ResInfo> ri;
@@ -31,8 +31,8 @@ public class CheckClass_Details extends JPanel{
     	{
     		nameField.setText("");;
     	    classField.setText("");
-    	    numField.setText("");
     	    dayField.setText("");
+    	    numField.setText("");
     	    timeField.setText("");
     	    purposeField.setText("");
     		JOptionPane aa=new JOptionPane();
@@ -48,8 +48,8 @@ public class CheckClass_Details extends JPanel{
 	public void setField() {
     	nameField.setText(Integer.toString(ri.get(cnt).getuno()));
 		classField.setText(ri.get(cnt).getrinfo());
-		numField.setText(Integer.toString(ri.get(cnt).getmemcnt()));
 		dayField.setText(ri.get(cnt).getuseday());
+		numField.setText(Integer.toString(ri.get(cnt).getmemcnt()));
 		timeField.setText(ri.get(cnt).getusetime());
 		purposeField.setText(ri.get(cnt).getpurpose());
     }
@@ -146,10 +146,10 @@ public class CheckClass_Details extends JPanel{
             nameField.setBounds(80 + textWidth, textStartY - 20, fieldWidth, textHeight);
             classText.setBounds(60, textStartY + 20, textWidth, textHeight);
             classField.setBounds(80 + textWidth, textStartY + 20, fieldWidth, textHeight);
-            numText.setBounds(60, textStartY + 60, textWidth, textHeight);
-            numField.setBounds(80 + textWidth, textStartY + 60, fieldWidth, textHeight);
             dayText.setBounds(60, textStartY + 100, textWidth, textHeight);
             dayField.setBounds(80 + textWidth, textStartY + 100, fieldWidth, textHeight);
+            numText.setBounds(60, textStartY + 60, textWidth, textHeight);
+            numField.setBounds(80 + textWidth, textStartY + 60, fieldWidth, textHeight);
             timeText.setBounds(60, textStartY + 140, textWidth, textHeight);
             timeField.setBounds(80 + textWidth, textStartY + 140, fieldWidth, textHeight);
             purposeText.setBounds(60, textStartY + 180, textWidth, textHeight);
@@ -157,22 +157,22 @@ public class CheckClass_Details extends JPanel{
 
             nameText.setHorizontalAlignment(SwingConstants.RIGHT);
             classText.setHorizontalAlignment(SwingConstants.RIGHT);
-            numText.setHorizontalAlignment(SwingConstants.RIGHT);
             dayText.setHorizontalAlignment(SwingConstants.RIGHT);
+            numText.setHorizontalAlignment(SwingConstants.RIGHT);
             timeText.setHorizontalAlignment(SwingConstants.RIGHT);
             purposeText.setHorizontalAlignment((SwingConstants.RIGHT));
 
             nameText.setFont(Sfont);
             classText.setFont(Sfont);
-            numText.setFont(Sfont);
             dayText.setFont(Sfont);
+            numText.setFont(Sfont);
             timeText.setFont(Sfont);
             purposeText.setFont(Sfont);
 
             nameField.setEnabled(false);
             classField.setEnabled(false);
-            numField.setEnabled(false);
             dayField.setEnabled(false);
+            numField.setEnabled(false);
             timeField.setEnabled(false);
             purposeField.setEnabled(false);
 
@@ -180,10 +180,10 @@ public class CheckClass_Details extends JPanel{
             add(classText);
             add(classField);
             add(nameField);
-            add(numText);
-            add(numField);
             add(dayText);
             add(dayField);
+            add(numText);
+            add(numField);
             add(timeText);
             add(timeField);
             add(purposeText);
