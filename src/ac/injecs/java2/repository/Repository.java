@@ -62,14 +62,18 @@ public class Repository {
     // --------------- Reservation  ------------------------//
 
     public void insertres(ResInfo res) {
-    	dbConnect.resinsert(res);
+        dbConnect.resinsert(res);
     }
     public Vector<ResInfo> getResinfo(String id) {
-    	return dbConnect.getResinfo(id);
+        return dbConnect.getResinfo(id);
     }
     public void deleteres(String id,String rinfo) {
-    	dbConnect.delres(id,rinfo);
+        dbConnect.delres(id,rinfo);
     }
+    public void resupdate(String id, String rinfo, boolean accept) {
+        dbConnect.resupdate(id, rinfo, accept);
+    }
+
 
     // --------------- Notice ------------------------//
 
@@ -90,9 +94,9 @@ public class Repository {
     }
     
     // --------------- Room ------------------------//
-    public Room getRoom(String room) {
-    	return dbConnect.getRoom(room);
-    }
+   // public Room getRoom(String room) {
+    	//return dbConnect.getRoomInfo(room);
+    //}
 
     public List<Room> findRoomAll(){
         String sql = "select * from room";

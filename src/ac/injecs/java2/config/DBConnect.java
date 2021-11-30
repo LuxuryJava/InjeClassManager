@@ -1,7 +1,6 @@
 package ac.injecs.java2.config;
 
-import ac.injecs.java2.config.sql.SQLMapper;
-import ac.injecs.java2.Main;
+import ac.injecs.java2.config.sql.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,11 +9,8 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
-
 import ac.injecs.java2.entity.*;
 public class DBConnect{
-	protected Main mainFrame;
     private static DBConnect dbConnect = new DBConnect();
 
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -25,6 +21,7 @@ public class DBConnect{
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+
 
     public static DBConnect getInstance() {
         return dbConnect;
@@ -82,11 +79,6 @@ public class DBConnect{
         System.out.println("DB 초기화를 진행합니다.");
         clearDb();
         createTables();
-        createData();
-    }
-
-    private void createData(){
-        runScript("injecm_data.sql");
     }
 
     private void createTables() {
@@ -118,131 +110,119 @@ public class DBConnect{
 
     }
     public void resinsert(ResInfo res) {
-    	String sql="insert into reservation values(?,?,?,?,?,?,?)";
-    	JOptionPane aa=new JOptionPane();
-    	try {
-    		Room rm=getRoom(res.getrinfo());
-    		if(rm.getroomPeople()>=res.getmemcnt()) {
-    			preparedStatement = connection.prepareStatement(sql);
-        		preparedStatement.setInt(1, res.getsno());
-        		preparedStatement.setString(2, res.getrinfo());
-                preparedStatement.setString(3, res.getuseday());
-        		preparedStatement.setInt(4, res.getmemcnt());
-                preparedStatement.setString(5, res.getusetime());
-                preparedStatement.setString(6, res.getpurpose());
-                preparedStatement.setBoolean(7,  false);
-                
-                int result = preparedStatement.executeUpdate();
-                if(result==1) {
-                    System.out.println("reservation데이터 삽입 성공!");  
-                    
-            		aa.showMessageDialog(null,"예약 성공");
-                }    			
-    		}
-    		else {
-    			
-        		aa.showMessageDialog(null,"최대인원 초과");
-    		}
-    		   
+        String sql="insert into reservation values(?,?,?,?,?,?,?)";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, res.getuno());
+            preparedStatement.setString(2, res.getrinfo());
+            preparedStatement.setInt(3, res.getmemcnt());
+            preparedStatement.setString(4, res.getuseday());
+            preparedStatement.setString(5, res.getusetime());
+            preparedStatement.setString(6, res.getpurpose());
+            preparedStatement.setBoolean(7, false);
+
+            int result = preparedStatement.executeUpdate();
+            if(result==1) {
+                System.out.println("reservation데이터 삽입 성공!");
+
+            }
+
         } catch (Exception e) {
             System.out.println(e);
         }    finally {
             try {
                 if(preparedStatement!=null && !preparedStatement.isClosed()) {
-                	preparedStatement.close();
+                    preparedStatement.close();
                 }
             } catch (Exception e2) {}
         }
-        
-        
-    } 
+
+
+    }
+
     public Vector<ResInfo> getResinfo(String id) {
-    	
-    	Vector<ResInfo> res=new Vector<ResInfo>();
-    	
-    	try {
-    		if(mainFrame.session.getUser().isManager())
-    			preparedStatement=connection.prepareStatement("select * from reservation");
-    		else
-    			preparedStatement=connection.prepareStatement("select * from reservation where sno='"+id+"'");
-    		
-    		resultSet=preparedStatement.executeQuery();
-    		while(resultSet.next()) {
-    			ResInfo ri=new ResInfo(
-                        resultSet.getInt(1)
-                        ,resultSet.getString(2)
-                        ,resultSet.getString(3)
-                        ,resultSet.getInt(4)
-                        ,resultSet.getString(5)
-                        ,resultSet.getString(6)
-                        ,resultSet.getBoolean(7)
-                );
-    			res.add(ri);
-    		}
-            
+        Vector<ResInfo> res=new Vector<ResInfo>();
+        String sql = "select * from user where uno='" + id + "'";
+        SQLMapper sqlMapper= new UserMapper();
+        User user = (User)select(sql, sqlMapper);
+
+        try {
+            if(user.isManager()) {
+                preparedStatement=connection.prepareStatement("select * from reservation");
+            }
+            else
+                preparedStatement=connection.prepareStatement("select * from reservation where uno='"+id+"'");
+
+            resultSet=preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),
+                        resultSet.getString(5),resultSet.getString(6), resultSet.getBoolean(7));
+                res.add(ri);
+            }
+
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("에에러러");
         }    finally {
             try {
                 if(preparedStatement!=null && !preparedStatement.isClosed()) {
-                	preparedStatement.close();
+                    preparedStatement.close();
                 }
             } catch (Exception e2) {}
         }
-        
-    	return res;
-    } 
+
+        return res;
+    }
     public void delres(String id, String rinfo) {
-    	String sql="delete from reservation where sno=? && rinfo=?";
-    	
-    	try {
-    		preparedStatement = connection.prepareStatement(sql);
-    		preparedStatement.setString(1, id);
-    		preparedStatement.setString(2, rinfo);
-            
+        String sql="delete from reservation where uno=? && rinfo=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, rinfo);
+
             int result = preparedStatement.executeUpdate();
             if(result==1) {
                 System.out.println("reservation데이터 삭제 성공!");
-                
+
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }    finally {
             try {
                 if(preparedStatement!=null && !preparedStatement.isClosed()) {
-                	preparedStatement.close();
+                    preparedStatement.close();
                 }
             } catch (Exception e2) {}
         }
-    }
-    public Room getRoom(String room) {
-    	String sql="select * from room where rinfo='"+room+"'";
-    	Room rm = null;
-    	try {
-    		preparedStatement = connection.prepareStatement(sql);
-    		
-    		resultSet=preparedStatement.executeQuery();
-    		while(resultSet.next()) {
-    			rm=new Room(resultSet.getString(1),resultSet.getBoolean(2),resultSet.getBoolean(3),resultSet.getBoolean(4),resultSet.getInt(5));
-    			
-    		}
-    		
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }    finally {
-            try {
-                if(preparedStatement!=null && !preparedStatement.isClosed()) {
-                	preparedStatement.close();
-                }
-            } catch (Exception e2) {}
-        }
-		return rm;
     }
 
-	
-    
+    public void resupdate(String id, String rinfo, boolean accept) {
+        String sql="update reservation set accept=? where uno=? && rinfo=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(2, id);
+            preparedStatement.setString(3, rinfo);
+            accept = !accept;
+            preparedStatement.setBoolean(1, accept);
+
+            int result = preparedStatement.executeUpdate();
+            if(result==1) {
+                System.out.println("reservation 예약 수정 성공!");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }    finally {
+            try {
+                if(preparedStatement!=null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (Exception e2) {}
+        }
+    }
+
 }
-
