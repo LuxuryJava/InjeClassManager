@@ -59,10 +59,7 @@ public class ReservationMapper extends SQLMapper {
             e.printStackTrace();
         }
 
-        if(resInfos.size() == 1){
-            return resInfos.get(0);
-        }
-        else if(resInfos.size() == 0){
+        if(resInfos.size() == 0){
             return null;
         }
         return resInfos;

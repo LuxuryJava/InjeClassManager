@@ -124,6 +124,7 @@ public class Main {
         if (nowPanel != null) {
             MainFrame.remove(nowPanel);
         }
+
         setPrevPanel(nowPanel);
         setNowPanel(panel);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
@@ -134,6 +135,11 @@ public class Main {
         if (prevPanel != null) {
             if(!prevPanel.equals(nowPanel))
                 MainFrame.remove(prevPanel);
+        }
+
+        if (panel.equals(dashBoardPanel)) {
+            //System.out.println("업데이트");
+            dashBoardPanel.updateContent();
         }
         updateContent();
     }

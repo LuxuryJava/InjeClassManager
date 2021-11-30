@@ -15,12 +15,16 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.*;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.Timer;
-import java.util.Vector;
 
 public class DashBoardPanel extends JPanel {
     private Main mainFrame;
@@ -34,11 +38,16 @@ public class DashBoardPanel extends JPanel {
     //    private Vector<String> notices = {"공지사항입니다", "2021.09.23(목)", "강의실관련 공지사항", "2021.11.01(일)"};
 
     List<Room> rooms;
+    List<ResInfo> reservationAll;
+    List<Notice> noticeAll;
 
     BoxPanel boxPanel1;
     BoxPanel boxPanel2;
     BoxPanel boxPanel3;
     BoxPanel boxPanel4;
+
+    NoticeBoxPanel noticeBoxPanel1;
+    NoticeBoxPanel noticeBoxPanel2;
 
     public DashBoardPanel(Main main) {
         this.mainFrame = main;
@@ -49,7 +58,6 @@ public class DashBoardPanel extends JPanel {
 
         setBackground(Color.WHITE);
 
-        rooms = mainFrame.repository.findRoomAll();
         // 초기 데이터 설정
         getNotificationData();
         getDatas();
@@ -60,22 +68,21 @@ public class DashBoardPanel extends JPanel {
         title.setFont(InjeFont.XLfont);
 
 
-        JLabel updateText = new JLabel("최근 업데이트 : " + LocalDate.now());
+        JLabel updateText = new JLabel("최근 업데이트 : " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시mm분")));
         updateText.setFont(InjeFont.PSfont);
-        updateText.setBounds(12, 40, 300, 30);
+        updateText.setBounds(12, 40, 500, 30);
 
 
         boxPanel1 = new BoxPanel("총 강의실", "NULL", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
-        boxPanel1.setValueText(String.valueOf(rooms.size()));
-        boxPanel2 = new BoxPanel("예약된 강의실", "NULL", new Color(0x071F6));
+        boxPanel2 = new BoxPanel("총 예약수", "NULL", new Color(0x071F6));
         boxPanel2.setBounds(50 + boxWidthGap * 2, 80, boxWidth, boxHeight);
         boxPanel3 = new BoxPanel("사용중 강의실", "NULL", new Color(0xFF6C2D));
         boxPanel3.setBounds(50 + boxWidthGap * 4, 80, boxWidth, boxHeight);
         boxPanel4 = new BoxPanel("남은 강의실", "NULL", new Color(0xC12503));
         boxPanel4.setBounds(50 + boxWidthGap * 6, 80, boxWidth, boxHeight);
 
-        NoticeBoxPanel noticeBoxPanel1 = new NoticeBoxPanel("비어있는 강의실", emptyClass, 300, 170);
+        noticeBoxPanel1 = new NoticeBoxPanel("비어있는 강의실", emptyClass, 300, 170);
         noticeBoxPanel1.setBounds(70, 190, 300, 170);
         NoticeBoxPanel noticeBoxPanel3 = new NoticeBoxPanel("공지사항", notices, 300, 170);
         noticeBoxPanel3.setBounds(70, 370, 300, 170);
@@ -87,7 +94,7 @@ public class DashBoardPanel extends JPanel {
             }
         });
 
-        NoticeBoxPanel noticeBoxPanel2 = new NoticeBoxPanel("실시간 강의실 기록", realtimeClass, 500, 350);
+        noticeBoxPanel2 = new NoticeBoxPanel("실시간 강의실 기록", realtimeClass, 500, 350);
         noticeBoxPanel2.setBounds(390, 190, 500, 350);
 
         add(title);
@@ -102,6 +109,7 @@ public class DashBoardPanel extends JPanel {
 
         setVisible(true);
 
+        setBoxDatas();
     }
 
     private void clearDatas(){
@@ -110,15 +118,42 @@ public class DashBoardPanel extends JPanel {
         rooms.clear();
     }
 
+    private void getRoomData(){
+        rooms = mainFrame.repository.findRoomAll();
+    }
+
     private void getNotificationData(){
-        List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
+        noticeAll = mainFrame.repository.findNoticeAll();
         for (int i = 0; i < noticeAll.size(); i++){
             notices.add(noticeAll.get(i).getTitle());
         }
     }
 
+    // 현재 시간을 기준으로 사욪웅인지 판별
+    private boolean isNowUsingClass(String dateTime){
+        try {
+            Date startTime = new SimpleDateFormat("HH:mm").parse(dateTime.substring(0, 5));
+            Date endTime = new SimpleDateFormat("HH:mm").parse(dateTime.substring(8,13));
+            Date nowTime = new SimpleDateFormat("HH:mm").parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+            //nowTime = new SimpleDateFormat("HH:mm").parse("09:30");
+
+            //System.out.println(startTime + " " + endTime + "현재시간" + nowTime);
+
+            if (nowTime.after(startTime) && nowTime.before(endTime)) {
+                return true;
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
     private void getReservationData(){
-        List<ResInfo> reservationAll = mainFrame.repository.findReservationAll();
+        System.out.println("출력");
+        reservationAll = mainFrame.repository.findReservationAll();
+        // TODO : NULL 잡기
         if (reservationAll == null){
             return;
         }
@@ -130,19 +165,35 @@ public class DashBoardPanel extends JPanel {
 
             if (resInfo.getaccept()) {
                 User user= mainFrame.repository.findUserById(String.valueOf(resInfo.getuno())).get();
-                String showResInfo = user.getId().substring(2, 4)
-                        + "-" + user.getName()
-                        + " " + user.getDepartment()
-                        + " " + resInfo.getrinfo()
-                        + " " + resInfo.getusetime();
+                String showResInfo;
+
+                showResInfo = user.getId().substring(2, 4)
+                        + "-" + user.getName() + "   "
+                        + String.format("%9s",user.getDepartment())
+                        + "   " + String.format("%6s",resInfo.getrinfo())
+                        + "   " + resInfo.getusetime();
+
+                System.out.println(showResInfo);
+
+                if (isNowUsingClass(resInfo.getusetime())){
+                    showResInfo += "   입실";
+                }else{
+                    showResInfo += "   퇴실";
+                }
 
                 realtimeClass.add(showResInfo);
             }
         }
     }
 
+    private void setNoticeClass(){
+        noticeBoxPanel1.setNoticeItems(realtimeClass);
+        noticeBoxPanel2.setNoticeItems(emptyClass);
+    }
+
 
     private void getDatas(){
+        getRoomData();
         // 모든 강의실 가져오기
         for (Room room : rooms) {
             //System.out.println(room);
@@ -153,11 +204,53 @@ public class DashBoardPanel extends JPanel {
         }
     }
 
-    public void paintComponent(Graphics graphics) {
+    private boolean isToday(String useDay){
+        DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
+        String todayWeek = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN);
+
+        if(useDay.equals(todayWeek))
+            return true;
+        return false;
+    }
+
+
+    private void setBoxDatas(){
+        int allClassCount = rooms.size();
+        int reservationCount = 0;
+        int usingClassCount = 0;
+
+        // 금일 예약된 강의실
+        if (reservationAll != null) {
+            for (int i = 0; i < reservationAll.size(); i++){
+                ResInfo resInfo = reservationAll.get(i);
+                if (resInfo.getaccept()) {
+                    // 금일
+                    if (isToday(resInfo.getuseday())) {
+                        reservationCount++;
+                        if (isNowUsingClass(resInfo.getusetime())) {
+                            usingClassCount++;
+                        }
+                    }
+                }
+            }
+        }
+        boxPanel1.setValueText(String.valueOf(allClassCount));
+
+        boxPanel2.setValueText(String.valueOf(reservationCount));
+        // 사용중 강의실
+        boxPanel3.setValueText(String.valueOf(usingClassCount));
+
+        boxPanel4.setValueText(String.valueOf(allClassCount - usingClassCount));
+
+    }
+
+    public void updateContent(){
         clearDatas();
         getDatas();
         getNotificationData();
         getReservationData();
+        setBoxDatas();
+        setNoticeClass();
     }
 
     public class BoxPanel extends JPanel{
@@ -192,6 +285,7 @@ public class DashBoardPanel extends JPanel {
 
     // 공지사항
     public class NoticeBoxPanel extends JPanel{
+        DefaultListModel items;
 
         public NoticeBoxPanel(String title, Vector<String> values, int width, int height) {
             LineBorder lineBorder = new LineBorder(Color.BLACK, 2, true);
@@ -205,7 +299,7 @@ public class DashBoardPanel extends JPanel {
             text.setForeground(Color.BLACK);
 
             // 리스트 아이템 추가
-            DefaultListModel items = new DefaultListModel();
+            items = new DefaultListModel();
             for (String item : values) {
                 items.addElement(item);
             }
@@ -252,6 +346,13 @@ public class DashBoardPanel extends JPanel {
                 });
             }
 
+        }
+
+        public void setNoticeItems(Vector<String> values){
+            items = new DefaultListModel();
+            for (String item : values) {
+                items.addElement(item);
+            }
         }
     }
 }
