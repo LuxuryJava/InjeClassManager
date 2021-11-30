@@ -26,9 +26,9 @@ public class Class_OpenCloseA extends JPanel {
 
 			setLayout(new GridLayout(2, 3, 0, 0 ));
 			for(int i = 0; i < 6; i++) {
-				//rm=mainFrame.repository.getRoom(strArr[i]);
+				rm=mainFrame.repository.getRoom(strArr[i]);
 
-				if(rm.getdoorOpen()==true) {
+				if(rm.getdoorOpen()) {
 					label[i]=new JLabel(strArr[i],image[1], SwingConstants.CENTER);
 				}
 				else {
