@@ -3,13 +3,13 @@ package ac.injecs.java2.entity;
 public class ResInfo {
 	private int uno;
 	private String rinfo;
-	private int memcnt;
 	private String useday;
+	private int memcnt;
 	private String usetime;
 	private String purpose;
 	private boolean accept;
 
-	public ResInfo(int uno,String rinfo, int memcnt, String useday,String usetime,String purpose, boolean accept){
+	public ResInfo(int uno, String rinfo, String useday, int memcnt, String usetime,String purpose, boolean accept){
 		this.uno=uno;
 		this.rinfo=rinfo;
 		this.memcnt=memcnt;

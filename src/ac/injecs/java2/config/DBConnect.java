@@ -79,8 +79,11 @@ public class DBConnect{
         System.out.println("DB 초기화를 진행합니다.");
         clearDb();
         createTables();
+        createData();
     }
-
+    private void createData(){
+        runScript("injecm_data.sql");
+    }
     private void createTables() {
         runScript("injecm_tables.sql");
     }
@@ -115,8 +118,8 @@ public class DBConnect{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, res.getuno());
             preparedStatement.setString(2, res.getrinfo());
-            preparedStatement.setInt(3, res.getmemcnt());
-            preparedStatement.setString(4, res.getuseday());
+            preparedStatement.setString(3, res.getuseday());
+            preparedStatement.setInt(4, res.getmemcnt());
             preparedStatement.setString(5, res.getusetime());
             preparedStatement.setString(6, res.getpurpose());
             preparedStatement.setBoolean(7, false);
@@ -155,7 +158,7 @@ public class DBConnect{
 
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next()) {
-                ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),
+                ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3), resultSet.getString(4),
                         resultSet.getString(5),resultSet.getString(6), resultSet.getBoolean(7));
                 res.add(ri);
             }

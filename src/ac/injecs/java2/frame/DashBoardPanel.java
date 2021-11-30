@@ -3,12 +3,17 @@ package ac.injecs.java2.frame;
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.entity.Notice;
+import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.Room;
+import ac.injecs.java2.entity.User;
 import com.mysql.cj.util.StringUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,10 +28,12 @@ public class DashBoardPanel extends JPanel {
     private int boxHeight = 80;
     private int boxWidthGap = 120;
 
-    private String[] emptyClass = {"E325", "C202", "J101", "E101", "E112"};
-    private String[] realtimeClass = {"18-박성훈 컴퓨터공학부 입실 E312 오후 03:04", "학번-이름 학과 상태 장소 시간"};
-    private String[] notices = {"공지사항입니다 2021.09.23(목)", "강의실관련 공지사항 2021.11.01(일)"};
+    private Vector<String> emptyClass = new Vector<>();
+    private Vector<String> realtimeClass = new Vector<>();
+    private Vector<String> notices = new Vector<>();
     //    private Vector<String> notices = {"공지사항입니다", "2021.09.23(목)", "강의실관련 공지사항", "2021.11.01(일)"};
+
+    List<Room> rooms;
 
     BoxPanel boxPanel1;
     BoxPanel boxPanel2;
@@ -42,6 +49,12 @@ public class DashBoardPanel extends JPanel {
 
         setBackground(Color.WHITE);
 
+        rooms = mainFrame.repository.findRoomAll();
+        // 초기 데이터 설정
+        getNotificationData();
+        getDatas();
+        getReservationData();
+
         JLabel title = new JLabel("대시보드");
         title.setBounds(10, 0, 300, 50);
         title.setFont(InjeFont.XLfont);
@@ -54,6 +67,7 @@ public class DashBoardPanel extends JPanel {
 
         boxPanel1 = new BoxPanel("총 강의실", "NULL", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
+        boxPanel1.setValueText(String.valueOf(rooms.size()));
         boxPanel2 = new BoxPanel("예약된 강의실", "NULL", new Color(0x071F6));
         boxPanel2.setBounds(50 + boxWidthGap * 2, 80, boxWidth, boxHeight);
         boxPanel3 = new BoxPanel("사용중 강의실", "NULL", new Color(0xFF6C2D));
@@ -65,6 +79,14 @@ public class DashBoardPanel extends JPanel {
         noticeBoxPanel1.setBounds(70, 190, 300, 170);
         NoticeBoxPanel noticeBoxPanel3 = new NoticeBoxPanel("공지사항", notices, 300, 170);
         noticeBoxPanel3.setBounds(70, 370, 300, 170);
+
+        noticeBoxPanel3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mainFrame.setCenterPanel(mainFrame.lecture_list);
+            }
+        });
+
         NoticeBoxPanel noticeBoxPanel2 = new NoticeBoxPanel("실시간 강의실 기록", realtimeClass, 500, 350);
         noticeBoxPanel2.setBounds(390, 190, 500, 350);
 
@@ -80,21 +102,62 @@ public class DashBoardPanel extends JPanel {
 
         setVisible(true);
 
-        getDatas();
     }
+
+    private void clearDatas(){
+        notices.clear();
+        emptyClass.clear();
+        rooms.clear();
+    }
+
+    private void getNotificationData(){
+        List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
+        for (int i = 0; i < noticeAll.size(); i++){
+            notices.add(noticeAll.get(i).getTitle());
+        }
+    }
+
+    private void getReservationData(){
+        List<ResInfo> reservationAll = mainFrame.repository.findReservationAll();
+        if (reservationAll == null){
+            return;
+        }
+        for (int i = 0; i < reservationAll.size(); i++){
+            ResInfo resInfo = reservationAll.get(i);
+            if (resInfo == null) {
+                continue;
+            }
+
+            if (resInfo.getaccept()) {
+                User user= mainFrame.repository.findUserById(String.valueOf(resInfo.getuno())).get();
+                String showResInfo = user.getId().substring(2, 4)
+                        + "-" + user.getName()
+                        + " " + user.getDepartment()
+                        + " " + resInfo.getrinfo()
+                        + " " + resInfo.getusetime();
+
+                realtimeClass.add(showResInfo);
+            }
+        }
+    }
+
 
     private void getDatas(){
         // 모든 강의실 가져오기
-        List<Room> rooms = mainFrame.repository.findRoomAll();
-
-        for (Room Item : rooms) {
-            System.out.println(Item);
+        for (Room room : rooms) {
+            //System.out.println(room);
+            // 빈 강의실 지정
+            if (room.getroomUsing() == false) {
+                emptyClass.add(room.getRoomInfo());
+            }
         }
-        boxPanel1.setValueText(String.valueOf(rooms.size()));
     }
 
     public void paintComponent(Graphics graphics) {
-
+        clearDatas();
+        getDatas();
+        getNotificationData();
+        getReservationData();
     }
 
     public class BoxPanel extends JPanel{
@@ -130,7 +193,7 @@ public class DashBoardPanel extends JPanel {
     // 공지사항
     public class NoticeBoxPanel extends JPanel{
 
-        public NoticeBoxPanel(String title, String[] values, int width, int height) {
+        public NoticeBoxPanel(String title, Vector<String> values, int width, int height) {
             LineBorder lineBorder = new LineBorder(Color.BLACK, 2, true);
             setLayout(null);
             setBackground(Color.WHITE);
@@ -160,6 +223,7 @@ public class DashBoardPanel extends JPanel {
             list.setFixedCellHeight(30);
 
             // 리스트 모양 설정
+
             list.setCellRenderer(new ListCellRenderer() {
                 @Override
                 public Component getListCellRendererComponent(JList list, Object value, int index,
@@ -176,6 +240,18 @@ public class DashBoardPanel extends JPanel {
             add(text);
             setBorder(lineBorder);
             setVisible(true);
+
+
+            // 공지사항 마우스 클릭 이벤트
+            if (title.equals("공지사항")) {
+                list.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        mainFrame.setCenterPanel(mainFrame.lecture_list);
+                    }
+                });
+            }
+
         }
     }
 }

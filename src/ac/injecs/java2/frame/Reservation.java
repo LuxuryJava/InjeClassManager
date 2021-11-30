@@ -66,8 +66,7 @@ public class Reservation extends JPanel {
         bt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(), Integer.parseInt(numField.getText()),
-                        Daycb.getSelectedItem().toString(), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
+                ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(), Integer.parseInt(numField.getText()),Daycb.getSelectedItem().toString(), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
                 mainFrame.repository.insertres(res);
 
             }
