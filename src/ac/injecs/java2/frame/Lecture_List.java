@@ -4,16 +4,12 @@ import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.entity.Notice;
-import ac.injecs.java2.repository.Repository;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import java.net.*;
-import java.util.List;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
 
 public class Lecture_List extends JPanel {
     private Main mainFrame;
@@ -87,7 +83,6 @@ public class Lecture_List extends JPanel {
                 lectures[i].getBtn().setContentAreaFilled(false);
                 lectures[i].getBtn().setLocation(40, 90 * i + 50);
                 lectures[i].getBtn().setSize(900, 80);
-                System.out.println(getWidth()-100);
                 lectures[i].getBtn().setText("");
 
                 add(lectures[i].getBtn());

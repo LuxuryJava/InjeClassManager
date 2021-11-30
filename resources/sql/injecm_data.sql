@@ -1,10 +1,9 @@
-insert into injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen)
-values  ('A111', 0, 0, 0, 30),
-        ('A112', 0, 0, 0, 30),
-        ('A113', 0, 0, 0, 30),
-        ('A211', 0, 0, 0, 30),
-        ('A212', 0, 0, 0, 30),
-        ('A213', 0, 0, 0, 30);
+INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A111', 0, 0, 1, 35);
+INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A112', 1, 1, 0, 30);
+INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A113', 0, 0, 1, 40);
+INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A211', 1, 1, 0, 25);
+INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A212', 0, 0, 1, 40);
+INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A213', 1, 1, 0, 35);
         
 insert into injecm.week (day)
 values  ('금'),

@@ -60,17 +60,16 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             setVisible(true);
         }
     }
-
     public class MenuBarButtons extends JPanel {
         private String resourcePath = "./resources/images/";
         private ImageIcon image1 = new ImageIcon(resourcePath + "대시보드.png");
-        private ImageIcon image2 = new ImageIcon(resourcePath + "강의실관리.png");
-        private ImageIcon image3 = new ImageIcon(resourcePath + "승인대기현황.png");
-        private ImageIcon image4 = new ImageIcon(resourcePath + "수업및특강등록.png");
-        private ImageIcon image5 = new ImageIcon(resourcePath + "공지사항.png");
+        private ImageIcon image2 = new ImageIcon(resourcePath + "강의실예약.png");
+        private ImageIcon image3 = new ImageIcon(resourcePath + "강의실조회.png");
+        private ImageIcon image4 = new ImageIcon(resourcePath + "강의실개방.png");
+        private ImageIcon image5 = new ImageIcon(resourcePath + "특강.png");
 
-        private void addButtonImage(ImageIcon image, JButton target) {
-            Image img = image.getImage().getScaledInstance(200, 30, Image.SCALE_SMOOTH);
+        private void addButtonImage(ImageIcon image, JButton target){
+            Image img = image.getImage().getScaledInstance(200, 40, Image.SCALE_SMOOTH);
             target.setIcon(new ImageIcon(img));
             target.setBorderPainted(false);
             target.setContentAreaFilled(false);
@@ -111,31 +110,32 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             classReservationButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.requestLockClassPanel);
+                    mainFrame.setCenterPanel(mainFrame.admitClassPanel);
 
-                    mainFrame.setMode("강의실관리");
+                    mainFrame.setMode("예약");
+                    mainFrame.admitClassPanel.update();
                 }
             });
             classCheckButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.admitClassPanel);
-                    mainFrame.setMode("승인대기현황");
+                    mainFrame.setCenterPanel(mainFrame.checkClass_day);
+                    mainFrame.setMode("조희");
                 }
             });
             classStateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.notice_add);
+                    mainFrame.setCenterPanel(mainFrame.class_openCloseA);
 
-                    mainFrame.setMode("수업및특강등록");
+                    mainFrame.setMode("개방");
                 }
             });
             lectureButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.lecture_list);
-                    mainFrame.setMode("공지사항");
+                    mainFrame.setMode("특강");
                 }
             });
 
@@ -173,19 +173,20 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             setVisible(true);
         }
 
-        private void setUserButtonVisible(boolean status) {
+        private void setUserButtonVisible(boolean status){
             if (mainFrame.session.getUser() == null) {
                 logoutButton.setVisible(status);
                 return;
             }
             if (mainFrame.session.getUser().getName().equals("관리자")) {
                 logoutButton.setVisible(true);
-            } else {
+            }
+            else{
                 logoutButton.setVisible(status);
             }
         }
 
-        public void paintComponent(Graphics g) {
+        public void paintComponent(Graphics g){
             setUserButtonVisible(mainFrame.session.isLogin);
         }
     }

@@ -46,7 +46,7 @@ public class CheckClass_Details extends JPanel{
     }
     
 	public void setField() {
-    	nameField.setText(Integer.toString(ri.get(cnt).getsno()));
+    	nameField.setText(Integer.toString(ri.get(cnt).getuno()));
 		classField.setText(ri.get(cnt).getrinfo());
 		numField.setText(Integer.toString(ri.get(cnt).getmemcnt()));
 		dayField.setText(ri.get(cnt).getuseday());
