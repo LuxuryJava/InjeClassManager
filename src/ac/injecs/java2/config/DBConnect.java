@@ -118,8 +118,8 @@ public class DBConnect{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, res.getuno());
             preparedStatement.setString(2, res.getrinfo());
-            preparedStatement.setInt(3, res.getmemcnt());
-            preparedStatement.setString(4, res.getuseday());
+            preparedStatement.setString(3, res.getuseday());
+            preparedStatement.setInt(4, res.getmemcnt());
             preparedStatement.setString(5, res.getusetime());
             preparedStatement.setString(6, res.getpurpose());
             preparedStatement.setBoolean(7, false);
@@ -176,6 +176,7 @@ public class DBConnect{
 
         return res;
     }
+
     public void delres(String id, String rinfo) {
         String sql="delete from reservation where uno=? && rinfo=?";
 
