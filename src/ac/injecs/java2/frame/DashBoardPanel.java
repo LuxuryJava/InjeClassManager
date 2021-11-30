@@ -116,6 +116,7 @@ public class DashBoardPanel extends JPanel {
         notices.clear();
         emptyClass.clear();
         rooms.clear();
+        realtimeClass.clear();
     }
 
     private void getRoomData(){
@@ -151,7 +152,6 @@ public class DashBoardPanel extends JPanel {
 
 
     private void getReservationData(){
-        System.out.println("출력");
         reservationAll = mainFrame.repository.findReservationAll();
         // TODO : NULL 잡기
         if (reservationAll == null){
@@ -164,10 +164,12 @@ public class DashBoardPanel extends JPanel {
             }
 
             if (resInfo.getaccept()) {
+                // 강의실 예약자 유저 찾기
                 User user= mainFrame.repository.findUserById(String.valueOf(resInfo.getuno())).get();
                 String showResInfo;
 
-                showResInfo = user.getId().substring(2, 4)
+
+                showResInfo = user.getId().substring(2, 4) // 20XX0000 ~ 학번양식에서 XX (학번)만 추출
                         + "-" + user.getName() + "   "
                         + String.format("%9s",user.getDepartment())
                         + "   " + String.format("%6s",resInfo.getrinfo())
@@ -186,6 +188,7 @@ public class DashBoardPanel extends JPanel {
         }
     }
 
+    // TODO : 강의실 예약 시 바로 업데이트 되도록 구현하기
     private void setNoticeClass(){
         noticeBoxPanel1.setNoticeItems(realtimeClass);
         noticeBoxPanel2.setNoticeItems(emptyClass);
@@ -286,6 +289,7 @@ public class DashBoardPanel extends JPanel {
     // 공지사항
     public class NoticeBoxPanel extends JPanel{
         DefaultListModel items;
+        JList list;
 
         public NoticeBoxPanel(String title, Vector<String> values, int width, int height) {
             LineBorder lineBorder = new LineBorder(Color.BLACK, 2, true);
@@ -306,7 +310,7 @@ public class DashBoardPanel extends JPanel {
             // x 좌표 기준 정렬
             int x = width/2 - 30;
             // 리스트 설정
-            JList list = new JList<>(items);
+            list = new JList<>(items);
             list.setEnabled(false); // 클릭 안되게 비활성화
             if (title.indexOf("실") != -1) {
                 x = 90;
@@ -353,6 +357,9 @@ public class DashBoardPanel extends JPanel {
             for (String item : values) {
                 items.addElement(item);
             }
+            list = new JList<>(items);
+            list.revalidate();
+            list.repaint();
         }
     }
 }
