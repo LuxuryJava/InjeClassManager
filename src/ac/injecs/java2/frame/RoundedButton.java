@@ -8,9 +8,6 @@ import java.awt.*;
 public class RoundedButton extends JButton {
     public RoundedButton() { super(); decorate(); }
     public RoundedButton(String text) { super(text); decorate(); }
-    public RoundedButton(Action action) { super(action); decorate(); }
-    public RoundedButton(Icon icon) { super(icon); decorate(); }
-    public RoundedButton(String text, Icon icon) { super(text, icon); decorate(); }
     protected void decorate() { setBorderPainted(false); setOpaque(false); }
     @Override
     protected void paintComponent(Graphics g) {
@@ -34,12 +31,11 @@ public class RoundedButton extends JButton {
 
         Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
 
-        int textX = (width - stringBounds.width) / 2;
         int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
 
         graphics.setColor(o);
         graphics.setFont(InjeFont.Mfont);
-        graphics.drawString("<공지사항> "+getText(), 30, textY);
+        graphics.drawString(getText(), 30, textY);
         graphics.dispose();
 
         super.paintComponent(g);

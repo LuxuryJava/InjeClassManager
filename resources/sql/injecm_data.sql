@@ -4,7 +4,7 @@ INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('
 INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A211', 1, 1, 0, 25);
 INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A212', 0, 0, 1, 40);
 INSERT INTO injecm.room (rinfo, doorOpen, isUsing, isProject, posiMen) VALUES ('A213', 1, 1, 0, 35);
-        
+
 insert into injecm.week (day)
 values  ('금'),
         ('목'),
