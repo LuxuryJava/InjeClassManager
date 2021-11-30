@@ -48,7 +48,6 @@ public class UserMapper extends SQLMapper {
                         .phoneNumber(resultSet.getString("phone"))
                         .isManager(resultSet.getBoolean("isManager"))
                         .build());
-                System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
