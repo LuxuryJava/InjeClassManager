@@ -2,6 +2,7 @@ package ac.injecs.java2.repository;
 
 import ac.injecs.java2.config.DBConnect;
 import ac.injecs.java2.config.sql.NoticeMapper;
+import ac.injecs.java2.config.sql.ReservationMapper;
 import ac.injecs.java2.config.sql.RoomMapper;
 import ac.injecs.java2.config.sql.UserMapper;
 import ac.injecs.java2.entity.*;
@@ -74,7 +75,11 @@ public class Repository {
         dbConnect.resupdate(id, rinfo, accept);
     }
 
-
+    public List<ResInfo> findReservationAll(){
+        String sql = "select * from reservation";
+        List<ResInfo> resInfos = (List<ResInfo>) dbConnect.select(sql, new ReservationMapper());
+        return resInfos;
+    }
     // --------------- Notice ------------------------//
 
     public Notice insertNotice(Notice notice) {
