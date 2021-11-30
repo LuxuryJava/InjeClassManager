@@ -99,9 +99,11 @@ public class Repository {
     }
     
     // --------------- Room ------------------------//
-   // public Room getRoom(String room) {
-    	//return dbConnect.getRoomInfo(room);
-    //}
+    public Room getRoom(String rinfo) {
+        String sql = "select * from room where rinfo like " + "\"" +rinfo + "\"";
+        Room room = (Room) dbConnect.select(sql, new RoomMapper());
+        return room;
+    }
 
     public List<Room> findRoomAll(){
         String sql = "select * from room";
