@@ -158,7 +158,7 @@ public class DBConnect{
 
             resultSet=preparedStatement.executeQuery();
             while(resultSet.next()) {
-                ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(4), resultSet.getInt(3),
+                ResInfo ri=new ResInfo(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getInt(4),
                         resultSet.getString(5),resultSet.getString(6), resultSet.getBoolean(7));
                 res.add(ri);
             }
