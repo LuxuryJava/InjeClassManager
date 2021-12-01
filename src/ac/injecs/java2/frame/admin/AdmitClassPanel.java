@@ -19,7 +19,6 @@ public class AdmitClassPanel extends JPanel {
     String[] header = { "학번", "강의실", "예약 요일", "사용 인원", "예약시간", "사용 목적", "예약상태" };
     DefaultTableModel model = new DefaultTableModel(null, header);
     JTable table;
-    int cnt = 0;
 
     static String uno, room, memcnt, day, time, purpose, status;
 
@@ -80,7 +79,6 @@ public class AdmitClassPanel extends JPanel {
         User user = mainFrame.session.user;
         ri = mainFrame.repository.getResinfo(user.getId());
         model.setNumRows(0);
-
 
         for (int i = 0; i < ri.size(); i++) {
             uno = Integer.toString(ri.get(i).getuno());
