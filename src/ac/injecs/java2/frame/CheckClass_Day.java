@@ -1,6 +1,7 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +15,8 @@ public class CheckClass_Day extends JPanel {
         mainFrame = main;
         setLayout(new BorderLayout());
 
-        JLabel title = new JLabel("강의실 예약 조회 Test", SwingConstants.CENTER);
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        JLabel title = new JLabel("강의실 예약 조회", SwingConstants.CENTER);
+        title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
         add(checkW, BorderLayout.CENTER);
         setVisible(true);
@@ -37,12 +38,7 @@ public class CheckClass_Day extends JPanel {
                 btn[i].setBorderPainted(false);
                 btn[i].setFocusPainted(false);
                 btn[i].setContentAreaFilled(false);
-                btn[i].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        mainFrame.setCenterPanel(mainFrame.checkClass_details);
-                    }
-                });
+                
             }
 
 

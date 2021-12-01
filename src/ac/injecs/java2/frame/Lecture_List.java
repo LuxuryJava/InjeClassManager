@@ -1,47 +1,140 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
+import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.entity.Notice;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+
+import java.net.*;
 
 public class Lecture_List extends JPanel {
     private Main mainFrame;
-    private List list = new List();
+
     public Lecture_List(Main main) {
         mainFrame = main;
         setLayout(new BorderLayout());
 
-        JLabel title = new JLabel("특강 목록", SwingConstants.CENTER);
-        title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+        JLabel title = new JLabel("공지사항 및 특강", SwingConstants.CENTER);
+        title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
+
+        List list = new List();
         add(list);
 
         setVisible(true);
     }
+
     public class List extends JPanel {
+        JButton AddBtn;
+        Lecture[] lectures;
+
+        class Lecture {
+            RoundedButton btn;
+            String URL;
+
+            public Lecture(){
+                btn = new RoundedButton();
+                URL = "";
+            }
+
+            public Lecture(RoundedButton btn, String URL) {
+                this.btn = btn;
+                this.URL = URL;
+            }
+            public RoundedButton getBtn() {
+                return btn;
+            }
+
+            public void setBtn(RoundedButton btn) {
+                this.btn = btn;
+            }
+
+            public String getURL() {
+                return URL;
+            }
+
+            public void setURL(String URL) {
+                this.URL = URL;
+            }
+        }
+
         public List() {
             setBackground(Color.WHITE);
             setSize(FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue(), FrameConstant.HEIGHT.getValue());
             setLayout(null);
 
-            RoundedButton[] btnList = new RoundedButton[4];
-            for(int i = 0; i < btnList.length; i++) {
-                btnList[i] = new RoundedButton();
+            AddBtn = new JButton("글 쓰기");
+            AddBtn.setFont(InjeFont.PSfont);
+            AddBtn.setLocation(830, 495);
+            AddBtn.setSize(100, 30);
+            AddBtn.setVisible(false);
+            add(AddBtn);
+
+            lectures = new Lecture[5];
+            for (int i = 0; i < lectures.length; i++) {
+                lectures[i] = new Lecture();
                 //이미지만 남기기
-                btnList[i].setBorderPainted(false);
-                btnList[i].setFocusPainted(false);
-                btnList[i].setContentAreaFilled(false);
-                btnList[i].setLocation(10, 140 * i);
-                btnList[i].setSize(getWidth() - 40, 100);
+                lectures[i].getBtn().setBorderPainted(false);
+                lectures[i].getBtn().setFocusPainted(false);
+                lectures[i].getBtn().setContentAreaFilled(false);
+                lectures[i].getBtn().setLocation(40, 90 * i + 50);
+                lectures[i].getBtn().setSize(900, 80);
+                lectures[i].getBtn().setText("");
+
+                add(lectures[i].getBtn());
+                //글쓰기 버튼 클릭 시
+                AddBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mainFrame.setCenterPanel(mainFrame.notice_add);
+                    }
+                });
             }
 
-
-            for(int i = 0; i < btnList.length; i++) {
-                add(btnList[i]);
+            // Data Load To DB
+            getLectureData();
+        }
+        private void showLectureData(){
+            java.util.List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
+            for (int i = 0; i < noticeAll.size();  i++) {
+                Notice item = noticeAll.get(i);
+                lectures[i].getBtn().setText(item.getTitle());
+                lectures[i].setURL(item.getContent());
             }
+        }
 
+        private void getLectureData(){
+            // 데이터를 전부 가져온다
+            java.util.List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
+            for (int i = 0; i < noticeAll.size();  i++){
+                Notice item = noticeAll.get(i);
+                lectures[i].getBtn().setText( item.getTitle());
+                lectures[i].setURL(item.getContent());
+
+                lectures[i].getBtn().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        try { //해당 공지사항 클릭 시 웹 페이지로 이동
+                            Desktop.getDesktop().browse(new URL(item.getContent()).toURI());
+                        } catch (Exception exe) {
+                             System.out.println(exe.getMessage());
+                        }
+                    }
+                });
+            }
+        }
+        //관리자일 때만 버튼 보임 
+        public void paintComponent(Graphics g) {
+            showLectureData();
+            if(mainFrame.session.isLogin){
+                if (mainFrame.session.getUser().isManager()) {
+                    AddBtn.setVisible(true);
+                }
+            }
         }
     }
 }

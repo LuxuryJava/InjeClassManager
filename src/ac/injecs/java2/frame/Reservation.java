@@ -1,39 +1,76 @@
 package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
-import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.config.InjeFont;
+import ac.injecs.java2.entity.ResInfo;
+import ac.injecs.java2.entity.Room;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class reservation extends JPanel {
+import ac.injecs.java2.entity.ResInfo;
+import ac.injecs.java2.entity.User;
+
+public class Reservation extends JPanel {
     private Main mainFrame;
-    private String[] unit = {"A111", "A112", "A113", "A211", "A212", "A213"};
+    private String[] unit = new String[6];
     private JButton bt = new JButton("확인");
     static JTextField unitField = new JTextField();
-    static Font Lfont = new Font("나눔고딕", Font.BOLD, 25);
-    static Font Mfont = new Font("나눔고딕", Font.BOLD, 20);
-    static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
+    private List<Room> rooms;
+    private User user;
 
-    public reservation(Main main) {
+   JTextField nameField = new JTextField("아무개");
+    JTextField numField = new JTextField();
+    JTextField purposeField = new JTextField();
+    JTextField acceptField = new JTextField();
+
+    private String[] day = {"일", "월", "화", "수", "목", "금", "토"};
+    private String[] time = {"09:00 ~ 09:50", "10:00 ~ 10:50", "11:00 ~ 11:50", "12:00 ~ 12:50",
+            "13:00 ~ 13:50", "14:00 ~ 14:50", "15:00 ~ 15:50", "16:00 ~ 16:50", "17:00 ~ 17:50",
+            "18:00 ~ 18:50", "19:00 ~ 19:50", "20:00 ~ 20:50", "21:00 ~ 21:50", "22:00 ~ 22:50",
+            "23:00 ~ 23:50"};
+    private JComboBox<String> Daycb = new JComboBox<String>(day);
+    private JComboBox<String> Timecb = new JComboBox<String>(time);
+
+    public Reservation(Main main) {
         this.mainFrame = main;
         setLayout(null);
+        user = mainFrame.session.getUser();
 
         JLabel title = new JLabel("강의실 예약", JLabel.CENTER);
         title.setBounds(400, 50, 300, 25);
-        title.setFont(Lfont);
+        title.setFont(InjeFont.Lfont);
+
+        JLabel text = new JLabel("강의실 선택", JLabel.CENTER);
+
+        // 강의실 DB 가져오기
+        rooms = mainFrame.repository.findRoomAll();
+        for (int i = 0; i < rooms.size(); i++) {
+            Room item = rooms.get(i);
+            unit[i] = item.getRoomInfo();   // 강의실 제목 끝
+        }
 
         JComboBox<String> cb = new JComboBox<String>(unit);
-        JLabel text = new JLabel("강의실 선택", JLabel.CENTER);
-        text.setFont(Mfont);
+
+
+        text.setFont(InjeFont.Mfont);
         text.setBounds(50, 120, 150, 20);
         title.setBounds(400, 50, 200, 30);
 
         cb.setBounds(200, 120, 150, 20);
         bt.setBounds(830, 480, 70, 40);
-        bt.setFont(Sfont);
+        bt.setFont(InjeFont.Sfont);
+        bt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(), Daycb.getSelectedItem().toString(),Integer.parseInt(numField.getText()), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
+                mainFrame.repository.insertres(res);
+
+            }
+        });
 
         InfoBox infobox = new InfoBox();
         infobox.setBounds(70, 170, 400, 300);
@@ -44,8 +81,13 @@ public class reservation extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JComboBox<String> cb = (JComboBox<String>) e.getSource();
-                int index = cb.getSelectedIndex();
+                int index = cb.getSelectedIndex(); // 선택중인 위치
                 unitField.setText(unit[index]);
+                //rooms.get(index).gethasProjector()
+                String procjetor = rooms.get(index).gethasProjector() ? "여" : "부";
+
+                infobox.beamField.setText(procjetor);
+                infobox.numField.setText(String.valueOf(rooms.get(index).getroomPeople()));
             }
         });
 
@@ -65,22 +107,26 @@ public class reservation extends JPanel {
         private int textHeight = 30;
         private int fieldWidth = 150;
 
+        private JTextField beamField;
+        private JTextField numField;
+
         public InfoBox() {
             setLayout(null);
             setBackground(new Color(0x4FDAE4));
             setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             JLabel titleText = new JLabel("강의실 정보");
-            titleText.setFont(Mfont);
+            titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(150, 20, 250, 30);
 
             JLabel unitText = new JLabel("강의실:");
             unitText.setBounds(160, 20, 100, 30);
 
             JLabel beamText = new JLabel("프로젝터 여부:");
-            JTextField beamField = new JTextField("여");
+            beamField = new JTextField();
             JLabel numText = new JLabel("최대 수용 가능 인원:");
-            JTextField numField = new JTextField("30");
+            numField = new JTextField();
+
 
             unitText.setBounds(60, textStartY, textWidth, textHeight);
             unitField.setBounds(80 + textWidth, textStartY, fieldWidth, textHeight);
@@ -95,8 +141,8 @@ public class reservation extends JPanel {
             unitText.setHorizontalAlignment(SwingConstants.RIGHT);
             beamText.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            unitText.setFont(Sfont);
-            beamText.setFont(Sfont);
+            unitText.setFont(InjeFont.Sfont);
+            beamText.setFont(InjeFont.Sfont);
             numText.setFont(new Font("나눔고딕", Font.BOLD, 12));
 
             unitField.setEnabled(false);
@@ -120,14 +166,6 @@ public class reservation extends JPanel {
         private int textHeight = 30;
         private int fieldWidth = 150;
 
-        private String[] day = {"일", "월", "화", "수", "목", "금", "토"};
-        private JComboBox<String> Daycb = new JComboBox<String>(day);
-        private String[] time = {"09:00 ~ 09:50", "10:00 ~ 10:50", "11:00 ~ 11:50", "12:00 ~ 12:50",
-                "13:00 ~ 13:50", "14:00 ~ 14:50", "15:00 ~ 15:50", "16:00 ~ 16:50", "17:00 ~ 17:50",
-                "18:00 ~ 18:50", "19:00 ~ 19:50", "20:00 ~ 20:50", "21:00 ~ 21:50", "22:00 ~ 22:50",
-                "23:00 ~ 23:50"};
-        private JComboBox<String> Timecb = new JComboBox<String>(time);
-
         public ResBox() {
             setLayout(null);
             setBackground(new Color(0x4FDAE4));
@@ -135,17 +173,17 @@ public class reservation extends JPanel {
 
             JLabel titleText = new JLabel("예약 정보");
 
-            titleText.setFont(Mfont);
+            titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
-            JTextField nameField = new JTextField("아무개");
+
             JLabel numText = new JLabel("이용 예정 인원:");
-            JTextField numField = new JTextField();
+
             JLabel dayText = new JLabel("이용 요일:");
             JLabel timeText = new JLabel("이용 시간:");
             JLabel purposeText = new JLabel("이용 목적:");
-            JTextField purposeField = new JTextField();
+
 
             nameText.setBounds(60, textStartY - 20, textWidth, textHeight);
             nameField.setBounds(80 + textWidth, textStartY - 20, fieldWidth, textHeight);
@@ -164,11 +202,11 @@ public class reservation extends JPanel {
             timeText.setHorizontalAlignment(SwingConstants.RIGHT);
             purposeText.setHorizontalAlignment((SwingConstants.RIGHT));
 
-            nameText.setFont(Sfont);
-            numText.setFont(Sfont);
-            dayText.setFont(Sfont);
-            timeText.setFont(Sfont);
-            purposeText.setFont(Sfont);
+            nameText.setFont(InjeFont.Sfont);
+            numText.setFont(InjeFont.Sfont);
+            dayText.setFont(InjeFont.Sfont);
+            timeText.setFont(InjeFont.Sfont);
+            purposeText.setFont(InjeFont.Sfont);
 
             nameField.setEnabled(false);
 
@@ -189,5 +227,9 @@ public class reservation extends JPanel {
             add(titleText);
             setVisible(true);
         }
+    }
+
+    public void setid(String id) {
+        nameField.setText(id);
     }
 }

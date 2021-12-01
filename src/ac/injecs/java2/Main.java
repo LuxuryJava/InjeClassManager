@@ -1,7 +1,18 @@
 package ac.injecs.java2;
 
+import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.constant.FrameConstant;
+import ac.injecs.java2.controller.UserController;
+import  ac.injecs.java2.controller.NoticeController;
 import ac.injecs.java2.frame.*;
+import ac.injecs.java2.frame.admin.AdmitClassPanel;
+import ac.injecs.java2.frame.admin.RequestLockClassPanel;
+import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
+import ac.injecs.java2.frame.menu.UserMenuBarPanel;
+import ac.injecs.java2.frame.user.UserInfoPanel;
+import ac.injecs.java2.repository.Repository;
+import ac.injecs.java2.service.NoticeService;
+import ac.injecs.java2.service.UserService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,30 +20,43 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Main {
+    public Repository repository = new Repository(); // 통합 DB 접근 객체
+
+    private UserService userService = new UserService(repository);
+    public UserController userController = new UserController(userService);
+
+    private NoticeService noticeService = new NoticeService(repository);
+    public NoticeController noticeController = new NoticeController(noticeService);
+
+    public SessionConfig session = new SessionConfig();
+    
+    private String sno;
     private JFrame MainFrame;
     private JPanel nowPanel;
     private JPanel prevPanel;
     private String mode;
-
+ 
     public DashBoardPanel dashBoardPanel;
-    public MenuBarPanel menuBarPanel;
+    public AdminMenuBarPanel adminMenuBarPanel;
+    public UserMenuBarPanel userMenuBarPanel;
     public SignPanel signPanel;
     public LoginPanel loginPanel;
-    public SelectDongPanel selectDongPanel;
     public Class_OpenCloseA class_openCloseA;
-    public Class_OpenCloseB class_openCloseB;
-    public Class_OpenCloseC class_openCloseC;
     public CheckClass_Day checkClass_day;
     public CheckClass_Details checkClass_details;
     public Lecture_List lecture_list;
-    public reservation reservation;
-
+    public Notice_Add notice_add;
+    public Reservation reservation;
+    public AdmitClassPanel admitClassPanel;
+    public RequestLockClassPanel requestLockClassPanel;
+    public UserInfoPanel userInfoPanel;
     // 프레임 초기 설정
     public Main(){
         MainFrame = new JFrame();
         MainFrame.setTitle("인제 클래스 매니저");
         MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        MainFrame.setBackground(Color.WHITE);
         MainFrame.setLayout(null);
 
         MainFrame.setResizable(false);
@@ -43,7 +67,6 @@ public class Main {
     // 현재 센터를 가지는 패널 지정
     public void setNowPanel(JPanel panel) {
         nowPanel = panel;
-        nowPanel.setBackground(Color.WHITE);
         nowPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -57,8 +80,20 @@ public class Main {
     }
 
     // 사이드 메뉴 부착
-    public void setMenuPanel(MenuBarPanel menuBarPanel) {
+    public void setMenuPanel(JPanel menuBarPanel) {
         MainFrame.add(menuBarPanel);
+        updateContent();
+    }
+
+    public void managerMode(){
+        MainFrame.remove(userMenuBarPanel);
+        MainFrame.add(adminMenuBarPanel);
+        updateContent();
+    }
+
+    public void userMode(){
+        MainFrame.remove(adminMenuBarPanel);
+        MainFrame.add(userMenuBarPanel);
         updateContent();
     }
 
@@ -77,16 +112,35 @@ public class Main {
         return this.mode;
     }
 
+    public void setsno(String sno) {
+    	this.sno=sno;
+    }
+    public String getsno() {
+    	return sno;
+    }
+
     // 센터 패널 부착
     public void setCenterPanel(JPanel panel) {
         if (nowPanel != null) {
             MainFrame.remove(nowPanel);
         }
+
         setPrevPanel(nowPanel);
         setNowPanel(panel);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
         panel.setBounds(FrameConstant.MENUWIDTH.getValue(), 0, width, 600);
+        panel.setBackground(Color.WHITE);
+
         MainFrame.add(panel);
+        if (prevPanel != null) {
+            if(!prevPanel.equals(nowPanel))
+                MainFrame.remove(prevPanel);
+        }
+
+        if (panel.equals(dashBoardPanel)) {
+            //System.out.println("업데이트");
+            dashBoardPanel.updateContent();
+        }
         updateContent();
     }
 
@@ -99,25 +153,22 @@ public class Main {
         Main main = new Main();
         // 사용자 정의 패널 생성
         main.dashBoardPanel = new DashBoardPanel(main);
-        main.menuBarPanel = new MenuBarPanel(main); // 의존성 주입
+        main.userMenuBarPanel = new UserMenuBarPanel(main); // 의존성 주입
+        main.adminMenuBarPanel = new AdminMenuBarPanel(main);
         main.signPanel = new SignPanel(main);
         main.loginPanel = new LoginPanel(main);
-        main.selectDongPanel = new SelectDongPanel(main);
         main.class_openCloseA = new Class_OpenCloseA(main);
-        main.class_openCloseB = new Class_OpenCloseB(main);
-        main.class_openCloseC = new Class_OpenCloseC(main);
         main.checkClass_day = new CheckClass_Day(main);
         main.checkClass_details = new CheckClass_Details(main);
         main.lecture_list = new Lecture_List(main);
-        main.reservation = new reservation(main);
+        main.notice_add = new Notice_Add(main);
+        main.reservation = new Reservation(main);
+        main.admitClassPanel = new AdmitClassPanel(main);
+        main.requestLockClassPanel = new RequestLockClassPanel(main);
+        main.userInfoPanel = new UserInfoPanel(main);
 
-        main.setMenuPanel(main.menuBarPanel);
+
         main.setCenterPanel(main.dashBoardPanel);
+        main.setMenuPanel(main.userMenuBarPanel);
     }
 }
-
-/*
-    왜 의존성 주입을 할까요? 그 이유는 패널 교체를 할떄 클래스 외부에서 접근하는게 아닌
-    생성자 함수에 MainFrame을 넘기면 MainFrame을 의존하게되어 해당 클래스 멤버를 접근할 수 있게됨
-    따라서 복잡하지 않게 패널 전환을 가능함.
- */
