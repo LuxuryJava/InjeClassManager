@@ -2,15 +2,18 @@ package ac.injecs.java2.frame.user;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
+import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 public class UserInfoPanel extends JPanel {
     Main mainFrame = null;
     JTextField jt[]= new JTextField[5];
     //JLabel jl[]=new JLabel[5];
+    Vector<ResInfo> ri;
 
     public UserInfoPanel(Main mainFrame) {
         this.mainFrame = mainFrame;
@@ -59,19 +62,23 @@ public class UserInfoPanel extends JPanel {
         JButton resinfo=new JButton("예약정보");
         resinfo.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		mainFrame.setCenterPanel(mainFrame.checkClass_details);
-        		
-        		mainFrame.checkClass_details.setInfo();
-				
-        	}        	
-        	
+        	    if(ri == null){
+                    mainFrame.checkClass_details.setInfo();
+                }
+        	    else {
+                    if(mainFrame.checkClass_details.setInfo()){
+                        mainFrame.checkClass_details.setBtn();
+                        mainFrame.setCenterPanel(mainFrame.checkClass_details);
+                    }
+                }
+        	}
         });
-        
+
         logout.setBounds(773, 508,100,30);
         resinfo.setBounds(663,508,100,30);
         add(logout);
         add(resinfo);
-        
+
         for(int i=0;i<5;i++) {
         	jt[i]=new JTextField(10);
         	jt[i].setBounds(340,(150+i*50),200,30);
@@ -92,5 +99,9 @@ public class UserInfoPanel extends JPanel {
         JLabel name = new JLabel("");
         name.setBounds(300, 100, 100, 30);
         add(name);
+    }
+
+    public void updateContent(){
+        ri = mainFrame.repository.getResinfo(mainFrame.session.user.getId());
     }
 }

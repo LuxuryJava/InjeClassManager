@@ -152,6 +152,10 @@ public class Main {
             notice_add.setNameData();
         }
 
+        if(panel.equals(userInfoPanel)){
+            userInfoPanel.updateContent();
+        }
+
         updateContent();
     }
 
