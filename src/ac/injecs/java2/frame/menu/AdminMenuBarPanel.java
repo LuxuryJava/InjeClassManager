@@ -146,11 +146,9 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             setOpaque(true);
             setForeground(Color.white);
 
-            JButton accountButton = new JButton("관리");
 
             logoutButton.setFont(InjeFont.Sfont);
 
-            add(accountButton);
             add(logoutButton);
 
             logoutButton.addActionListener(new ActionListener() {
