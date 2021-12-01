@@ -10,8 +10,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
 public class CheckClass_Details extends JPanel{
-	InjeFont font;
-    
     private Main mainFrame;
     JLabel nameLabel = new JLabel("");
     JLabel classLabel = new JLabel("");
@@ -20,12 +18,14 @@ public class CheckClass_Details extends JPanel{
     JLabel timeLabel = new JLabel("");
     JLabel purposeLabel = new JLabel("");
     JLabel acceptLabel = new JLabel("");
-    
+
+    JButton pre;
+    JButton next;
+
     Vector<ResInfo> ri;
     int cnt;
-    public void setInfo() {
+    public boolean setInfo() {
             User user = mainFrame.session.user;
-    	    ri=null;
     	    ri = mainFrame.repository.getResinfo(user.getId());
     	    if(ri.size()==0)
     	{
@@ -38,12 +38,14 @@ public class CheckClass_Details extends JPanel{
     	    acceptLabel.setText("");
     		JOptionPane aa=new JOptionPane();
     		aa.showMessageDialog(null,"예약정보가 없습니다.");
-    		return;
+    		mainFrame.setCenterPanel(mainFrame.userInfoPanel);
+    		return false;
     	}
     	cnt=0;
-    	setField();   	 			
+    	setField();
+    	return true;
     }
-    
+
 	public void setField() {
     	nameLabel.setText(Integer.toString(ri.get(cnt).getuno()));
 		classLabel.setText(ri.get(cnt).getrinfo());
@@ -53,19 +55,40 @@ public class CheckClass_Details extends JPanel{
 		purposeLabel.setText(ri.get(cnt).getpurpose());
 		acceptLabel.setText(Boolean.toString(ri.get(cnt).getaccept()));
     }
+    // 버튼의 보여짐/안보여짐 결정
+    public void setBtn() {
+        System.out.println(ri.size());
+        if (ri.size() == 1) {
+            pre.setVisible(false);
+            next.setVisible(false);
+            return;
+        }
+        if(cnt == 0 ) {
+            pre.setVisible(false);
+            next.setVisible(true);
+        }
+        else if(cnt == ri.size() - 1) {
+            pre.setVisible(true);
+            next.setVisible(false);
+        }
+        else {
+            pre.setVisible(true);
+            next.setVisible(true);
+        }
+    }
     public CheckClass_Details(Main main) {
         this.mainFrame = main;
         setLayout(null);
 
         JLabel title = new JLabel("강의실 조회", JLabel.CENTER);
         title.setBounds(410, 50, 200, 25);
-        title.setFont(font.Lfont);
+        title.setFont(InjeFont.Lfont);
 
         DetailBox detailbox = new DetailBox();
         detailbox.setBounds(300, 100, 400, 370);
-        
-        JButton pre=new JButton("이전");
-        JButton next=new JButton("다음");
+
+        pre  = new JButton("이전");
+        next = new JButton("다음");
         JButton cancel=new JButton("예약취소");
         pre.setBounds(300, 512, 70, 30);
         next.setBounds(380, 512, 70, 30);
@@ -78,9 +101,10 @@ public class CheckClass_Details extends JPanel{
         			return;
         		cnt--;
         		setField();
+                setBtn();
         		
         	}
-        	
+
         	
         });
         next.addActionListener(new ActionListener() {
@@ -91,6 +115,7 @@ public class CheckClass_Details extends JPanel{
         			return;
         		cnt++;
         		setField();
+                setBtn();
         		
         	}
         	
@@ -99,11 +124,12 @@ public class CheckClass_Details extends JPanel{
         cancel.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		mainFrame.repository.deleteres(nameLabel.getText(), classLabel.getText());
+                JOptionPane.showMessageDialog(null, "예약을 취소하시겠습니까 ?", "MESSAGE", JOptionPane.YES_NO_OPTION);
         		setInfo();
-        		
+        		setBtn();
         	}
-        	
-        	
+
+
         });
         add(pre);
         add(next);
@@ -126,7 +152,7 @@ public class CheckClass_Details extends JPanel{
             setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
             JLabel titleText = new JLabel("예약 정보");
-            titleText.setFont(font.Mfont);
+            titleText.setFont(InjeFont.Mfont);
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
@@ -169,21 +195,21 @@ public class CheckClass_Details extends JPanel{
             purposeText.setHorizontalAlignment((SwingConstants.RIGHT));
             acceptText.setHorizontalAlignment(SwingConstants.RIGHT);
             
-            nameLabel.setFont(font.PSfont);
-            classLabel.setFont(font.PSfont);
-            dayLabel.setFont(font.PSfont);
-            numLabel.setFont(font.PSfont);
-            timeLabel.setFont(font.PSfont);
-            purposeLabel.setFont(font.PSfont);
-            acceptLabel.setFont(font.PMfont);
+            nameLabel.setFont(InjeFont.PSfont);
+            classLabel.setFont(InjeFont.PSfont);
+            dayLabel.setFont(InjeFont.PSfont);
+            numLabel.setFont(InjeFont.PSfont);
+            timeLabel.setFont(InjeFont.PSfont);
+            purposeLabel.setFont(InjeFont.PSfont);
+            acceptLabel.setFont(InjeFont.PMfont);
 	
-            nameText.setFont(font.Sfont);
-            classText.setFont(font.Sfont);
-            dayText.setFont(font.Sfont);
-            numText.setFont(font.Sfont);
-            timeText.setFont(font.Sfont);
-            purposeText.setFont(font.Sfont);
-            acceptText.setFont(font.Sfont);
+            nameText.setFont(InjeFont.Sfont);
+            classText.setFont(InjeFont.Sfont);
+            dayText.setFont(InjeFont.Sfont);
+            numText.setFont(InjeFont.Sfont);
+            timeText.setFont(InjeFont.Sfont);
+            purposeText.setFont(InjeFont.Sfont);
+            acceptText.setFont(InjeFont.Sfont);
 
             add(nameText);
             add(nameLabel);
