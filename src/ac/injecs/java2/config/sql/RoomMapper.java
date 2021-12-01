@@ -54,6 +54,10 @@ public class RoomMapper extends SQLMapper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        if(rooms.size() == 1){
+            return rooms.get(0);
+        }
         return rooms;
     }
 }
