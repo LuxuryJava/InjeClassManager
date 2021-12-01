@@ -141,6 +141,17 @@ public class Main {
             //System.out.println("업데이트");
             dashBoardPanel.updateContent();
         }
+        if (panel.equals(reservation)){
+            System.out.println("예약 데이터 갱신!");
+            // 업데이트
+            reservation.setid(session.getUser().getId());
+        }
+
+        if(panel.equals(notice_add)){
+            System.out.println("이름 데이터 갱신!");
+            notice_add.setNameData();
+        }
+
         updateContent();
     }
 
