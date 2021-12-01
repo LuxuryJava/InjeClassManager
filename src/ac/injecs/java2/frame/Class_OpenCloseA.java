@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Class_OpenCloseA extends JPanel {
 	private Main mainFrame;
-	private ImageIcon[] image= { new ImageIcon("images/lock.png"),new ImageIcon("images/unlock.jpg") };
+	private ImageIcon[] image= { new ImageIcon("images/lock.png"),new ImageIcon("images/unlock.png") };
 	private JLabel label[]= new JLabel[6];
 	private String[] strArr= {"A111","A112","A113","A211","A212","A213"};
 	private Room rm;
