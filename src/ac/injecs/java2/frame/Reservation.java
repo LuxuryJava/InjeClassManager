@@ -10,8 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.User;
 
 public class Reservation extends JPanel {
@@ -69,7 +67,7 @@ public class Reservation extends JPanel {
                 ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(),Daycb.getSelectedItem().toString() ,
                 		Integer.parseInt(numField.getText()), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
                 mainFrame.repository.insertres(res);
-
+                JOptionPane.showMessageDialog(null, "예약 요청이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
             }
         });
 

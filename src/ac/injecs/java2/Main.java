@@ -155,6 +155,10 @@ public class Main {
             checkClass_day.updateContent();
         }
 
+        if(panel.equals(userInfoPanel)){
+            userInfoPanel.updateContent();
+        }
+
         updateContent();
     }
 
