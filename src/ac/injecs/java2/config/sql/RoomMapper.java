@@ -60,4 +60,5 @@ public class RoomMapper extends SQLMapper {
         }
         return rooms;
     }
+
 }
