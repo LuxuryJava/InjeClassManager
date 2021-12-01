@@ -8,13 +8,14 @@ import java.awt.*;
 
 public class Class_OpenCloseA extends JPanel {
 	private Main mainFrame;
-	private ImageIcon[] image= { new ImageIcon("images/lock.png"),new ImageIcon("images/unlock.jpg") };
+	private ImageIcon[] image= { new ImageIcon("images/lock.png"),new ImageIcon("images/unlock.png") };
 	private JLabel label[]= new JLabel[6];
 	private String[] strArr= {"A111","A112","A113","A211","A212","A213"};
 	private Room rm;
 	public Class_OpenCloseA(Main main) {
 		mainFrame=main;
 		setLayout(new BorderLayout());
+		setBackground(Color.WHITE);
 		JLabel title = new JLabel("강의실 개방 여부", SwingConstants.CENTER);
 		title.setFont(new Font("나눔고딕", Font.BOLD, 30));
 		add(title, BorderLayout.NORTH);
@@ -23,7 +24,7 @@ public class Class_OpenCloseA extends JPanel {
 	}
 	public class classP extends JPanel {
 		public classP() {
-
+			setBackground(Color.WHITE);
 			setLayout(new GridLayout(2, 3, 0, 0 ));
 			for(int i = 0; i < 6; i++) {
 				rm=mainFrame.repository.getRoom(strArr[i]);
