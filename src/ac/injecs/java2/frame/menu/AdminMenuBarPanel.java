@@ -119,6 +119,8 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.admitClassPanel);
+                    mainFrame.admitClassPanel.update();
+                    
                     mainFrame.setMode("승인대기현황");
                 }
             });

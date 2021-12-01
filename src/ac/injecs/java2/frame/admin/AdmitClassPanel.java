@@ -16,7 +16,7 @@ import java.util.Vector;
 public class AdmitClassPanel extends JPanel {
     private Main mainFrame;
     Vector<ResInfo> ri = null;
-    String[] header = { "학번", "강의실", "사용 인원", "예약 요일", "예약시간", "사용 목적", "예약상태" };
+    String[] header = { "학번", "강의실", "예약 요일", "사용 인원", "예약시간", "사용 목적", "예약상태" };
     DefaultTableModel model = new DefaultTableModel(null, header);
     JTable table;
     int cnt = 0;
@@ -85,12 +85,12 @@ public class AdmitClassPanel extends JPanel {
         for (int i = 0; i < ri.size(); i++) {
             uno = Integer.toString(ri.get(i).getuno());
             room = ri.get(i).getrinfo();
-            memcnt = Integer.toString(ri.get(i).getmemcnt());
             day = ri.get(i).getuseday();
+            memcnt = Integer.toString(ri.get(i).getmemcnt());
             time = ri.get(i).getusetime();
             purpose = ri.get(i).getpurpose();
             status = Boolean.toString(ri.get(i).getaccept());
-            Object[][] contents = { { uno, room, memcnt, day, time, purpose, status } };
+            Object[][] contents = { { uno, room, day, memcnt, time, purpose, status } };
             model.addRow(contents[0]);
         }
     }
