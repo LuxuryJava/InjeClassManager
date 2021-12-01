@@ -81,7 +81,6 @@ public class AdmitClassPanel extends JPanel {
         ri = mainFrame.repository.getResinfo(user.getId());
         model.setNumRows(0);
 
-
         for (int i = 0; i < ri.size(); i++) {
             uno = Integer.toString(ri.get(i).getuno());
             room = ri.get(i).getrinfo();

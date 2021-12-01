@@ -38,5 +38,9 @@ public class RequestLockClassPanel extends JPanel {
 
         setVisible(true);
     }
+    
+    public void update() {
+    	
+    }
 
 }
