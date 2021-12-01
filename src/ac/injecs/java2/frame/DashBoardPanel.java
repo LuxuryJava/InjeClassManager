@@ -75,7 +75,7 @@ public class DashBoardPanel extends JPanel {
 
         boxPanel1 = new BoxPanel("총 강의실", "NULL", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
-        boxPanel2 = new BoxPanel("총 예약수", "NULL", new Color(0x071F6));
+        boxPanel2 = new BoxPanel("금일 예약 승인", "NULL", new Color(0x071F6));
         boxPanel2.setBounds(50 + boxWidthGap * 2, 80, boxWidth, boxHeight);
         boxPanel3 = new BoxPanel("사용중 강의실", "NULL", new Color(0xFF6C2D));
         boxPanel3.setBounds(50 + boxWidthGap * 4, 80, boxWidth, boxHeight);
@@ -94,7 +94,7 @@ public class DashBoardPanel extends JPanel {
             }
         });
 
-        noticeBoxPanel2 = new NoticeBoxPanel("강의실 예약 기록", realtimeClass, 500, 350);
+        noticeBoxPanel2 = new NoticeBoxPanel("실시간 강의실  기록", realtimeClass, 500, 350);
         noticeBoxPanel2.setBounds(390, 190, 500, 350);
 
         add(title);

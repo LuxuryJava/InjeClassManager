@@ -73,7 +73,7 @@ public class Notice_Add  extends JPanel {
                     notice.setTitle(TitleFelid.getText());
                     notice.setContent(NtextArea.getText());
                     System.out.println(notice);
-
+                    JOptionPane.showMessageDialog(null, "등록이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     mainFrame.noticeController.post(notice);
 
                     System.out.println(notice.toString());
