@@ -15,6 +15,8 @@ public class RequestLockClassPanel extends JPanel {
     DefaultTableModel model = new DefaultTableModel(null, header);
     JTable table;
     
+    //static String uno, name, 
+    
     public RequestLockClassPanel(Main main) {
         this.mainFrame = main;
         setLayout(null);

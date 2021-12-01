@@ -142,6 +142,38 @@ public class DBConnect{
 
 
     }
+    
+    public Vector<Door> getDoor(String id){
+    	Vector<Door> res = new Vector<Door>();
+//    	String sql = "select * from door where uno='" + id + "'";
+//    	SQLMapper sqlMapper = new UserMapper();
+//    	User user = (User)select(sql, sqlMapper);
+//    	
+    	try {
+//    		if(user.isManager()) {
+//                preparedStatement=connection.prepareStatement("select * from reservation");
+//            }
+//            else
+    		preparedStatement = connection.prepareStatement("select * from door where uno='" + id + "'");
+    		resultSet = preparedStatement.executeQuery();
+    		
+    		while(resultSet.next()) {
+    			Door door = new Door(resultSet.getInt(1), resultSet.getString(2), resultSet.getBoolean(3));
+    			res.add(door);
+    			
+    		}
+    	}catch(Exception e) {
+    		System.out.println(e);
+    		System.out.println("에러났지롱");
+    	}finally {
+    		try {
+    			if(preparedStatement != null && !preparedStatement.isClosed()) {
+    				preparedStatement.close();
+    			}
+    		} catch (Exception e2) {}
+    	}
+    	return res;
+    }
 
     public Vector<ResInfo> getResinfo(String id) {
         Vector<ResInfo> res=new Vector<ResInfo>();
