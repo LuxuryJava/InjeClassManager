@@ -147,6 +147,11 @@ public class Main {
             reservation.setid(session.getUser().getId());
         }
 
+        if(panel.equals(notice_add)){
+            System.out.println("이름 데이터 갱신!");
+            notice_add.setNameData();
+        }
+
         updateContent();
     }
 
