@@ -151,6 +151,9 @@ public class Main {
             System.out.println("이름 데이터 갱신!");
             notice_add.setNameData();
         }
+        if (panel.equals(checkClass_day)) {
+            checkClass_day.updateContent();
+        }
 
         updateContent();
     }
@@ -177,7 +180,6 @@ public class Main {
         main.admitClassPanel = new AdmitClassPanel(main);
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
-
 
         main.setCenterPanel(main.dashBoardPanel);
         main.setMenuPanel(main.userMenuBarPanel);
