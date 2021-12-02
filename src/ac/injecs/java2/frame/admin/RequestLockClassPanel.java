@@ -52,8 +52,9 @@ public class RequestLockClassPanel extends JPanel {
                 Door door = new Door.Builder().setuno(uno).setrinfo(rinfo).setdoorOpen(doorOpen).build(); 
                 
                 mainFrame.repository.roomupdate(mainFrame.repository.getRoom(rinfo));
-                mainFrame.repository.deletedoor(door);
-                update();
+                mainFrame.class_openCloseA.update();
+                mainFrame.repository.deletedoor(door);                
+                
             }
         });
 

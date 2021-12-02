@@ -117,7 +117,7 @@ public class Repository {
     
     public void roomupdate(Room room) {
     	String sql = "update room set doorOpen=? where rinfo=?";
-        dbConnect.update(sql,new RoomMapper(), room);
+        dbConnect.update(sql, new RoomMapper(), room);
     }
     
     // --------------- Door ------------------------//
