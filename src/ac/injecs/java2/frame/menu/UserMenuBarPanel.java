@@ -118,9 +118,13 @@ public class UserMenuBarPanel extends MenuBarPanel {
             classStateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    mainFrame.setCenterPanel(mainFrame.class_openCloseA);
-
-                    mainFrame.setMode("개방");
+                	if (mainFrame.session.getUser() == null) {
+                        JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else {
+                    	mainFrame.setCenterPanel(mainFrame.class_openCloseA);
+                        mainFrame.setMode("개방");
+                    }
                 }
             });
             lectureButton.addActionListener(new ActionListener() {

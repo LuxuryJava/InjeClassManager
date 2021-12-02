@@ -111,6 +111,7 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.requestLockClassPanel);
+                    mainFrame.requestLockClassPanel.update();
 
                     mainFrame.setMode("강의실관리");
                 }
