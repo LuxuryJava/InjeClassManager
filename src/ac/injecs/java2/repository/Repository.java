@@ -1,10 +1,7 @@
 package ac.injecs.java2.repository;
 
 import ac.injecs.java2.config.DBConnect;
-import ac.injecs.java2.config.sql.NoticeMapper;
-import ac.injecs.java2.config.sql.ReservationMapper;
-import ac.injecs.java2.config.sql.RoomMapper;
-import ac.injecs.java2.config.sql.UserMapper;
+import ac.injecs.java2.config.sql.*;
 import ac.injecs.java2.entity.*;
 
 
@@ -63,7 +60,8 @@ public class Repository {
     // --------------- Reservation  ------------------------//
 
     public void insertres(ResInfo res) {
-        dbConnect.resinsert(res);
+    	String sql = "insert into reservation values(?,?,?,?,?,?,?)";
+        dbConnect.insert(sql, new ReservationMapper(), res);
     }
     public Vector<ResInfo> getResinfo(String id) {
         return dbConnect.getResinfo(id);
@@ -110,5 +108,36 @@ public class Repository {
         List<Room> finds = (List<Room>) dbConnect.select(sql, new RoomMapper());
         return finds;
     }
-
+    
+    public void roomupdate(Room room) {
+    	String sql = "update room set doorOpen=? where rinfo=?";
+        dbConnect.update(sql,new RoomMapper(), room);
+    }
+    
+    // --------------- Door ------------------------//
+    public Door insertDoor(Door door) {
+        String sql = "insert into door values(?, ?, ?)";
+        dbConnect.insert(sql, new DoorMapper(), door);
+        return door;
+    }
+    
+//    public Vector<Door> findDoorAll() {
+//        String sql = "select * from door";
+//        Vector<Door> findDoor = (Vector<Door>) dbConnect.select(sql, new DoorMapper());
+//        return findDoor;
+//    }
+    
+    public Vector<Door> getDoorinfo(String rinfo) {
+        return dbConnect.getDoorinfo(rinfo);
+    }
+    
+    public void doorupdate(Door door) {
+    	String sql = "update door set doorOpen=? where uno=? && rinfo=?";
+        dbConnect.update(sql,new DoorMapper(),door);
+    }
+    
+    public void deletedoor(Door door) {
+    	String sql = "delete from door where rinfo=?";
+        dbConnect.delete(sql, new DoorMapper(), door);
+    }
 }
