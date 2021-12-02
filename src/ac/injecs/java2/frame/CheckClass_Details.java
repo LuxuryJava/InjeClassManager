@@ -57,12 +57,13 @@ public class CheckClass_Details extends JPanel{
     }
     // 버튼의 보여짐/안보여짐 결정
     public void setBtn() {
-        System.out.println(ri.size());
+        //System.out.println(ri.size());
         if (ri.size() == 1) {
             pre.setVisible(false);
             next.setVisible(false);
             return;
         }
+
         if(cnt == 0 ) {
             pre.setVisible(false);
             next.setVisible(true);

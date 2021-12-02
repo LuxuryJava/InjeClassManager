@@ -10,10 +10,11 @@ import com.mysql.cj.protocol.a.NativeConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.Comparator;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -56,15 +57,22 @@ public class CheckClass_Day extends JPanel {
                     new JLabel("금"),
                     new JLabel("토")
             };
+
+            DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
+            int dayOfWeekNumber = dayOfWeek.getValue();
+
+            weekNames[dayOfWeekNumber].setForeground(Color.MAGENTA);
             weekNames[0].setForeground(Color.RED);
             weekNames[6].setForeground(Color.BLUE);
 
             weekReservationPanels = new WeekReservationPanel[7];
             // 배치
             for (int i = 0 ; i < weekNames.length; i++){
-                weekNames[i].setFont(InjeFont.XLfont);
+                weekNames[i].setFont(InjeFont.PXLfont);
                 weekReservationPanels[i] = new WeekReservationPanel();
             }
+            weekNames[dayOfWeekNumber].setFont(InjeFont.XLfont);
+
             weekNames[0].setBounds(100, 10, 150, 50);
             weekReservationPanels[0].setBounds(50, 60, 150, 150);
 
@@ -95,7 +103,12 @@ public class CheckClass_Day extends JPanel {
         // 승인된 모든 예약 정보 가져옴
         public Vector<ResInfo> getAcceptReservation(){
             List<ResInfo> reservationAll = mainFrame.repository.findReservationAll();
+
+            if (reservationAll == null) {
+                return null;
+            }
             Vector<ResInfo> acceptAll = new Vector<>();
+
             for (int i =0 ; i < reservationAll.size(); i++){
                 ResInfo resInfo = reservationAll.get(i);
                 if(resInfo.getaccept())
@@ -145,11 +158,16 @@ public class CheckClass_Day extends JPanel {
 
         public void updateContent(){
             Vector<ResInfo> acceptReservation = getAcceptReservation();
+            if (acceptReservation == null) {
+                for (int i = 0; i < 7; i++){
+                    weekReservationPanels[i].clearListData();
+                }
+                return;
+            }
             for (int i = 0; i < 7; i++){
                 Vector<ResInfo> weekReservationData = getWeekReservationData(i, acceptReservation);
                 weekReservationPanels[i].setListData(weekReservationData);
             }
-
         }
 
 
@@ -182,6 +200,11 @@ public class CheckClass_Day extends JPanel {
                 add(list);
 
                 setVisible(true);
+            }
+
+            public void clearListData(){
+                DefaultListModel temp = (DefaultListModel) list.getModel();
+                temp.removeAllElements();
             }
 
             public void setListData(Vector<ResInfo> values){

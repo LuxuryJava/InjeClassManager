@@ -80,6 +80,12 @@ public class Repository {
         List<ResInfo> resInfos = (List<ResInfo>) dbConnect.select(sql, new ReservationMapper());
         return resInfos;
     }
+
+    public List<ResInfo> findReservationByUseTime(String usetime) {
+        String sql = "select * from reservation where usetime like " + "'" +usetime + "'";
+        List<ResInfo> resInfos = (List<ResInfo>) dbConnect.select(sql, new ReservationMapper());
+        return resInfos;
+    }
     // --------------- Notice ------------------------//
 
     public Notice insertNotice(Notice notice) {
