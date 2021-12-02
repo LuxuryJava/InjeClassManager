@@ -1,5 +1,6 @@
 package ac.injecs.java2.config.sql;
 
+import ac.injecs.java2.entity.Door;
 import ac.injecs.java2.entity.Room;
 import ac.injecs.java2.entity.User;
 
@@ -7,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class RoomMapper extends SQLMapper {
     @Override
@@ -60,5 +63,28 @@ public class RoomMapper extends SQLMapper {
         }
         return rooms;
     }
+    
+    @Override
+    public void update(PreparedStatement preparedStatement, Object object) {
+    	try {
+            Room room = (Room) object;
 
+            this.preparedStatement = preparedStatement;
+            
+            preparedStatement.setBoolean(1, !room.getdoorOpen());
+			preparedStatement.setString(2, room.getRoomInfo());
+
+            int row = preparedStatement.executeUpdate();
+
+            //System.out.println("추가된 row : " + row);
+//            JOptionPane aa=new JOptionPane();
+//    		aa.showMessageDialog(null,"");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane aa=new JOptionPane();
+    		aa.showMessageDialog(null,"업데이트 실패");
+        }
+    
+    }
 }

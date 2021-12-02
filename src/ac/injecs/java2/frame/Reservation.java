@@ -20,7 +20,7 @@ public class Reservation extends JPanel {
     private List<Room> rooms;
     private User user;
 
-   JTextField nameField = new JTextField("아무개");
+    JTextField nameField = new JTextField("아무개");
     JTextField numField = new JTextField();
     JTextField purposeField = new JTextField();
     JTextField acceptField = new JTextField();
@@ -68,7 +68,7 @@ public class Reservation extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(),Daycb.getSelectedItem().toString() ,
-                		Integer.parseInt(numField.getText()), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
+                        Integer.parseInt(numField.getText()), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
 
                 // 이미 예약된 건지 확인
                 String resText = cb.getSelectedItem().toString();

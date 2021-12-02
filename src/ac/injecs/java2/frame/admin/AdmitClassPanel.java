@@ -23,7 +23,6 @@ public class AdmitClassPanel extends JPanel {
     static String uno, room, memcnt, day, time, purpose, status;
 
     public AdmitClassPanel(Main main) {
-
         this.mainFrame = main;
         setLayout(null);
 

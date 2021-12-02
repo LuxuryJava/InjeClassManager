@@ -1,91 +1,91 @@
 package ac.injecs.java2.entity;
 
 public class Room {
-    private String roomInfo;
+	private String roomInfo;
 
-    private boolean doorOpen;
+	private boolean doorOpen;
 
-    private boolean roomUsing;
+	private boolean roomUsing;
 
-    private boolean hasProjector;
+	private boolean hasProjector;
 
-    private int roomPeople;
+	private int roomPeople;
 
-    public Room(String roomInfo,boolean doorOpen,boolean roomUsing,boolean hasProjector,int roomPeople) {
-    	this.roomInfo=roomInfo;
-    	this.doorOpen=doorOpen;
-    	this.roomUsing=roomUsing;
-    	this.hasProjector=hasProjector;
-    	this.roomPeople=roomPeople;
-    	
-    }
-    public String getRoomInfo() {
-    	return roomInfo;
-    }
-    
-    public boolean getdoorOpen() {
-    	return doorOpen;
-    }
-    public boolean getroomUsing() {
-    	return roomUsing;
-    }
-    public boolean gethasProjector() {
-    	return hasProjector;
-    }
-    public int getroomPeople() {
-    	return roomPeople;
-    }
+	public Room(String roomInfo, boolean doorOpen, boolean roomUsing, boolean hasProjector, int roomPeople) {
+		this.roomInfo = roomInfo;
+		this.doorOpen = doorOpen;
+		this.roomUsing = roomUsing;
+		this.hasProjector = hasProjector;
+		this.roomPeople = roomPeople;
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomInfo='" + roomInfo + '\'' +
-                ", doorOpen=" + doorOpen +
-                ", roomUsing=" + roomUsing +
-                ", hasProjector=" + hasProjector +
-                ", roomPeople=" + roomPeople +
-                '}';
-    }
+	}
 
-    public static class Builder{
-        private String roomInfo;
+	public String getRoomInfo() {
+		return roomInfo;
+	}
 
-        private boolean doorOpen;
+	public boolean getdoorOpen() {
+		return doorOpen;
+	}
 
-        private boolean roomUsing;
+	public boolean getroomUsing() {
+		return roomUsing;
+	}
 
-        private boolean hasProjector;
+	public boolean gethasProjector() {
+		return hasProjector;
+	}
 
-        private int roomPeople;
+	public int getroomPeople() {
+		return roomPeople;
+	}
 
-        public Builder roomInfo(String roomInfo) {
-            this.roomInfo = roomInfo;
-            return this;
-        }
-        public Builder doorOpen(boolean doorOpen) {
-            this.doorOpen = doorOpen;
-            return this;
-        }
+	@Override
+	public String toString() {
+		return "Room{" + "roomInfo='" + roomInfo + '\'' + ", doorOpen=" + doorOpen + ", roomUsing=" + roomUsing
+				+ ", hasProjector=" + hasProjector + ", roomPeople=" + roomPeople + '}';
+	}
 
-        public Builder roomUsing(boolean roomUsing) {
-            this.roomUsing = roomUsing;
-            return this;
-        }
+	public static class Builder {
+		private String roomInfo;
 
-        public Builder hasProjector(boolean hasProjector) {
-            this.hasProjector = hasProjector;
-            return this;
-        }
+		private boolean doorOpen;
 
-        public Builder roomPeople(int roomPeople) {
-            this.roomPeople =roomPeople;
-            return this;
-        }
+		private boolean roomUsing;
 
-        public Room build(){
-            Room room = new Room(roomInfo, doorOpen, roomUsing, hasProjector, roomPeople);
-            return room;
-        }
+		private boolean hasProjector;
 
-    }
+		private int roomPeople;
+
+		public Builder roomInfo(String roomInfo) {
+			this.roomInfo = roomInfo;
+			return this;
+		}
+
+		public Builder doorOpen(boolean doorOpen) {
+			this.doorOpen = doorOpen;
+			return this;
+		}
+
+		public Builder roomUsing(boolean roomUsing) {
+			this.roomUsing = roomUsing;
+			return this;
+		}
+
+		public Builder hasProjector(boolean hasProjector) {
+			this.hasProjector = hasProjector;
+			return this;
+		}
+
+		public Builder roomPeople(int roomPeople) {
+			this.roomPeople = roomPeople;
+			return this;
+		}
+
+		public Room build() {
+			Room room = new Room(roomInfo, doorOpen, roomUsing, hasProjector, roomPeople);
+			return room;
+		}
+
+	}
 }
