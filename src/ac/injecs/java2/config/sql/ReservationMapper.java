@@ -3,6 +3,7 @@ package ac.injecs.java2.config.sql;
 import ac.injecs.java2.entity.Notice;
 import ac.injecs.java2.entity.ResInfo;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;

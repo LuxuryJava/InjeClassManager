@@ -19,6 +19,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+// TODO : 금일 현재 시간보다 전에 예약을 하면 금일 예약 정보에 올라가는데 이걸 어캐 잡을까.
 public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
 
@@ -147,6 +149,18 @@ public class Main {
             reservation.setid(session.getUser().getId());
         }
 
+        if(panel.equals(notice_add)){
+            System.out.println("이름 데이터 갱신!");
+            notice_add.setNameData();
+        }
+        if (panel.equals(checkClass_day)) {
+            checkClass_day.updateContent();
+        }
+
+        if(panel.equals(userInfoPanel)){
+            userInfoPanel.updateContent();
+        }
+
         updateContent();
     }
 
@@ -172,7 +186,6 @@ public class Main {
         main.admitClassPanel = new AdmitClassPanel(main);
         main.requestLockClassPanel = new RequestLockClassPanel(main);
         main.userInfoPanel = new UserInfoPanel(main);
-
 
         main.setCenterPanel(main.dashBoardPanel);
         main.setMenuPanel(main.userMenuBarPanel);

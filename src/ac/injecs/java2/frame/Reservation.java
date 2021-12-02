@@ -10,8 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.User;
 
 public class Reservation extends JPanel {
@@ -34,6 +32,9 @@ public class Reservation extends JPanel {
             "23:00 ~ 23:50"};
     private JComboBox<String> Daycb = new JComboBox<String>(day);
     private JComboBox<String> Timecb = new JComboBox<String>(time);
+
+    private InfoBox infobox;
+    private ResBox resbox;
 
     public Reservation(Main main) {
         this.mainFrame = main;
@@ -68,14 +69,40 @@ public class Reservation extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(),Daycb.getSelectedItem().toString() ,
                 		Integer.parseInt(numField.getText()), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
+
+                // 이미 예약된 건지 확인
+                String resText = cb.getSelectedItem().toString();
+                String useTime = Timecb.getSelectedItem().toString();
+                String useDay = Daycb.getSelectedItem().toString();
+                List<ResInfo> reservationByUseTime = mainFrame.repository.findReservationByUseTime(useTime);
+                if (reservationByUseTime != null) {
+                    for (ResInfo resInfo : reservationByUseTime) {
+                        if (resInfo.getaccept()) {
+                            if (resInfo.getuseday().equals(useDay) && resInfo.getusetime().equals(useTime)) {
+                                String message = "[" + useTime +"] " + resText + "\n이미 예약된 강의실입니다.";
+                                JOptionPane.showMessageDialog(null, message, "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                        }
+                        else{
+                            if (resInfo.getuseday().equals(useDay) && resInfo.getusetime().equals(useTime)) {
+                                String message = "[" + useTime +"] " + resText + "\n해당시간대에 이미 예약 신청하셨습니다.";
+                                JOptionPane.showMessageDialog(null, message, "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                        }
+                    }
+                }
+
                 mainFrame.repository.insertres(res);
 
+                JOptionPane.showMessageDialog(null, "예약 요청이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
             }
         });
 
-        InfoBox infobox = new InfoBox();
+        infobox = new InfoBox();
         infobox.setBounds(70, 170, 400, 300);
-        ResBox resbox = new ResBox();
+        resbox = new ResBox();
         resbox.setBounds(500, 170, 400, 300);
 
         cb.addActionListener(new ActionListener() {
@@ -99,8 +126,20 @@ public class Reservation extends JPanel {
         add(infobox);
         add(resbox);
 
+        setResInfoData();
         setVisible(true);
     }
+
+    private void setResInfoData(){
+        int index = Daycb.getSelectedIndex(); // 선택중인 위치
+        unitField.setText(unit[index]);
+        //rooms.get(index).gethasProjector()
+        String procjetor = rooms.get(index).gethasProjector() ? "여" : "부";
+
+        infobox.beamField.setText(procjetor);
+        infobox.numField.setText(String.valueOf(rooms.get(index).getroomPeople()));
+    }
+
 
     public class InfoBox extends JPanel {
         private int textStartY = 100;

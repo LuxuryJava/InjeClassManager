@@ -43,7 +43,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
         });
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         setOpaque(true);
         setBackground(Color.WHITE);
         mainFrame.updateContent();
@@ -58,12 +58,13 @@ public class UserMenuBarPanel extends MenuBarPanel {
         private ImageIcon image4 = new ImageIcon(resourcePath + "강의실개방.png");
         private ImageIcon image5 = new ImageIcon(resourcePath + "특강.png");
 
-        private void addButtonImage(ImageIcon image, JButton target){
+        private void addButtonImage(ImageIcon image, JButton target) {
             Image img = image.getImage().getScaledInstance(200, 30, Image.SCALE_SMOOTH);
             target.setIcon(new ImageIcon(img));
             target.setBorderPainted(false);
             target.setContentAreaFilled(false);
         }
+
         public MenuBarButtons() {
             setLayout(new GridLayout(7, 1, 0, 15));
 
@@ -100,9 +101,8 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (mainFrame.session.getUser() == null) {
                         JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
-                    }
-                    else {
-                    	mainFrame.setCenterPanel(mainFrame.reservation);
+                    } else {
+                        mainFrame.setCenterPanel(mainFrame.reservation);
 
                         mainFrame.setMode("예약");
                     }
@@ -111,6 +111,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
             classCheckButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
+<<<<<<< HEAD
                     if (mainFrame.session.getUser() == null) {
                         //JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     }
@@ -118,13 +119,17 @@ public class UserMenuBarPanel extends MenuBarPanel {
                         mainFrame.setCenterPanel(mainFrame.checkClass_day);
                         mainFrame.setMode("조희");
                     }
+=======
+                    mainFrame.setCenterPanel(mainFrame.checkClass_day);
+                    mainFrame.setMode("조회");
+>>>>>>> 2791489f1ef75a08b8f4619172fe40f29f2fdfdd
                 }
             });
             classStateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.class_openCloseA);
-         
+
                     mainFrame.setMode("개방");
                 }
             });
@@ -192,7 +197,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
             setVisible(true);
         }
 
-        private void setUserButtonVisible(boolean status){
+        private void setUserButtonVisible(boolean status) {
             if (mainFrame.session.getUser() == null) {
                 accountButton.setVisible(status);
                 logoutButton.setVisible(status);
@@ -205,8 +210,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 logoutButton.setVisible(true);
                 loginButton.setVisible(false);
                 signButton.setVisible(false);
-            }
-            else{
+            } else {
                 accountButton.setVisible(status);
                 logoutButton.setVisible(status);
                 loginButton.setVisible(!status);
@@ -215,7 +219,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
         }
 
 
-        public void paintComponent(Graphics g){
+        public void paintComponent(Graphics g) {
             setUserButtonVisible(mainFrame.session.isLogin);
         }
     }

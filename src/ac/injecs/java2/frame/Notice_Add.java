@@ -3,13 +3,10 @@ package ac.injecs.java2.frame;
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
 import ac.injecs.java2.dto.NoticeDto;
-import ac.injecs.java2.entity.Notice;
-import ac.injecs.java2.entity.ResInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.Writer;
 
 //Frame
 public class Notice_Add  extends JPanel {
@@ -19,6 +16,7 @@ public class Notice_Add  extends JPanel {
     public Notice_Add(Main main) {
         this.mainFrame = main;
         setLayout(null);
+        setBackground(Color.WHITE);
 
         JLabel Maintitle = new JLabel("게시글 등록", JLabel.CENTER);
         Maintitle.setBounds(430, 30, 200, 25);
@@ -40,11 +38,11 @@ public class Notice_Add  extends JPanel {
         NtextArea.setBounds(450, 200, 340, 130);
 
         JLabel Nwriter = new JLabel("작성자");
-        Nwriter.setBounds(375, 330, 57, 20);
+        Nwriter.setBounds(375, 340, 57, 20);
         Nwriter.setFont(InjeFont.Mfont);
 
         WriterFelid = new JTextField("아무개");
-        WriterFelid.setBounds(450, 330, 116, 21);
+        WriterFelid.setBounds(450, 340, 116, 21);
         WriterFelid.setEnabled(false);
 
         JButton Endbtn = new JButton("작성완료");
@@ -75,7 +73,7 @@ public class Notice_Add  extends JPanel {
                     notice.setTitle(TitleFelid.getText());
                     notice.setContent(NtextArea.getText());
                     System.out.println(notice);
-
+                    JOptionPane.showMessageDialog(null, "등록이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     mainFrame.noticeController.post(notice);
 
                     System.out.println(notice.toString());
@@ -89,7 +87,7 @@ public class Notice_Add  extends JPanel {
         });
         setVisible(true);
     }
-    public void paintComponent(Graphics g){
+    public void setNameData(){
         if(mainFrame.session.isLogin){
             String name = mainFrame.session.getUser().getName();
             WriterFelid.setText(name);
