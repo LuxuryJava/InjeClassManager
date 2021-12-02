@@ -112,7 +112,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (mainFrame.session.getUser() == null) {
-                        JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                        //JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     }
                     else {
                         mainFrame.setCenterPanel(mainFrame.checkClass_day);
