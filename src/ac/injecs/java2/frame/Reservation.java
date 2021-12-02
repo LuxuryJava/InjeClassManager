@@ -33,6 +33,9 @@ public class Reservation extends JPanel {
     private JComboBox<String> Daycb = new JComboBox<String>(day);
     private JComboBox<String> Timecb = new JComboBox<String>(time);
 
+    private InfoBox infobox;
+    private ResBox resbox;
+
     public Reservation(Main main) {
         this.mainFrame = main;
         setLayout(null);
@@ -71,9 +74,9 @@ public class Reservation extends JPanel {
             }
         });
 
-        InfoBox infobox = new InfoBox();
+        infobox = new InfoBox();
         infobox.setBounds(70, 170, 400, 300);
-        ResBox resbox = new ResBox();
+        resbox = new ResBox();
         resbox.setBounds(500, 170, 400, 300);
 
         cb.addActionListener(new ActionListener() {
@@ -97,8 +100,20 @@ public class Reservation extends JPanel {
         add(infobox);
         add(resbox);
 
+        setResInfoData();
         setVisible(true);
     }
+
+    private void setResInfoData(){
+        int index = Daycb.getSelectedIndex(); // 선택중인 위치
+        unitField.setText(unit[index]);
+        //rooms.get(index).gethasProjector()
+        String procjetor = rooms.get(index).gethasProjector() ? "여" : "부";
+
+        infobox.beamField.setText(procjetor);
+        infobox.numField.setText(String.valueOf(rooms.get(index).getroomPeople()));
+    }
+
 
     public class InfoBox extends JPanel {
         private int textStartY = 100;
