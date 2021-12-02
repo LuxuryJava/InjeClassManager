@@ -94,7 +94,7 @@ public class DashBoardPanel extends JPanel {
             }
         });
 
-        noticeBoxPanel2 = new NoticeBoxPanel("실시간 강의실  기록", realtimeClass, 500, 350);
+        noticeBoxPanel2 = new NoticeBoxPanel("금일 강의실 예약 현황", realtimeClass, 500, 350);
         noticeBoxPanel2.setBounds(390, 190, 500, 350);
 
         add(title);
