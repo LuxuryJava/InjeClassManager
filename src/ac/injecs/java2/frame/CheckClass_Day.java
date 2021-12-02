@@ -56,14 +56,34 @@ public class CheckClass_Day extends JPanel {
                     new JLabel("금"),
                     new JLabel("토")
             };
+            weekNames[0].setForeground(Color.RED);
+            weekNames[6].setForeground(Color.BLUE);
 
             weekReservationPanels = new WeekReservationPanel[7];
+            // 배치
             for (int i = 0 ; i < weekNames.length; i++){
                 weekNames[i].setFont(InjeFont.XLfont);
-                weekNames[i].setBounds(i * 150 + 60, 10, 150, 50);
                 weekReservationPanels[i] = new WeekReservationPanel();
-                weekReservationPanels[i].setBounds((i * 150), 60, 150, 400);
             }
+            weekNames[0].setBounds(100, 10, 150, 50);
+            weekReservationPanels[0].setBounds(50, 60, 150, 150);
+
+            weekNames[1].setBounds(350, 10, 150, 50);
+            weekReservationPanels[1].setBounds(300, 60, 150, 150);
+
+            weekNames[2].setBounds(600, 10, 150, 50);
+            weekReservationPanels[2].setBounds(550, 60, 150, 150);
+
+            weekNames[3].setBounds(850, 10, 150, 50);
+            weekReservationPanels[3].setBounds(800, 60, 150, 150);
+
+            weekNames[4].setBounds(250, 250, 150, 50);
+            weekReservationPanels[4].setBounds(200, 300, 150, 200);
+            weekNames[5].setBounds(500, 250, 150, 50);
+            weekReservationPanels[5].setBounds(450, 300, 150, 200);
+            weekNames[6].setBounds(750, 250, 150, 50);
+            weekReservationPanels[6].setBounds(700, 300, 150, 200);
+
 
             for(int i = 0; i < weekNames.length; i++) {
                 add(weekNames[i]);
