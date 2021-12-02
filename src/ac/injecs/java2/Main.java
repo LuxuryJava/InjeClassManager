@@ -19,6 +19,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+// TODO : 금일 현재 시간보다 전에 예약을 하면 금일 예약 정보에 올라가는데 이걸 어캐 잡을까.
 public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
 

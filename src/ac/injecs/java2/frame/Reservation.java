@@ -69,7 +69,33 @@ public class Reservation extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 ResInfo res = new ResInfo(Integer.parseInt(nameField.getText()), cb.getSelectedItem().toString(),Daycb.getSelectedItem().toString() ,
                 		Integer.parseInt(numField.getText()), Timecb.getSelectedItem().toString(), purposeField.getText(), Boolean.parseBoolean(acceptField.getText()));
+
+                // 이미 예약된 건지 확인
+                String resText = cb.getSelectedItem().toString();
+                String useTime = Timecb.getSelectedItem().toString();
+                String useDay = Daycb.getSelectedItem().toString();
+                List<ResInfo> reservationByUseTime = mainFrame.repository.findReservationByUseTime(useTime);
+                if (reservationByUseTime != null) {
+                    for (ResInfo resInfo : reservationByUseTime) {
+                        if (resInfo.getaccept()) {
+                            if (resInfo.getuseday().equals(useDay) && resInfo.getusetime().equals(useTime)) {
+                                String message = "[" + useTime +"] " + resText + "\n이미 예약된 강의실입니다.";
+                                JOptionPane.showMessageDialog(null, message, "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                        }
+                        else{
+                            if (resInfo.getuseday().equals(useDay) && resInfo.getusetime().equals(useTime)) {
+                                String message = "[" + useTime +"] " + resText + "\n해당시간대에 이미 예약 신청하셨습니다.";
+                                JOptionPane.showMessageDialog(null, message, "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                        }
+                    }
+                }
+
                 mainFrame.repository.insertres(res);
+
                 JOptionPane.showMessageDialog(null, "예약 요청이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
             }
         });
