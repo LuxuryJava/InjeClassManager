@@ -9,6 +9,8 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
+
 import ac.injecs.java2.entity.*;
 
 public class DBConnect {
@@ -114,8 +116,8 @@ public class DBConnect {
 		}
 
 	}
-	
-	public void update(String query, SQLMapper sqlMapper,Object object) {
+
+	public void update(String query, SQLMapper sqlMapper, Object object) {
 		try {
 			sqlMapper.update(connection.prepareStatement(query), object);
 
@@ -123,7 +125,7 @@ public class DBConnect {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void delete(String query, SQLMapper sqlMapper, Object object) {
 		try {
 			sqlMapper.delete(connection.prepareStatement(query), object);
@@ -131,12 +133,12 @@ public class DBConnect {
 			e.printStackTrace();
 		}
 	}
-	
-	public Vector<Door> getDoorinfo(String rinfo){
+
+	public Vector<Door> getDoorinfo(String rinfo) {
 		Vector<Door> door = new Vector<Door>();
 		try {
 			preparedStatement = connection.prepareStatement("select * from door");
-			
+
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Door di = new Door(resultSet.getString(1), resultSet.getString(2), resultSet.getBoolean(3));
@@ -156,8 +158,6 @@ public class DBConnect {
 		}
 		return door;
 	}
-	
-
 
 	public Vector<ResInfo> getResinfo(String id) {
 		Vector<ResInfo> res = new Vector<ResInfo>();
@@ -206,7 +206,10 @@ public class DBConnect {
 
 			}
 
+			JOptionPane .showMessageDialog(null,"예약이 삭제되었습니다.");
+
 		} catch (Exception e) {
+			JOptionPane .showMessageDialog(null,"예약 삭제 오류");
 			System.out.println(e);
 		} finally {
 			try {
@@ -231,10 +234,11 @@ public class DBConnect {
 			int result = preparedStatement.executeUpdate();
 			if (result == 1) {
 				System.out.println("reservation 예약 수정 성공!");
-
 			}
+			JOptionPane.showMessageDialog(null,"예약 승인/거부가 완료되었습니다.");
 
 		} catch (Exception e) {
+			JOptionPane .showMessageDialog(null,"예약 승인/거부 오류");
 			System.out.println(e);
 		} finally {
 			try {
@@ -246,4 +250,34 @@ public class DBConnect {
 		}
 	}
 
+	public void roomupdate(String rinfo, boolean doorOpen) {
+    	String sql = "update room set doorOpen=? where rinfo=?";
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+
+			doorOpen = !doorOpen;
+            preparedStatement.setBoolean(1, doorOpen);
+			preparedStatement.setString(2, rinfo);
+
+			int result = preparedStatement.executeUpdate();
+			if (result == 1) {
+				System.out.println("roomUpdate 성공!");
+				JOptionPane .showMessageDialog(null,"개방/잠금 완료");
+			}
+
+            //System.out.println("추가된 row : " + row);
+
+
+        } catch (Exception e) {
+
+			System.out.println(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+			} catch (Exception e2) {
+			}
+		}
+	}
 }

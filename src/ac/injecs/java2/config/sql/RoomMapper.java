@@ -71,12 +71,14 @@ public class RoomMapper extends SQLMapper {
 
             this.preparedStatement = preparedStatement;
             
-            preparedStatement.setBoolean(1, !room.getdoorOpen());
+            boolean res = room.getdoorOpen();
+            res = !res;
+            preparedStatement.setBoolean(1, res);
 			preparedStatement.setString(2, room.getRoomInfo());
 
             int row = preparedStatement.executeUpdate();
 
-            //System.out.println("추가된 row : " + row);
+            System.out.println("추가된 row : " + row);
 //            JOptionPane aa=new JOptionPane();
 //    		aa.showMessageDialog(null,"");
 
