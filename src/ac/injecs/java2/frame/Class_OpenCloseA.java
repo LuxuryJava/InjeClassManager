@@ -64,7 +64,6 @@ public class Class_OpenCloseA extends JPanel {
 
 		add(title);
 	}
-<<<<<<< HEAD
 
 	public void updateContent() {
 		// 개방 여부에 따라 이미지를 변경하면됨.
@@ -80,6 +79,4 @@ public class Class_OpenCloseA extends JPanel {
 
 		}
 	}
-=======
->>>>>>> c7dd3551253cfc9133d169f34edfb684c28f02e9
 }
