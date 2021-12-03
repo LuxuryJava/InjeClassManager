@@ -161,6 +161,10 @@ public class Main {
             userInfoPanel.updateContent();
         }
 
+        if(panel.equals((class_openCloseA))) {
+            class_openCloseA.updateContent();
+        }
+
         updateContent();
     }
 

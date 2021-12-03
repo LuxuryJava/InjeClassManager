@@ -205,13 +205,11 @@ public class DBConnect {
 				System.out.println("reservation데이터 삭제 성공!");
 
 			}
-			
-			JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"예약이 삭제되었습니다.");
+
+			JOptionPane .showMessageDialog(null,"예약이 삭제되었습니다.");
 
 		} catch (Exception e) {
-			JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"예약 삭제 오류");
+			JOptionPane .showMessageDialog(null,"예약 삭제 오류");
 			System.out.println(e);
 		} finally {
 			try {
@@ -237,13 +235,10 @@ public class DBConnect {
 			if (result == 1) {
 				System.out.println("reservation 예약 수정 성공!");
 			}
-			
-			JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"예약 승인/거부가 완료되었습니다.");
+			JOptionPane.showMessageDialog(null,"예약 승인/거부가 완료되었습니다.");
 
 		} catch (Exception e) {
-			JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"예약 승인/거부 오류");
+			JOptionPane .showMessageDialog(null,"예약 승인/거부 오류");
 			System.out.println(e);
 		} finally {
 			try {
@@ -259,7 +254,7 @@ public class DBConnect {
     	String sql = "update room set doorOpen=? where rinfo=?";
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-            
+
 			doorOpen = !doorOpen;
             preparedStatement.setBoolean(1, doorOpen);
 			preparedStatement.setString(2, rinfo);
@@ -267,15 +262,14 @@ public class DBConnect {
 			int result = preparedStatement.executeUpdate();
 			if (result == 1) {
 				System.out.println("roomUpdate 성공!");
-				JOptionPane aa=new JOptionPane();
-	    		aa.showMessageDialog(null,"개방/잠금 완료");
+				JOptionPane .showMessageDialog(null,"개방/잠금 완료");
 			}
 
             //System.out.println("추가된 row : " + row);
-            
+
 
         } catch (Exception e) {
-        	
+
 			System.out.println(e);
 		} finally {
 			try {
