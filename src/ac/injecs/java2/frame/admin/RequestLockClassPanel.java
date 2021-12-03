@@ -35,7 +35,7 @@ public class RequestLockClassPanel extends JPanel {
         scrollPane.setBounds(200, 80, 600, 400);
         
         JButton btn = new JButton("요청 승인");
-        btn.setBounds(550, 500, 140, 40);
+        btn.setBounds(690, 500, 110, 40);
         add(btn);
         
         btn.addActionListener(new ActionListener() {
@@ -52,8 +52,9 @@ public class RequestLockClassPanel extends JPanel {
                 Door door = new Door.Builder().setuno(uno).setrinfo(rinfo).setdoorOpen(doorOpen).build(); 
                 
                 mainFrame.repository.roomupdate(mainFrame.repository.getRoom(rinfo));
-                mainFrame.repository.deletedoor(door);
-                update();
+                mainFrame.class_openCloseA.update();
+                mainFrame.repository.deletedoor(door);                
+                
             }
         });
 
