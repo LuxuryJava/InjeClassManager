@@ -21,7 +21,7 @@ public class Repository {
     }
 
     public Optional<User> findUserById(String id) {
-        String sql = "select * from user where uno like " + id;
+        String sql = "select * from user where uno like " + "\"" + id + "\"";
         User find = (User) dbConnect.select(sql, new UserMapper());
 
         return Optional.ofNullable(find);
