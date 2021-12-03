@@ -12,8 +12,51 @@ import java.util.List;
 public class ReservationMapper extends SQLMapper {
 
     @Override
+    public void update(PreparedStatement preparedStatement, Object object) {
+        try {
+            ResInfo resInfo = (ResInfo) object;
+
+            this.preparedStatement = preparedStatement;
+
+            preparedStatement.setBoolean(1, resInfo.getaccept());
+            preparedStatement.setString(2, String.valueOf(resInfo.getuno()));
+            preparedStatement.setString(3, resInfo.getrinfo());
+            preparedStatement.setString(4, resInfo.getusetime());
+            preparedStatement.setString(5, resInfo.getuseday());
+
+            int result = preparedStatement.executeUpdate();
+            System.out.println("resinfo update = " + result);
+            JOptionPane.showMessageDialog(null,"예약 승인/거부가 완료되었습니다.");
+
+        } catch (SQLException e) {
+            JOptionPane .showMessageDialog(null,"예약 승인/거부 오류");
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void delete(PreparedStatement preparedStatement, Object object) {
+        try {
+            ResInfo resInfo = (ResInfo) object;
+
+            this.preparedStatement = preparedStatement;
+
+            preparedStatement.setString(1, String.valueOf(resInfo.getuno()));
+            preparedStatement.setString(2, resInfo.getrinfo());
+            preparedStatement.setString(3, resInfo.getusetime());
+            preparedStatement.setString(4, resInfo.getuseday());
+
+            int result = preparedStatement.executeUpdate();
+            System.out.println("resinfo delete = " + result);
+            JOptionPane .showMessageDialog(null,"예약이 삭제되었습니다.");
+        } catch (SQLException e) {
+            JOptionPane .showMessageDialog(null,"예약 삭제 오류.");
+            System.out.println(e);
+        }
+    }
+
+    @Override
     public void insert(PreparedStatement preparedStatement, Object object) {
-        String sql="insert into reservation values(?,?,?,?,?,?,?)";
         try {
             ResInfo res = (ResInfo) object;
 

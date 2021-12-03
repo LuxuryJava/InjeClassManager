@@ -44,10 +44,17 @@ public class AdmitClassPanel extends JPanel {
 
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String id = String.valueOf(model.getValueAt(table.getSelectedRow(), 0));
-                String rinfo = String.valueOf(model.getValueAt(table.getSelectedRow(), 1));
                 boolean accept = Boolean.parseBoolean(String.valueOf(model.getValueAt(table.getSelectedRow(), 6)));
-                mainFrame.repository.resupdate(id, rinfo, accept);
+                ResInfo newData = new ResInfo(
+                        Integer.valueOf((String)model.getValueAt(table.getSelectedRow(), 0)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 1)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 2)),
+                        Integer.valueOf((String)model.getValueAt(table.getSelectedRow(), 3)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 4)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 5)),
+                        !accept
+                );
+                mainFrame.repository.setResinfoAccept(newData);
                 update();
             }
         });
@@ -59,10 +66,16 @@ public class AdmitClassPanel extends JPanel {
 
         delBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String id = String.valueOf(model.getValueAt(table.getSelectedRow(), 0));
-                String rinfo = String.valueOf(model.getValueAt(table.getSelectedRow(), 1));
-                //String useday = String.valueOf(model.getValueAt(table.getSelectedRow(), 3));
-                mainFrame.repository.deleteres(id, rinfo);
+                ResInfo newData = new ResInfo(
+                        Integer.valueOf((String) model.getValueAt(table.getSelectedRow(), 0)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 1)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 2)),
+                        Integer.valueOf((String) model.getValueAt(table.getSelectedRow(), 3)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 4)),
+                        String.valueOf(model.getValueAt(table.getSelectedRow(), 5)),
+                        Boolean.valueOf((String) model.getValueAt(table.getSelectedRow(), 6))
+                );
+                mainFrame.repository.deleteResinfoByResinfo(newData);
                 update();
             }
         });

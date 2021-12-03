@@ -69,8 +69,19 @@ public class Repository {
     public void deleteres(String id,String rinfo) {
         dbConnect.delres(id,rinfo);
     }
+
     public void resupdate(String id, String rinfo, boolean accept) {
         dbConnect.resupdate(id, rinfo, accept);
+    }
+
+    public void setResinfoAccept(ResInfo resInfo) {
+        String sql = "update reservation set accept=? where uno=? and rinfo=? and usetime=? and day=?";
+        dbConnect.update(sql, new ReservationMapper(), resInfo);
+    }
+
+    public void deleteResinfoByResinfo(ResInfo resInfo) {
+        String sql = "delete from reservation where uno=? and rinfo=? and usetime=? and day=?";
+        dbConnect.delete(sql, new ReservationMapper(), resInfo);
     }
 
     public List<ResInfo> findReservationAll(){
