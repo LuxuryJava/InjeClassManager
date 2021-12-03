@@ -62,7 +62,7 @@ create table Reservation(
 
                                 accept boolean,
 
-                                PRIMARY KEY(rinfo, uno, day),
+                                PRIMARY KEY(rinfo, uno, day, usetime),
 
                                 foreign key(rinfo) references Room(rinfo) ON DELETE CASCADE,
 

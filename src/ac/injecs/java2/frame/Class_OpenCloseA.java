@@ -79,8 +79,4 @@ public class Class_OpenCloseA extends JPanel {
 
 		}
 	}
-
-	public void updateContent(){
-
-	}
 }

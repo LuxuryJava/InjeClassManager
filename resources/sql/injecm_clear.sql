@@ -1,3 +1,4 @@
+drop table door;
 drop table reservation;
 drop table notification;
 drop table user;
