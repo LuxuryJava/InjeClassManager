@@ -16,6 +16,9 @@ public class Class_OpenCloseA extends JPanel {
 	private String[] strArr = { "A111", "A112", "A113", "A211", "A212", "A213" };
 	private Room rm[] = new Room[6];
 
+	String rInfo;
+	boolean dOpen;
+
 	public Class_OpenCloseA(Main main) {
 		mainFrame = main;
 		setLayout(null);
@@ -32,8 +35,8 @@ public class Class_OpenCloseA extends JPanel {
 		setBackground(Color.WHITE);
 		for (int i = 0; i < 6; i++) {
 			rm[i] = mainFrame.repository.getRoom(strArr[i]);
-			String rInfo = rm[i].getRoomInfo();
-			boolean dOpen = rm[i].getdoorOpen();
+			rInfo = rm[i].getRoomInfo();
+			dOpen = rm[i].getdoorOpen();
 
 			if (rm[i].getdoorOpen()) { // Open
 				btn[i] = new JButton(strArr[i], image[1]);

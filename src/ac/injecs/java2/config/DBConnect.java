@@ -264,6 +264,7 @@ public class DBConnect {
 			}
 
             //System.out.println("추가된 row : " + row);
+
         } catch (Exception e) {
 			System.out.println(e);
 		} finally {
