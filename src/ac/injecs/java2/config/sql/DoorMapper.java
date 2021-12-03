@@ -31,7 +31,7 @@ public class DoorMapper extends SQLMapper {
     		aa.showMessageDialog(null,"개방/잠금 요청 되었습니다.");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             JOptionPane aa=new JOptionPane();
     		aa.showMessageDialog(null,"이미 요청되었습니다.");
         }
@@ -101,12 +101,12 @@ public class DoorMapper extends SQLMapper {
 			int row = preparedStatement.executeUpdate();
 			
 			JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"완료");
+    		aa.showMessageDialog(null,"개방/잠금 완료");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
             JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"므ㅏ");
+    		aa.showMessageDialog(null,"개방/잠금 오류");
 		}
 	}
 

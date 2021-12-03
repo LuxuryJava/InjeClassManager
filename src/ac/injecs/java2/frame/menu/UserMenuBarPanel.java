@@ -123,6 +123,8 @@ public class UserMenuBarPanel extends MenuBarPanel {
                     }
                     else {
                     	mainFrame.setCenterPanel(mainFrame.class_openCloseA);
+                    	mainFrame.class_openCloseA.update();
+                    	
                         mainFrame.setMode("개방");
                     }
                 }
