@@ -27,11 +27,19 @@ public class DoorMapper extends SQLMapper {
             int row = preparedStatement.executeUpdate();
 
             System.out.println("추가된 row : " + row);
+<<<<<<< HEAD
             JOptionPane.showMessageDialog(null,"개방/잠금 요청 되었습니다.");
 
         } catch (SQLException e) {
             //e.printStackTrace();
             JOptionPane.showMessageDialog(null,"이미 요청되었습니다.");
+=======
+            JOptionPane .showMessageDialog(null,"개방/잠금 요청 되었습니다.");
+
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            JOptionPane .showMessageDialog(null,"이미 요청되었습니다.");
+>>>>>>> c7dd3551253cfc9133d169f34edfb684c28f02e9
         }
 
 	}
@@ -77,13 +85,11 @@ public class DoorMapper extends SQLMapper {
             int row = preparedStatement.executeUpdate();
 
             System.out.println("추가된 row : " + row);
-            JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"개방/잠금 요청 되었습니다.");
+            JOptionPane .showMessageDialog(null,"개방/잠금 요청 되었습니다.");
 
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"이미 요청되었습니다.");
+            JOptionPane.showMessageDialog(null,"이미 요청되었습니다.");
         }
 	}
 	
@@ -97,14 +103,11 @@ public class DoorMapper extends SQLMapper {
 			preparedStatement.setString(1, door.getrinfo());
 			
 			int row = preparedStatement.executeUpdate();
-			
-			JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"개방/잠금 완료");
+			//JOptionPane.showMessageDialog(null,"개방/잠금 완료");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-            JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"개방/잠금 오류");
+			JOptionPane.showMessageDialog(null, "개방/잠금 오류");
 		}
 	}
 

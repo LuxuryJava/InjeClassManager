@@ -24,7 +24,7 @@ public class Class_OpenCloseA extends JPanel {
 		mainFrame = main;
 		setLayout(null);
 		setBackground(Color.WHITE);
-		
+
 		JLabel title = new JLabel("강의실 개방 여부");
 		title.setBounds(390, 0, 600, 35);
 		title.setFont(new Font("나눔고딕", Font.BOLD, 30));
@@ -64,6 +64,7 @@ public class Class_OpenCloseA extends JPanel {
 
 		add(title);
 	}
+<<<<<<< HEAD
 
 	public void updateContent() {
 		// 개방 여부에 따라 이미지를 변경하면됨.
@@ -79,4 +80,6 @@ public class Class_OpenCloseA extends JPanel {
 
 		}
 	}
+=======
+>>>>>>> c7dd3551253cfc9133d169f34edfb684c28f02e9
 }

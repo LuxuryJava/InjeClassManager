@@ -164,10 +164,6 @@ public class Main {
             class_openCloseA.updateContent();
         }
 
-        if(panel.equals((class_openCloseA))) {
-            class_openCloseA.updateContent();
-        }
-
         updateContent();
     }
 
