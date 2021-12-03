@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Class_OpenCloseA extends JPanel {
 	private Main mainFrame;
@@ -27,12 +28,7 @@ public class Class_OpenCloseA extends JPanel {
 		JLabel title = new JLabel("강의실 개방 여부");
 		title.setBounds(390, 0, 600, 35);
 		title.setFont(new Font("나눔고딕", Font.BOLD, 30));
-		add(title);
 
-	}
-
-	public void update() {
-		setBackground(Color.WHITE);
 		for (int i = 0; i < 6; i++) {
 			rm[i] = mainFrame.repository.getRoom(strArr[i]);
 			rInfo = rm[i].getRoomInfo();
@@ -56,13 +52,31 @@ public class Class_OpenCloseA extends JPanel {
 
 			btn[i].setContentAreaFilled(false);
 			btn[i].setBorderPainted(false);
-			
+
 			if (i < 3) {
 				btn[i].setBounds(140 + (i * 300), 150, 150, 100);
 			} else if (i >= 3) {
 				btn[i].setBounds(140 + ((i - 3) * 300), 360, 150, 100);
 			}
 			add(btn[i]);
+		}
+
+
+		add(title);
+	}
+
+	public void updateContent() {
+		// 개방 여부에 따라 이미지를 변경하면됨.
+		List<Room> roomAll = mainFrame.repository.findRoomAll();
+		for (int i = 0; i < roomAll.size(); i++){ // 총 강의실 개수 6개
+			Room find = roomAll.get(i);	// btn Array와 roomAll은 매핑
+
+			if (find.getdoorOpen()) {
+				btn[i].setIcon(image[1]);
+			} else {
+				btn[i].setIcon(image[0]);
+			}
+
 		}
 	}
 
