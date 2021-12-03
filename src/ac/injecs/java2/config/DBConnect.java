@@ -249,31 +249,4 @@ public class DBConnect {
 		}
 	}
 
-	public void roomupdate(String rinfo, boolean doorOpen) {
-    	String sql = "update room set doorOpen=? where rinfo=?";
-		try {
-			preparedStatement = connection.prepareStatement(sql);
-			doorOpen = !doorOpen;
-            preparedStatement.setBoolean(1, doorOpen);
-			preparedStatement.setString(2, rinfo);
-
-			int result = preparedStatement.executeUpdate();
-			if (result == 1) {
-				System.out.println("roomUpdate 성공!");
-				JOptionPane .showMessageDialog(null,"개방/잠금 완료");
-			}
-
-            //System.out.println("추가된 row : " + row);
-
-        } catch (Exception e) {
-			System.out.println(e);
-		} finally {
-			try {
-				if (preparedStatement != null && !preparedStatement.isClosed()) {
-					preparedStatement.close();
-				}
-			} catch (Exception e2) {
-			}
-		}
-	}
 }
