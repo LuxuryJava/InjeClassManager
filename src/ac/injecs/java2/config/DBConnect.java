@@ -205,7 +205,6 @@ public class DBConnect {
 				System.out.println("reservation데이터 삭제 성공!");
 
 			}
-
 			JOptionPane .showMessageDialog(null,"예약이 삭제되었습니다.");
 
 		} catch (Exception e) {
@@ -254,7 +253,6 @@ public class DBConnect {
     	String sql = "update room set doorOpen=? where rinfo=?";
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-
 			doorOpen = !doorOpen;
             preparedStatement.setBoolean(1, doorOpen);
 			preparedStatement.setString(2, rinfo);
@@ -266,10 +264,7 @@ public class DBConnect {
 			}
 
             //System.out.println("추가된 row : " + row);
-
-
         } catch (Exception e) {
-
 			System.out.println(e);
 		} finally {
 			try {

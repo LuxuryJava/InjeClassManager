@@ -95,12 +95,11 @@ public class DoorMapper extends SQLMapper {
 			preparedStatement.setString(1, door.getrinfo());
 			
 			int row = preparedStatement.executeUpdate();
-			
 			//JOptionPane.showMessageDialog(null,"개방/잠금 완료");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"개방/잠금 오류");
+			JOptionPane.showMessageDialog(null, "개방/잠금 오류");
 		}
 	}
 

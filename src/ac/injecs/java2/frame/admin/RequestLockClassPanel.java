@@ -54,7 +54,6 @@ public class RequestLockClassPanel extends JPanel {
                 mainFrame.repository.roomupdate(mainFrame.repository.getRoom(rinfo));
                 mainFrame.repository.deletedoor(door);
                 mainFrame.class_openCloseA.update();
-
             }
         });
 

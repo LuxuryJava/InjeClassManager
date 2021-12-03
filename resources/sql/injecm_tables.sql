@@ -70,3 +70,17 @@ create table Reservation(
 
                                 foreign key(day) references Week(day)ON DELETE CASCADE
  );
+
+create table door(
+   uno varchar(20),
+
+   rinfo char(10),
+
+   doorOpen boolean,
+
+   PRIMARY KEY(uno, rinfo),
+
+   foreign key(uno) references User(uno) ON DELETE CASCADE,
+
+   foreign key(rinfo) references Room(rinfo) ON DELETE CASCADE
+);
