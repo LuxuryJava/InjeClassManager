@@ -15,6 +15,13 @@ public class SignPanel extends JPanel {
     // DI 주입
     private Main mainFrame;
     static Font Sfont = new Font("나눔고딕", Font.BOLD, 15);
+    JTextField nameField = new JTextField();
+    JTextField idField = new JTextField();
+    JTextField departField = new JTextField();
+    JTextField emailField = new JTextField();
+    JTextField phoneField = new JTextField();
+    JTextField passwordField = new JPasswordField();
+    JTextField repasswordField = new JPasswordField();
     public SignPanel(Main main) {
         this.mainFrame = main;
 
@@ -28,30 +35,35 @@ public class SignPanel extends JPanel {
         add(signBox, BorderLayout.CENTER);
     }
 
+    public void fieldClear(){
+    	nameField.setText("");
+    	idField.setText("");
+    	departField.setText("");
+    	emailField.setText("");
+    	phoneField.setText("");
+    	passwordField.setText("");
+    	repasswordField.setText("");
+    }
+    
     public class SignBox extends JPanel{
         private int textStartY = 20;
         private int textWidth = 50;
         private int textHeight = 30;
         private int fieldWidth = 150;
+        
 
         public SignBox() {
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
 
             JLabel nameText = new JLabel("이름:");
-            JTextField nameField = new JTextField();
             JLabel idText = new JLabel("학번:");
-            JTextField idField = new JTextField();
+            
             JLabel departText = new JLabel("학과:");
-            JTextField departField = new JTextField();
             JLabel emailText = new JLabel("이메일:");
-            JTextField emailField = new JTextField();
             JLabel phoneText = new JLabel("전화번호:");
-            JTextField phoneField = new JTextField();
             JLabel passwordText = new JLabel("비밀번호:");
-            JTextField passwordField = new JPasswordField();
             JLabel repasswordText = new JLabel("비밀번호 확인:");
-            JTextField repasswordField = new JPasswordField();
 
             JLabel errorMessage = new JLabel("");
             errorMessage.setForeground(Color.RED);
@@ -166,9 +178,6 @@ public class SignPanel extends JPanel {
             setVisible(true);
         }
 
-        private void fieldClear(){
-
-        }
 
     }
 }
