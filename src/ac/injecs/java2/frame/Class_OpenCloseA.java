@@ -43,8 +43,13 @@ public class Class_OpenCloseA extends JPanel {
 			btn[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Door door = new Door.Builder().setuno(mainFrame.session.getUser().getId()).setrinfo(rInfo)
-							.setdoorOpen(dOpen).build();
+					JButton selectRoom = (JButton) e.getSource();
+
+					Door door = new Door.Builder()
+							.setuno(mainFrame.session.getUser().getId())
+							.setrinfo(selectRoom.getText())
+							.setdoorOpen(dOpen)
+							.build();
 					mainFrame.repository.insertDoor(door);
 					// mainFrame.repository.roomupdate(mainFrame.repository.getRoom(rInfo));
 				}
