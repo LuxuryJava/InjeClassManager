@@ -70,11 +70,12 @@ public class RoomMapper extends SQLMapper {
             Room room = (Room) object;
 
             this.preparedStatement = preparedStatement;
-            
+
             boolean res = room.getdoorOpen();
             res = !res;
             preparedStatement.setBoolean(1, res);
 			preparedStatement.setString(2, room.getRoomInfo());
+
 
             int row = preparedStatement.executeUpdate();
 
@@ -87,6 +88,23 @@ public class RoomMapper extends SQLMapper {
             JOptionPane aa=new JOptionPane();
     		aa.showMessageDialog(null,"업데이트 실패");
         }
-    
+    }
+
+    public void usingUpdate(PreparedStatement preparedStatement, Object object) {
+        try {
+            Room room = (Room) object;
+
+            this.preparedStatement = preparedStatement;
+
+
+            preparedStatement.setBoolean(1, room.getroomUsing());
+
+
+            int row = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"업데이트 실패");
+        }
     }
 }

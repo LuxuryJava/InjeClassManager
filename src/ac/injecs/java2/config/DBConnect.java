@@ -126,6 +126,16 @@ public class DBConnect {
 		}
 	}
 
+	public void roomUpdate(String query, RoomMapper sqlMapper, Object object) {
+		try {
+
+			sqlMapper.usingUpdate(connection.prepareStatement(query), object);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void delete(String query, SQLMapper sqlMapper, Object object) {
 		try {
 			sqlMapper.delete(connection.prepareStatement(query), object);
