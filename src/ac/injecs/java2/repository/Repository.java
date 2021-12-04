@@ -130,6 +130,11 @@ public class Repository {
     	String sql = "update room set doorOpen=? where rinfo=?";
         dbConnect.update(sql, new RoomMapper(), room);
     }
+
+    public void setRoomUsing(Room room) {
+        String sql = "update room set isUsing=? where rinfo like " + "\"" +room.getRoomInfo() + "\"";
+        dbConnect.roomUpdate(sql, new RoomMapper(), room);
+    }
     
     // --------------- Door ------------------------//
     public Door insertDoor(Door door) {
