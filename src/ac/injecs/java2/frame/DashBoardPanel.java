@@ -112,15 +112,51 @@ public class DashBoardPanel extends JPanel {
         setBoxDatas();
     }
 
+    private void setRoomAllUsing(){
+        // 예약에 따른 강의실 정보 최신으로 갱신
+        // 현재 예약으로 입실중인 강의실을 roomUsing = true
+        List<Room> rooms = mainFrame.repository.findRoomAll();
+        List<ResInfo> resInfos = mainFrame.repository.findReservationAll();
+        // TODO : NULL 잡기
+        if (resInfos == null){
+            return;
+        }
+
+        for (int i = 0; i< resInfos.size(); i++){
+            ResInfo resInfo = resInfos.get(i);
+
+            if (resInfo.getaccept()) {
+                if (isToday(resInfo.getuseday()) && isNowUsingClass(resInfo.getusetime()).equals("입실")) {
+                    Room find = mainFrame.repository.getRoom(resInfo.getrinfo());
+                    Room newRoom = new Room.Builder()
+                            .roomInfo(find.getRoomInfo())
+                            .roomPeople(find.getroomPeople())
+                            .roomUsing(true)
+                            .hasProjector(find.gethasProjector())
+                            .doorOpen(find.getdoorOpen())
+                            .build();
+                    mainFrame.repository.setRoomUsing(newRoom);
+                }
+                else{
+                    Room find = mainFrame.repository.getRoom(resInfo.getrinfo());
+                    Room newRoom = new Room.Builder()
+                            .roomInfo(find.getRoomInfo())
+                            .roomPeople(find.getroomPeople())
+                            .roomUsing(false)
+                            .hasProjector(find.gethasProjector())
+                            .doorOpen(find.getdoorOpen())
+                            .build();
+                    mainFrame.repository.setRoomUsing(newRoom);
+                }
+            }
+        }
+    }
+
     private void clearDatas(){
         notices.clear();
         emptyClass.clear();
         rooms.clear();
         realtimeClass.clear();
-    }
-
-    private void getRoomData(){
-        rooms = mainFrame.repository.findRoomAll();
     }
 
     private void getNotificationData(){
@@ -199,14 +235,14 @@ public class DashBoardPanel extends JPanel {
         noticeBoxPanel2.setNoticeItems(realtimeClass);
     }
 
-
+    // 빈 강의실 가져오기.
     private void getDatas(){
-        getRoomData();
+        rooms = mainFrame.repository.findRoomAll();
         // 모든 강의실 가져오기
         for (Room room : rooms) {
-            //System.out.println(room);
+//            System.out.println(room);
             // 빈 강의실 지정
-            if (room.getroomUsing() == false) {
+            if (!room.getroomUsing()) {
                 emptyClass.add(room.getRoomInfo());
             }
         }
@@ -254,6 +290,7 @@ public class DashBoardPanel extends JPanel {
 
     public void updateContent(){
         clearDatas();
+        setRoomAllUsing();
         getDatas(); // DB 데이터
         getNotificationData();
         getReservationData();

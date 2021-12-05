@@ -74,7 +74,7 @@ public class RequestLockClassPanel extends JPanel {
     			request = "잠가주세요";
     			doorOpen = "열림";
     		}
-    		else {
+    		else if(di.get(i).getdoorOpen() == false) {
     			request = "열어주세요";
     			doorOpen = "잠김";
     		}

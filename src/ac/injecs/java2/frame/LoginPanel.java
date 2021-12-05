@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
+    private LoginBox loginBox;
     public LoginPanel(Main main) {
         this.mainFrame = main;
         setLayout(new BorderLayout());
@@ -20,7 +21,7 @@ public class LoginPanel extends JPanel {
         title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
 
-        LoginBox loginBox = new LoginBox();
+        loginBox = new LoginBox();
         add(loginBox, BorderLayout.CENTER);
         setVisible(true);
     }
@@ -28,12 +29,14 @@ public class LoginPanel extends JPanel {
     public class LoginBox extends JPanel {
         private int textWidth = 50;
 
+        JTextField idField;
+
         public LoginBox(){
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
 
             JLabel idText = new JLabel(" 학번: ");
-            JTextField idField = new JTextField();
+            idField = new JTextField();
             JLabel passwordText = new JLabel("비밀번호:");
             JPasswordField passwordField = new JPasswordField();
             JButton signButton = new JButton("회원가입");
@@ -116,5 +119,13 @@ public class LoginPanel extends JPanel {
             });
             setVisible(true);
         }
+
+        public void fieldFocuse(boolean state) {
+            idField.setFocusable(state);
+            idField.requestFocus();
+        }
+    }
+    public void fieldFocuse(boolean state){
+        loginBox.fieldFocuse(state);
     }
 }

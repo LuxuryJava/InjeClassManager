@@ -164,6 +164,10 @@ public class Main {
             class_openCloseA.updateContent();
         }
 
+        if (panel.equals(loginPanel)) {
+            loginPanel.fieldFocuse(true);
+        }
+
         updateContent();
     }
 
