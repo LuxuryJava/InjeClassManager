@@ -17,7 +17,6 @@ public class Class_OpenCloseA extends JPanel {
 	private String[] strArr = { "A111", "A112", "A113", "A211", "A212", "A213" };
 	private Room rm[] = new Room[6];
 
-	String rInfo;
 	boolean dOpen;
 
 	public Class_OpenCloseA(Main main) {
@@ -28,11 +27,24 @@ public class Class_OpenCloseA extends JPanel {
 		JLabel title = new JLabel("강의실 개방 여부");
 		title.setBounds(390, 0, 600, 35);
 		title.setFont(new Font("나눔고딕", Font.BOLD, 30));
+		
+		JButton refresh = new JButton(new ImageIcon("./resources/images/새로고침.png"));
+		refresh.setBounds(840, 90, 50, 50);
+		refresh.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updateContent();
+			}
+		});
+		
+		refresh.setContentAreaFilled(false);
+		refresh.setBorderPainted(false);
+		add(refresh);
+		
 
 		for (int i = 0; i < 6; i++) {
 			rm[i] = mainFrame.repository.getRoom(strArr[i]);
-			rInfo = rm[i].getRoomInfo();
-			dOpen = rm[i].getdoorOpen();
+			//dOpen = rm[i].getdoorOpen();
 
 			if (rm[i].getdoorOpen()) { // Open
 				btn[i] = new JButton(strArr[i], image[1]);
@@ -44,12 +56,19 @@ public class Class_OpenCloseA extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JButton selectRoom = (JButton) e.getSource();
+					
+					if(selectRoom.getIcon() == image[1]) {
+						dOpen = true;
+					}
+					else
+						dOpen = false;
 
 					Door door = new Door.Builder()
 							.setuno(mainFrame.session.getUser().getId())
 							.setrinfo(selectRoom.getText())
 							.setdoorOpen(dOpen)
 							.build();
+					System.out.println(dOpen + "dd" + selectRoom.getText());
 					mainFrame.repository.insertDoor(door);
 					// mainFrame.repository.roomupdate(mainFrame.repository.getRoom(rInfo));
 				}

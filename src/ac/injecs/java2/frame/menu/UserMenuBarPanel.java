@@ -162,6 +162,7 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.signPanel);
+                    mainFrame.signPanel.fieldClear();
                 }
             });
             loginButton.addActionListener(new ActionListener() {
