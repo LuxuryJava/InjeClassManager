@@ -274,5 +274,6 @@ public class Reservation extends JPanel {
 
     public void setid(String id) {
         nameField.setText(id);
+        clearField();
     }
 }
