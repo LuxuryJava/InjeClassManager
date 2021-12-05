@@ -1,6 +1,4 @@
 package ac.injecs.java2.config.sql;
-
-import ac.injecs.java2.entity.Notice;
 import ac.injecs.java2.entity.ResInfo;
 
 import javax.swing.*;
@@ -48,7 +46,6 @@ public class ReservationMapper extends SQLMapper {
 
             int result = preparedStatement.executeUpdate();
             System.out.println("resinfo delete = " + result);
-            JOptionPane .showMessageDialog(null,"예약이 삭제되었습니다.");
         } catch (SQLException e) {
             JOptionPane .showMessageDialog(null,"예약 삭제 오류.");
             System.out.println(e);
@@ -73,7 +70,9 @@ public class ReservationMapper extends SQLMapper {
             int result = preparedStatement.executeUpdate();
             if(result==1) {
                 System.out.println("reservation데이터 삽입 성공!");
-
+            }
+            else {
+                JOptionPane.showMessageDialog(null, ":최대인원초과",  "MESSAGE", JOptionPane.WARNING_MESSAGE);
             }
 
         } catch (Exception e) {

@@ -1,21 +1,14 @@
 package ac.injecs.java2.entity;
 
-
 import ac.injecs.java2.dto.UserFormDto;
 
 public class User {
     private String id; // key
-
     private String name;
-
     private String department;
-
     private String email;
-
     private String phoneNumber;
-
     private String password;
-
     private boolean isManager;
 
     @Override
@@ -73,17 +66,11 @@ public class User {
 
     public static class Builder{
         private String id; // key
-
         private String name;
-
         private String department;
-
         private String email;
-
         private String phoneNumber;
-
         private String password;
-
         private boolean isManager;
 
         public Builder id(String id) {
@@ -150,7 +137,5 @@ public class User {
                 .build();
         return user;
     }
-
-
 }
 

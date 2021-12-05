@@ -1,14 +1,10 @@
 package ac.injecs.java2.config.sql;
 
-import ac.injecs.java2.entity.Door;
 import ac.injecs.java2.entity.Room;
-import ac.injecs.java2.entity.User;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 
 public class RoomMapper extends SQLMapper {

@@ -12,7 +12,6 @@ import java.util.Vector;
 public class UserInfoPanel extends JPanel {
     Main mainFrame = null;
     JTextField jt[]= new JTextField[5];
-    //JLabel jl[]=new JLabel[5];
     Vector<ResInfo> ri;
 
     public UserInfoPanel(Main mainFrame) {

@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class RoundedButton extends JButton {
     public RoundedButton() { super(); decorate(); }
-    public RoundedButton(String text) { super(text); decorate(); }
     protected void decorate() { setBorderPainted(false); setOpaque(false); }
     @Override
     protected void paintComponent(Graphics g) {
@@ -40,5 +39,4 @@ public class RoundedButton extends JButton {
 
         super.paintComponent(g);
     }
-
 }

@@ -1,13 +1,9 @@
 package ac.injecs.java2.entity;
 
 import ac.injecs.java2.dto.NoticeDto;
-import ac.injecs.java2.dto.UserFormDto;
-
-import java.time.LocalDateTime;
 
 public class Notice {
     private String  title;
-
     private String content;
 
     public Notice(String title, String content) {
@@ -27,13 +23,8 @@ public class Notice {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public static class Builder {
         private String  title;
-
         private String content;
 
         public Builder title(String title) {
@@ -58,5 +49,4 @@ public class Notice {
                 .content(noticeDto.getContent())
                 .build();
     }
-
 }

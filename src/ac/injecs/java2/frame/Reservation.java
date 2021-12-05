@@ -13,10 +13,10 @@ import java.util.List;
 import ac.injecs.java2.entity.User;
 
 public class Reservation extends JPanel {
+    static JTextField unitField = new JTextField();
     private Main mainFrame;
     private String[] unit = new String[6];
     private JButton bt = new JButton("확인");
-    static JTextField unitField = new JTextField();
     private List<Room> rooms;
     private User user;
 
@@ -51,19 +51,19 @@ public class Reservation extends JPanel {
         rooms = mainFrame.repository.findRoomAll();
         for (int i = 0; i < rooms.size(); i++) {
             Room item = rooms.get(i);
-            unit[i] = item.getRoomInfo();   // 강의실 제목 끝
+            unit[i] = item.getRoomInfo();
         }
 
         JComboBox<String> cb = new JComboBox<String>(unit);
 
-
-        text.setFont(InjeFont.Mfont);
         text.setBounds(50, 120, 150, 20);
         title.setBounds(400, 50, 200, 30);
-
         cb.setBounds(200, 120, 150, 20);
         bt.setBounds(830, 480, 70, 40);
+
+        text.setFont(InjeFont.Mfont);
         bt.setFont(InjeFont.Sfont);
+
         bt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,6 +75,12 @@ public class Reservation extends JPanel {
                 String useTime = Timecb.getSelectedItem().toString();
                 String useDay = Daycb.getSelectedItem().toString();
                 List<ResInfo> reservationByUseTime = mainFrame.repository.findReservationByUseTime(useTime);
+
+               if(rooms.get(cb.getSelectedIndex()).getroomPeople() <  Integer.parseInt(numField.getText())){
+                    JOptionPane.showMessageDialog(null, "최대 인원을 초과하였습니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 if (reservationByUseTime != null) {
                     for (ResInfo resInfo : reservationByUseTime) {
                         if (resInfo.getaccept()) {
@@ -84,18 +90,16 @@ public class Reservation extends JPanel {
                                 return;
                             }
                         }
-                        else{
+                        else {
                             if (resInfo.getuseday().equals(useDay) && resInfo.getusetime().equals(useTime)) {
-                                String message = "[" + useTime +"] " + resText + "\n해당시간대에 이미 예약 신청하셨습니다.";
+                                String message = "[" + useTime + "] " + resText + "\n해당시간대에 이미 예약 신청하셨습니다.";
                                 JOptionPane.showMessageDialog(null, message, "MESSAGE", JOptionPane.WARNING_MESSAGE);
                                 return;
                             }
                         }
                     }
                 }
-
                 mainFrame.repository.insertres(res);
-
                 JOptionPane.showMessageDialog(null, "예약 요청이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
             }
         });
@@ -111,7 +115,6 @@ public class Reservation extends JPanel {
                 JComboBox<String> cb = (JComboBox<String>) e.getSource();
                 int index = cb.getSelectedIndex(); // 선택중인 위치
                 unitField.setText(unit[index]);
-                //rooms.get(index).gethasProjector()
                 String procjetor = rooms.get(index).gethasProjector() ? "여" : "부";
 
                 infobox.beamField.setText(procjetor);
@@ -133,13 +136,11 @@ public class Reservation extends JPanel {
     private void setResInfoData(){
         int index = Daycb.getSelectedIndex(); // 선택중인 위치
         unitField.setText(unit[index]);
-        //rooms.get(index).gethasProjector()
         String procjetor = rooms.get(index).gethasProjector() ? "여" : "부";
 
         infobox.beamField.setText(procjetor);
         infobox.numField.setText(String.valueOf(rooms.get(index).getroomPeople()));
     }
-
 
     public class InfoBox extends JPanel {
         private int textStartY = 100;
@@ -166,7 +167,6 @@ public class Reservation extends JPanel {
             beamField = new JTextField();
             JLabel numText = new JLabel("최대 수용 가능 인원:");
             numField = new JTextField();
-
 
             unitText.setBounds(60, textStartY, textWidth, textHeight);
             unitField.setBounds(80 + textWidth, textStartY, fieldWidth, textHeight);
@@ -217,13 +217,10 @@ public class Reservation extends JPanel {
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
-
             JLabel numText = new JLabel("이용 예정 인원:");
-
             JLabel dayText = new JLabel("이용 요일:");
             JLabel timeText = new JLabel("이용 시간:");
             JLabel purposeText = new JLabel("이용 목적:");
-
 
             nameText.setBounds(60, textStartY - 20, textWidth, textHeight);
             nameField.setBounds(80 + textWidth, textStartY - 20, fieldWidth, textHeight);
@@ -235,6 +232,7 @@ public class Reservation extends JPanel {
             Timecb.setBounds(80 + textWidth, textStartY + 100, fieldWidth, textHeight);
             purposeText.setBounds(60, textStartY + 140, textWidth, textHeight);
             purposeField.setBounds(80 + textWidth, textStartY + 140, fieldWidth, textHeight);
+            titleText.setBounds(170, 20, 100, 30);
 
             nameText.setHorizontalAlignment(SwingConstants.RIGHT);
             numText.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -260,11 +258,8 @@ public class Reservation extends JPanel {
             add(Timecb);
             add(purposeText);
             add(purposeField);
-
-
-            titleText.setBounds(170, 20, 100, 30);
-
             add(titleText);
+
             setVisible(true);
         }
     }

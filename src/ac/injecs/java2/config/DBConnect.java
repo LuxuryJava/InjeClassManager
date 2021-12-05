@@ -1,6 +1,6 @@
 package ac.injecs.java2.config;
-
 import ac.injecs.java2.config.sql.*;
+import ac.injecs.java2.entity.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,10 +8,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 import java.util.Vector;
-
 import javax.swing.JOptionPane;
-
-import ac.injecs.java2.entity.*;
 
 public class DBConnect {
 	private static DBConnect dbConnect = new DBConnect();
@@ -114,7 +111,6 @@ public class DBConnect {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void update(String query, SQLMapper sqlMapper, Object object) {
@@ -128,9 +124,7 @@ public class DBConnect {
 
 	public void roomUpdate(String query, RoomMapper sqlMapper, Object object) {
 		try {
-
 			sqlMapper.usingUpdate(connection.prepareStatement(query), object);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -148,7 +142,6 @@ public class DBConnect {
 		Vector<Door> door = new Vector<Door>();
 		try {
 			preparedStatement = connection.prepareStatement("select * from door");
-
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Door di = new Door(resultSet.getString(1), resultSet.getString(2), resultSet.getBoolean(3));
@@ -213,7 +206,6 @@ public class DBConnect {
 			int result = preparedStatement.executeUpdate();
 			if (result == 1) {
 				System.out.println("reservation데이터 삭제 성공!");
-
 			}
 			JOptionPane .showMessageDialog(null,"예약이 삭제되었습니다.");
 
@@ -258,5 +250,4 @@ public class DBConnect {
 			}
 		}
 	}
-
 }

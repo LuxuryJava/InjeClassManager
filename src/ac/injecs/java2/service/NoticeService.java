@@ -6,7 +6,6 @@ import ac.injecs.java2.repository.Repository;
 import java.util.Optional;
 
 public class NoticeService {
-
     private final Repository repository;
 
     public NoticeService(Repository repository) {
@@ -17,7 +16,6 @@ public class NoticeService {
         checkText(notice);
         System.out.println();
         checkSamePost(notice.getTitle());
-
         return repository.insertNotice(notice);
     }
 
@@ -33,5 +31,4 @@ public class NoticeService {
             throw new IllegalArgumentException();
         }
     }
-
 }

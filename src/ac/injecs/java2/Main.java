@@ -1,10 +1,10 @@
 package ac.injecs.java2;
 
+import ac.injecs.java2.frame.*;
 import ac.injecs.java2.config.SessionConfig;
 import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.controller.UserController;
 import  ac.injecs.java2.controller.NoticeController;
-import ac.injecs.java2.frame.*;
 import ac.injecs.java2.frame.admin.AdmitClassPanel;
 import ac.injecs.java2.frame.admin.RequestLockClassPanel;
 import ac.injecs.java2.frame.menu.AdminMenuBarPanel;
@@ -19,10 +19,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-// TODO : 금일 현재 시간보다 전에 예약을 하면 금일 예약 정보에 올라가는데 이걸 어캐 잡을까.
 public class Main {
     public Repository repository = new Repository(); // 통합 DB 접근 객체
+    public SessionConfig session = new SessionConfig();
 
     private UserService userService = new UserService(repository);
     public UserController userController = new UserController(userService);
@@ -30,10 +29,8 @@ public class Main {
     private NoticeService noticeService = new NoticeService(repository);
     public NoticeController noticeController = new NoticeController(noticeService);
 
-    public SessionConfig session = new SessionConfig();
-    
-    private String sno;
     private JFrame MainFrame;
+    private String sno;
     private JPanel nowPanel;
     private JPanel prevPanel;
     private String mode;
@@ -52,6 +49,7 @@ public class Main {
     public AdmitClassPanel admitClassPanel;
     public RequestLockClassPanel requestLockClassPanel;
     public UserInfoPanel userInfoPanel;
+
     // 프레임 초기 설정
     public Main(){
         MainFrame = new JFrame();
@@ -69,14 +67,7 @@ public class Main {
     // 현재 센터를 가지는 패널 지정
     public void setNowPanel(JPanel panel) {
         nowPanel = panel;
-        nowPanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("센터 좌표 : "+ e.getX() + ", " + e.getY());
-            }
-        });
     }
-
     public JPanel getNowPanel(){
         return nowPanel;
     }
@@ -109,7 +100,6 @@ public class Main {
     public void setMode(String mode){
         this.mode = mode;
     }
-
     public String getMode(){
         return this.mode;
     }
@@ -139,31 +129,26 @@ public class Main {
                 MainFrame.remove(prevPanel);
         }
 
+        // 업데이트
         if (panel.equals(dashBoardPanel)) {
-            //System.out.println("업데이트");
             dashBoardPanel.updateContent();
         }
         if (panel.equals(reservation)){
-            System.out.println("예약 데이터 갱신!");
-            // 업데이트
             reservation.setid(session.getUser().getId());
         }
-
         if(panel.equals(notice_add)){
-            System.out.println("이름 데이터 갱신!");
             notice_add.setNameData();
+            notice_add.updateContent();
         }
         if (panel.equals(checkClass_day)) {
             checkClass_day.updateContent();
         }
-
         if(panel.equals(userInfoPanel)){
             userInfoPanel.updateContent();
         }
         if (panel.equals(class_openCloseA)) {
             class_openCloseA.updateContent();
         }
-
         if (panel.equals(loginPanel)) {
             loginPanel.fieldFocuse(true);
         }

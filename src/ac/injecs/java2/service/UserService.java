@@ -6,13 +6,7 @@ import ac.injecs.java2.repository.Repository;
 import java.util.Optional;
 
 public class UserService {
-
     private final Repository repository;
-
-    public UserService(Repository repository){
-        this.repository = repository;
-    }
-
     // 회원가입
     public User saveStudent(User student) {
         validateDuplicateStudent(student);  // 중복 검사
@@ -24,6 +18,10 @@ public class UserService {
         if (!findStudent.isEmpty()) {
             throw new IllegalStateException();
         }
+    }
+
+    public UserService(Repository repository){
+        this.repository = repository;
     }
 
     public Optional<User> loginUser(String id) {

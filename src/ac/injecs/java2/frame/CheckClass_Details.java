@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
+
 public class CheckClass_Details extends JPanel{
     private Main mainFrame;
     JLabel nameLabel = new JLabel("");
@@ -24,6 +25,7 @@ public class CheckClass_Details extends JPanel{
 
     Vector<ResInfo> ri;
     int cnt;
+
     public boolean setInfo() {
             User user = mainFrame.session.user;
     	    ri = mainFrame.repository.getResinfo(user.getId());
@@ -36,8 +38,7 @@ public class CheckClass_Details extends JPanel{
     	    timeLabel.setText("");
     	    purposeLabel.setText("");
     	    acceptLabel.setText("");
-    		JOptionPane aa=new JOptionPane();
-    		aa.showMessageDialog(null,"예약정보가 없습니다.");
+    		JOptionPane.showMessageDialog(null,"예약정보가 없습니다.");
     		mainFrame.setCenterPanel(mainFrame.userInfoPanel);
     		return false;
     	}
@@ -55,9 +56,9 @@ public class CheckClass_Details extends JPanel{
 		purposeLabel.setText(ri.get(cnt).getpurpose());
 		acceptLabel.setText(Boolean.toString(ri.get(cnt).getaccept()));
     }
+
     // 버튼의 보여짐/안보여짐 결정
     public void setBtn() {
-        //System.out.println(ri.size());
         if (ri.size() == 1) {
             pre.setVisible(false);
             next.setVisible(false);
@@ -105,8 +106,6 @@ public class CheckClass_Details extends JPanel{
                 setBtn();
         		
         	}
-
-        	
         });
         next.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -117,30 +116,24 @@ public class CheckClass_Details extends JPanel{
         		cnt++;
         		setField();
                 setBtn();
-        		
         	}
-        	
-        	
         });
         cancel.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		mainFrame.repository.deleteres(nameLabel.getText(), classLabel.getText());
-                JOptionPane.showMessageDialog(null, "예약을 취소하시겠습니까 ?", "MESSAGE", JOptionPane.YES_NO_OPTION);
         		setInfo();
         		setBtn();
         	}
-
-
         });
         add(pre);
         add(next);
         add(cancel);
-
         add(title);
         add(detailbox);
-        setVisible(true);
 
+        setVisible(true);
     }
+
     public class DetailBox extends JPanel {
         private int textStartY = 100;
         private int textWidth = 100;
@@ -157,19 +150,12 @@ public class CheckClass_Details extends JPanel{
             titleText.setBounds(170, 20, 100, 30);
 
             JLabel nameText = new JLabel("ID(이름):");
-            
             JLabel classText = new JLabel("강의실:");
-            
             JLabel numText = new JLabel("이용 예정 인원:");
-            
             JLabel dayText = new JLabel("이용 요일:");
-            
             JLabel timeText = new JLabel("이용 시간:");
-            
             JLabel purposeText = new JLabel("이용 목적:");
-            
             JLabel acceptText = new JLabel ("승인 여부: ");
-            
 
             nameText.setBounds(60, textStartY -	35, textWidth, textHeight);
             nameLabel.setBounds(80 + textWidth, textStartY - 35, fieldWidth, textHeight);
@@ -226,8 +212,8 @@ public class CheckClass_Details extends JPanel{
             add(purposeLabel);
             add(acceptText);
             add(acceptLabel);
-
             add(titleText);
+
             setVisible(true);
         }
     }

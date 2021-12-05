@@ -1,19 +1,15 @@
 package ac.injecs.java2.config.sql;
 
+import ac.injecs.java2.entity.Door;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
 
-import ac.injecs.java2.entity.Door;
-
 public class DoorMapper extends SQLMapper {
-
 	@Override
 	public void insert(PreparedStatement preparedStatement, Object object) {
 		try {
             Door door = (Door) object;
-
             this.preparedStatement = preparedStatement;
 
 			preparedStatement.setString(1, door.getuno());
@@ -25,17 +21,14 @@ public class DoorMapper extends SQLMapper {
             System.out.println("추가된 row : " + row);
             JOptionPane.showMessageDialog(null,"개방/잠금 요청 되었습니다.");
         } catch (SQLException e) {
-            //e.printStackTrace();
             JOptionPane.showMessageDialog(null,"이미 요청되었습니다.");
         }
-
 	}
 
 	@Override
 	public void update(PreparedStatement preparedStatement, Object object) {
 		try {
             Door door = (Door) object;
-
             this.preparedStatement = preparedStatement;
 
 			preparedStatement.setString(2, door.getuno());
@@ -57,9 +50,8 @@ public class DoorMapper extends SQLMapper {
 	public void delete(PreparedStatement preparedStatement, Object object) {
 		try {
 			Door door = (Door) object;
-			
 			this.preparedStatement = preparedStatement;
-			
+
 			preparedStatement.setString(1, door.getrinfo());
 			
 			int row = preparedStatement.executeUpdate();
@@ -73,7 +65,6 @@ public class DoorMapper extends SQLMapper {
 
 	@Override
 	public Object select(PreparedStatement preparedStatement) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

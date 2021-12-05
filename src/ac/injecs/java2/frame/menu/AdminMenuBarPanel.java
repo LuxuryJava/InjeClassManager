@@ -6,13 +6,9 @@ import ac.injecs.java2.constant.FrameConstant;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class AdminMenuBarPanel extends MenuBarPanel {
-
     public AdminMenuBarPanel(Main main) {
         super(main);
         setLayout(null);
@@ -65,8 +61,7 @@ public class AdminMenuBarPanel extends MenuBarPanel {
         private ImageIcon image1 = new ImageIcon(resourcePath + "대시보드.png");
         private ImageIcon image2 = new ImageIcon(resourcePath + "강의실관리.png");
         private ImageIcon image3 = new ImageIcon(resourcePath + "승인대기현황.png");
-        private ImageIcon image4 = new ImageIcon(resourcePath + "수업및특강등록.png");
-//        private ImageIcon image5 = new ImageIcon(resourcePath + "공지사항.png");
+        private ImageIcon image4 = new ImageIcon(resourcePath + "공지사항.png");
 
         private void addButtonImage(ImageIcon image, JButton target) {
             Image img = image.getImage().getScaledInstance(200, 30, Image.SCALE_SMOOTH);
@@ -87,17 +82,12 @@ public class AdminMenuBarPanel extends MenuBarPanel {
             JButton classCheckButton = new JButton();
             addButtonImage(image3, classCheckButton);
 
-//            JButton classStateButton = new JButton();
-//            addButtonImage(image4, classStateButton);
-
             JButton lectureButton = new JButton();
             addButtonImage(image4, lectureButton);
-
 
             add(dashboardButton);
             add(classReservationButton);
             add(classCheckButton);
-//            add(classStateButton);
             add(lectureButton);
 
             dashboardButton.addActionListener(new ActionListener() {
@@ -112,7 +102,6 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.requestLockClassPanel);
                     mainFrame.requestLockClassPanel.update();
-
                     mainFrame.setMode("강의실관리");
                 }
             });
@@ -121,7 +110,6 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.admitClassPanel);
                     mainFrame.admitClassPanel.update();
-                    
                     mainFrame.setMode("승인대기현황");
                 }
             });
@@ -129,24 +117,20 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     mainFrame.setCenterPanel(mainFrame.lecture_list);
-
                     mainFrame.setMode("수업및특강등록");
                 }
             });
-
             setVisible(true);
         }
     }
 
     public class MenuBarUser extends JPanel {
-        JButton signButton = null;
         JButton logoutButton = new JButton("로그아웃");
 
         public MenuBarUser() {
             setLayout(new FlowLayout());
             setOpaque(true);
             setForeground(Color.white);
-
 
             logoutButton.setFont(InjeFont.Sfont);
 
@@ -159,10 +143,8 @@ public class AdminMenuBarPanel extends MenuBarPanel {
                     mainFrame.userMode();
                     mainFrame.setCenterPanel(mainFrame.dashBoardPanel);
                     mainFrame.session.outSession();
-
                 }
             });
-
             setVisible(true);
         }
 

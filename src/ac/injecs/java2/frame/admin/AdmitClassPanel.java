@@ -6,9 +6,6 @@ import ac.injecs.java2.entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
@@ -34,7 +31,6 @@ public class AdmitClassPanel extends JPanel {
         table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
 
-
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(200, 80, 600, 400);
 
@@ -59,7 +55,6 @@ public class AdmitClassPanel extends JPanel {
             }
         });
 
-
         JButton delBtn = new JButton("삭 제");
         delBtn.setBounds(700, 500, 100, 40);
         add(delBtn);
@@ -79,7 +74,6 @@ public class AdmitClassPanel extends JPanel {
                 update();
             }
         });
-
 
         add(title);
         add(scrollPane);

@@ -11,7 +11,6 @@ public class NoticeMapper extends SQLMapper {
     public void insert(PreparedStatement preparedStatement, Object object) {
         try {
             Notice notice = (Notice)object;
-
             this.preparedStatement = preparedStatement;
 
             preparedStatement.setString(1, notice.getTitle());

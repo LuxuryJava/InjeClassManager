@@ -8,11 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//Frame
 public class Notice_Add  extends JPanel {
     private Main mainFrame;
     private JTextField WriterFelid;
-
+    private JTextField TitleFelid = new JTextField();
+    private JTextArea NtextArea = new JTextArea();
     public Notice_Add(Main main) {
         this.mainFrame = main;
         setLayout(null);
@@ -26,14 +26,12 @@ public class Notice_Add  extends JPanel {
         Ntitle.setBounds(375, 150, 57, 20);
         Ntitle.setFont(InjeFont.Mfont);
 
-        JTextField TitleFelid = new JTextField();
         TitleFelid.setBounds(450, 150, 200, 20);
 
         JLabel  Ncontent = new JLabel("글내용");
         Ncontent.setBounds(375, 200, 60, 20);
         Ncontent.setFont(InjeFont.Mfont);
 
-        JTextArea NtextArea = new JTextArea();
         NtextArea.setLineWrap(true);
         NtextArea.setBounds(450, 200, 340, 130);
 
@@ -57,8 +55,7 @@ public class Notice_Add  extends JPanel {
         add(Nwriter);
         add(WriterFelid);
         add(Endbtn);
-
-
+        
         Endbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -92,5 +89,10 @@ public class Notice_Add  extends JPanel {
             String name = mainFrame.session.getUser().getName();
             WriterFelid.setText(name);
         }
+    }
+
+    public void updateContent() {
+        TitleFelid.setText(""); ;
+        NtextArea.setText("");
     }
 }

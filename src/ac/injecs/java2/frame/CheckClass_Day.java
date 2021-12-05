@@ -2,27 +2,19 @@ package ac.injecs.java2.frame;
 
 import ac.injecs.java2.Main;
 import ac.injecs.java2.config.InjeFont;
-import ac.injecs.java2.constant.FrameConstant;
 import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.User;
-import com.mysql.cj.protocol.a.NativeConstants;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
 import java.util.*;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 public class CheckClass_Day extends JPanel {
     private Main mainFrame;
     private checkWeekly checkW = new checkWeekly();
-    private String[] day = {"일", "월", "화", "수", "목", "금", "토"};
-    private JComboBox<String> Daycb = new JComboBox<String>(day);
 
     public CheckClass_Day(Main main) {
         mainFrame = main;
@@ -31,9 +23,9 @@ public class CheckClass_Day extends JPanel {
         JLabel title = new JLabel("강의실 예약 조회", SwingConstants.CENTER);
         title.setFont(InjeFont.XLfont);
 
-
         add(title, BorderLayout.NORTH);
         add(checkW, BorderLayout.CENTER);
+
         setVisible(true);
     }
 
@@ -75,23 +67,18 @@ public class CheckClass_Day extends JPanel {
 
             weekNames[0].setBounds(100, 10, 150, 50);
             weekReservationPanels[0].setBounds(50, 60, 150, 150);
-
             weekNames[1].setBounds(350, 10, 150, 50);
             weekReservationPanels[1].setBounds(300, 60, 150, 150);
-
             weekNames[2].setBounds(600, 10, 150, 50);
             weekReservationPanels[2].setBounds(550, 60, 150, 150);
-
             weekNames[3].setBounds(850, 10, 150, 50);
             weekReservationPanels[3].setBounds(800, 60, 150, 150);
-
             weekNames[4].setBounds(250, 250, 150, 50);
             weekReservationPanels[4].setBounds(200, 300, 150, 200);
             weekNames[5].setBounds(500, 250, 150, 50);
             weekReservationPanels[5].setBounds(450, 300, 150, 200);
             weekNames[6].setBounds(750, 250, 150, 50);
             weekReservationPanels[6].setBounds(700, 300, 150, 200);
-
 
             for(int i = 0; i < weekNames.length; i++) {
                 add(weekNames[i]);
@@ -152,7 +139,6 @@ public class CheckClass_Day extends JPanel {
                     return left < right ? -1 : (left == right) ? 0 : 1;
                 }
             });
-
             return resInfos;
         }
 
@@ -170,12 +156,8 @@ public class CheckClass_Day extends JPanel {
             }
         }
 
-
-
         class WeekReservationPanel extends JPanel {
-
             JList list;
-
             public WeekReservationPanel(){
                 setLayout(new FlowLayout());
                 setBackground(Color.WHITE);
@@ -188,8 +170,7 @@ public class CheckClass_Day extends JPanel {
 
                 list.setCellRenderer(new ListCellRenderer() {
                     @Override
-                    public Component getListCellRendererComponent(JList list, Object value, int index,
-                                                                  boolean isSelected, boolean cellHasFocus) {
+                    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                         JLabel label = new JLabel(value.toString());
                         label.setForeground(Color.BLACK);
 
@@ -210,14 +191,12 @@ public class CheckClass_Day extends JPanel {
             public void setListData(Vector<ResInfo> values){
                 DefaultListModel temp = (DefaultListModel) list.getModel();
                 temp.removeAllElements();
+                // 정렬
                 for (ResInfo item : values) {
                     User user = mainFrame.repository.findUserById(String.valueOf(item.getuno())).get();
-
                     String result = item.getusetime() + " " + item.getrinfo() + " " + user.getName();
-
                     temp.addElement(result);
                 }
-                // 정렬
             }
         }
     }
