@@ -101,6 +101,9 @@ public class Reservation extends JPanel {
                 }
                 mainFrame.repository.insertres(res);
                 JOptionPane.showMessageDialog(null, "예약 요청이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
+
+                // clear field
+                clearField();
             }
         });
 
@@ -131,6 +134,11 @@ public class Reservation extends JPanel {
 
         setResInfoData();
         setVisible(true);
+    }
+
+    public void clearField(){
+        numField.setText("");
+        purposeField.setText("");
     }
 
     private void setResInfoData(){

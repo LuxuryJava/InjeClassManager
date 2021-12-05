@@ -135,6 +135,7 @@ public class Main {
         }
         if (panel.equals(reservation)){
             reservation.setid(session.getUser().getId());
+            reservation.clearField();
         }
         if(panel.equals(notice_add)){
             notice_add.setNameData();
