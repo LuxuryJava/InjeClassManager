@@ -11,14 +11,13 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class RequestLockClassPanel extends JPanel {
+    static String uno, rinfo, request, doorOpen;
     private Main mainFrame;
     Vector<Door> di = null;
     String[] header = {"요청번호", "요청자", "강의실", "요청내용", "잠금상태"};
     DefaultTableModel model = new DefaultTableModel(null, header);
     JTable table;
-    
-    static String uno, rinfo, request, doorOpen;
-    
+
     public RequestLockClassPanel(Main main) {
         this.mainFrame = main;
         setLayout(null);

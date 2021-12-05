@@ -5,10 +5,7 @@ import ac.injecs.java2.config.InjeFont;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class LoginPanel extends JPanel {
     private Main mainFrame;
@@ -28,9 +25,7 @@ public class LoginPanel extends JPanel {
 
     public class LoginBox extends JPanel {
         private int textWidth = 50;
-
         JTextField idField;
-
         public LoginBox(){
             setLayout(null);
             setBackground(new Color(0xA2E8DB));
@@ -65,7 +60,6 @@ public class LoginPanel extends JPanel {
             add(idField);
             add(passwordText);
             add(passwordField);
-           // add(signButton);
             add(loginButton);
             add(errorMessage);
 
@@ -84,7 +78,6 @@ public class LoginPanel extends JPanel {
                         String id = idField.getText();
                         boolean isLogin = mainFrame.userController.login(mainFrame.session, id, password);
 
-
                         if(isLogin) {
                             // 관리자인지 확인
                             if (mainFrame.session.getUser().isManager()){
@@ -95,7 +88,6 @@ public class LoginPanel extends JPanel {
                             mainFrame.userInfoPanel.update();
                             mainFrame.setsno(id);
                             errorMessage.setText("");
-                            //mainFrame.userMenuBarPanel.btnshow();
                             idField.setText("");
                             passwordField.setText("");
                             mainFrame.reservation.setid(id.toString());
@@ -108,13 +100,6 @@ public class LoginPanel extends JPanel {
                     } catch (IllegalStateException e) {
                         errorMessage.setText(e.getMessage());
                     }
-                }
-            });
-
-            addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    System.out.println("로그인 창 + " + e.getX() + "," + e.getY());
                 }
             });
             setVisible(true);

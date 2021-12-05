@@ -2,13 +2,9 @@ package ac.injecs.java2.entity;
 
 public class Room {
 	private String roomInfo;
-
 	private boolean doorOpen;
-
 	private boolean roomUsing;
-
 	private boolean hasProjector;
-
 	private int roomPeople;
 
 	public Room(String roomInfo, boolean doorOpen, boolean roomUsing, boolean hasProjector, int roomPeople) {
@@ -17,7 +13,6 @@ public class Room {
 		this.roomUsing = roomUsing;
 		this.hasProjector = hasProjector;
 		this.roomPeople = roomPeople;
-
 	}
 
 	public String getRoomInfo() {
@@ -48,13 +43,9 @@ public class Room {
 
 	public static class Builder {
 		private String roomInfo;
-
 		private boolean doorOpen;
-
 		private boolean roomUsing;
-
 		private boolean hasProjector;
-
 		private int roomPeople;
 
 		public Builder roomInfo(String roomInfo) {
@@ -86,6 +77,5 @@ public class Room {
 			Room room = new Room(roomInfo, doorOpen, roomUsing, hasProjector, roomPeople);
 			return room;
 		}
-
 	}
 }

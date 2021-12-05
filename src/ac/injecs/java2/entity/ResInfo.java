@@ -46,5 +46,4 @@ public class ResInfo {
    public boolean getaccept() {
       return accept;
    }
-
 }

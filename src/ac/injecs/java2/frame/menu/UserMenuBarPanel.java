@@ -18,29 +18,19 @@ public class UserMenuBarPanel extends MenuBarPanel {
         setLayout(null);
         setBounds(0, 0, menuBarWidth, FrameConstant.HEIGHT.getValue());
 
-        // add
         MenuBarTopLabel menuBarTopLabel = new MenuBarTopLabel();
         MenuBarButtons menuBarButtons = new MenuBarButtons();
         MenuBarUser menuBarUser = new MenuBarUser();
-
 
         menuBarTopLabel.setBounds(0, 0, menuBarWidth, 100);
         menuBarButtons.setBounds(0, 100, menuBarWidth, 400);
         menuBarUser.setBounds(0, 500, menuBarWidth, 60);
 
         add(menuBarTopLabel);
-
         add(menuBarButtons);
-
         add(menuBarUser);
 
         setVisible(true);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("메뉴바 : " + e.getX() + ", " + e.getY());
-            }
-        });
     }
 
     public void paintComponent(Graphics g) {
@@ -49,14 +39,13 @@ public class UserMenuBarPanel extends MenuBarPanel {
         mainFrame.updateContent();
     }
 
-
     public class MenuBarButtons extends JPanel {
         private String resourcePath = "./resources/images/";
         private ImageIcon image1 = new ImageIcon(resourcePath + "대시보드.png");
         private ImageIcon image2 = new ImageIcon(resourcePath + "강의실예약.png");
         private ImageIcon image3 = new ImageIcon(resourcePath + "강의실조회.png");
         private ImageIcon image4 = new ImageIcon(resourcePath + "강의실개방.png");
-        private ImageIcon image5 = new ImageIcon(resourcePath + "특강.png");
+        private ImageIcon image5 = new ImageIcon(resourcePath + "공지사항.png");
 
         private void addButtonImage(ImageIcon image, JButton target) {
             Image img = image.getImage().getScaledInstance(200, 30, Image.SCALE_SMOOTH);
@@ -103,7 +92,6 @@ public class UserMenuBarPanel extends MenuBarPanel {
                         JOptionPane.showMessageDialog(null, "로그인이 필요합니다.", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     } else {
                         mainFrame.setCenterPanel(mainFrame.reservation);
-
                         mainFrame.setMode("예약");
                     }
                 }
@@ -134,7 +122,6 @@ public class UserMenuBarPanel extends MenuBarPanel {
                     mainFrame.setMode("공지사항 및 특강");
                 }
             });
-
             setVisible(true);
         }
     }
@@ -188,7 +175,6 @@ public class UserMenuBarPanel extends MenuBarPanel {
                     repaint();
                 }
             });
-
             setVisible(true);
         }
 
@@ -212,11 +198,8 @@ public class UserMenuBarPanel extends MenuBarPanel {
                 signButton.setVisible(!status);
             }
         }
-
-
         public void paintComponent(Graphics g) {
             setUserButtonVisible(mainFrame.session.isLogin);
         }
     }
-
 }

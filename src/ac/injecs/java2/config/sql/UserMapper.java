@@ -1,12 +1,10 @@
 package ac.injecs.java2.config.sql;
 
 import ac.injecs.java2.entity.User;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UserMapper extends SQLMapper {
-
     @Override
     public void insert(PreparedStatement preparedStatement, Object object) {
         try {

@@ -1,11 +1,10 @@
 package ac.injecs.java2.entity;
 
-import java.util.*;
-
 public class Door {
 	private String uno;
 	private String rinfo;
 	private boolean doorOpen;
+
 	public Door(String uno, String rinfo, boolean doorOpen) {
         this.uno = uno;
         this.rinfo = rinfo;

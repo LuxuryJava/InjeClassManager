@@ -8,7 +8,6 @@ import ac.injecs.java2.entity.Notice;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 import java.net.*;
 
 public class Lecture_List extends JPanel {
@@ -31,7 +30,6 @@ public class Lecture_List extends JPanel {
     public class List extends JPanel {
         JButton AddBtn;
         Lecture[] lectures;
-
         class Lecture {
             RoundedButton btn;
             String URL;
@@ -94,7 +92,6 @@ public class Lecture_List extends JPanel {
                     }
                 });
             }
-
             // Data Load To DB
             getLectureData();
         }

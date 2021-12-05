@@ -18,15 +18,15 @@ public class MenuBarPanel extends JPanel {
     }
 
     public class MenuBarTopLabel extends JPanel {
-        JLabel name;
+        JLabel name =  new JLabel("어서오세요.");
         public MenuBarTopLabel() {
             setLayout(null);
             JLabel notice = new JLabel("인제 클래스 매니저");
-            notice.setFont(InjeFont.Mfont);
 
-            name = new JLabel("어서오세요.");
             notice.setBounds(20, 20, 200, 30);
             name.setBounds(20, 60, 200, 30);
+
+            notice.setFont(InjeFont.Mfont);
             name.setFont(InjeFont.Sfont);
 
             add(notice);
@@ -49,6 +49,5 @@ public class MenuBarPanel extends JPanel {
             profile();
         }
     }
-
 }
 

@@ -6,10 +6,7 @@ import ac.injecs.java2.dto.UserFormDto;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class SignPanel extends JPanel {
     // DI 주입
@@ -24,7 +21,6 @@ public class SignPanel extends JPanel {
     JTextField repasswordField = new JPasswordField();
     public SignPanel(Main main) {
         this.mainFrame = main;
-
         setLayout(new BorderLayout());
 
         JLabel title = new JLabel("회원가입", SwingConstants.CENTER);
@@ -46,7 +42,6 @@ public class SignPanel extends JPanel {
     }
     
     public class SignBox extends JPanel{
-        private int textStartY = 20;
         private int textWidth = 50;
         private int textHeight = 30;
         private int fieldWidth = 150;
@@ -122,17 +117,9 @@ public class SignPanel extends JPanel {
             add(doneButton);
             add(errorMessage);
 
-            addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    System.out.println("SignBox = " + e.getX() + ", " + e.getY());
-                }
-            });
-
             doneButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-
                     try {
                         // 회원가입
                         UserFormDto user = new UserFormDto();
@@ -142,7 +129,6 @@ public class SignPanel extends JPanel {
                         user.setName(nameField.getText());
                         user.setPhoneNumber(phoneField.getText());
                         user.setPassword(passwordField.getText());
-
 
                         // 이름, 이메일 validate
                         if (!ValidateForm.isKorean(nameField.getText())){
@@ -160,10 +146,7 @@ public class SignPanel extends JPanel {
                             return;
                         }
                         errorMessage.setText("");
-
-
                         System.out.println(user.toString());
-
                         mainFrame.userController.signUp(user);
                         mainFrame.userController.login(mainFrame.session, idField.getText(), passwordField.getText());
                         mainFrame.userInfoPanel.update();
@@ -177,7 +160,5 @@ public class SignPanel extends JPanel {
             });
             setVisible(true);
         }
-
-
     }
 }

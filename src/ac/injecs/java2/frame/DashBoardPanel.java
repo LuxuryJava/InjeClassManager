@@ -7,24 +7,20 @@ import ac.injecs.java2.entity.Notice;
 import ac.injecs.java2.entity.ResInfo;
 import ac.injecs.java2.entity.Room;
 import ac.injecs.java2.entity.User;
-import com.mysql.cj.util.StringUtils;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
+import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.util.*;
-import java.util.List;
-import java.util.Timer;
 
 public class DashBoardPanel extends JPanel {
     private Main mainFrame;
@@ -35,7 +31,6 @@ public class DashBoardPanel extends JPanel {
     private Vector<String> emptyClass = new Vector<>();
     private Vector<String> realtimeClass = new Vector<>();
     private Vector<String> notices = new Vector<>();
-    //    private Vector<String> notices = {"공지사항입니다", "2021.09.23(목)", "강의실관련 공지사항", "2021.11.01(일)"};
 
     List<Room> rooms;
     List<ResInfo> reservationAll;
@@ -51,11 +46,9 @@ public class DashBoardPanel extends JPanel {
 
     public DashBoardPanel(Main main) {
         this.mainFrame = main;
-        setLayout(null);
         int width = FrameConstant.WIDTH.getValue() - FrameConstant.MENUWIDTH.getValue();
+        setLayout(null);
         setSize(width, 600);
-        setOpaque(true);
-
         setBackground(Color.WHITE);
 
         // 초기 데이터 설정
@@ -67,11 +60,9 @@ public class DashBoardPanel extends JPanel {
         title.setBounds(10, 0, 300, 50);
         title.setFont(InjeFont.XLfont);
 
-
         JLabel updateText = new JLabel("최근 업데이트 : " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시mm분")));
         updateText.setFont(InjeFont.PSfont);
         updateText.setBounds(12, 40, 500, 30);
-
 
         boxPanel1 = new BoxPanel("총 강의실", "NULL", new Color(0x071F6));
         boxPanel1.setBounds(50, 80, boxWidth, boxHeight);
@@ -117,7 +108,7 @@ public class DashBoardPanel extends JPanel {
         // 현재 예약으로 입실중인 강의실을 roomUsing = true
         List<Room> rooms = mainFrame.repository.findRoomAll();
         List<ResInfo> resInfos = mainFrame.repository.findReservationAll();
-        // TODO : NULL 잡기
+
         if (resInfos == null){
             return;
         }
@@ -172,16 +163,12 @@ public class DashBoardPanel extends JPanel {
             Date startTime = new SimpleDateFormat("HH:mm").parse(dateTime.substring(0, 5));
             Date endTime = new SimpleDateFormat("HH:mm").parse(dateTime.substring(8,13));
             Date nowTime = new SimpleDateFormat("HH:mm").parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
-            //nowTime = new SimpleDateFormat("HH:mm").parse("09:30");
-
-            //System.out.println(startTime + " " + endTime + "현재시간" + nowTime);
 
             if (nowTime.after(startTime) && nowTime.before(endTime)) {
                 return "입실";
             } else if (nowTime.after(endTime)) {
                 return "퇴실";
             }
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -190,7 +177,7 @@ public class DashBoardPanel extends JPanel {
 
     private void getReservationData(){
         reservationAll = mainFrame.repository.findReservationAll();
-        // TODO : NULL 잡기
+
         if (reservationAll == null){
             return;
         }
@@ -213,8 +200,6 @@ public class DashBoardPanel extends JPanel {
                             + "   " + String.format("%6s",resInfo.getrinfo())
                             + "   " + resInfo.getusetime();
                     showResInfo += "   " + isNowUsingClass(resInfo.getusetime());
-
-                    //System.out.println(showResInfo);
                     realtimeClass.add(showResInfo);
                 }
             }
@@ -229,7 +214,6 @@ public class DashBoardPanel extends JPanel {
         });
     }
 
-    // TODO : 강의실 예약 시 바로 업데이트 되도록 구현하기
     private void setNoticeClass(){
         noticeBoxPanel1.setNoticeItems(emptyClass);
         noticeBoxPanel2.setNoticeItems(realtimeClass);
@@ -240,7 +224,6 @@ public class DashBoardPanel extends JPanel {
         rooms = mainFrame.repository.findRoomAll();
         // 모든 강의실 가져오기
         for (Room room : rooms) {
-//            System.out.println(room);
             // 빈 강의실 지정
             if (!room.getroomUsing()) {
                 emptyClass.add(room.getRoomInfo());
@@ -256,7 +239,6 @@ public class DashBoardPanel extends JPanel {
             return true;
         return false;
     }
-
 
     private void setBoxDatas(){
         int allClassCount = rooms.size();
@@ -321,17 +303,13 @@ public class DashBoardPanel extends JPanel {
 
             setVisible(true);
         }
-
         public void setValueText(String valueText){
             this.valueText.setText(valueText);
         }
-
     }
-
     // 공지사항
     public class NoticeBoxPanel extends JPanel{
         JList list;
-
         public NoticeBoxPanel(String title, Vector<String> values, int width, int height) {
             LineBorder lineBorder = new LineBorder(Color.BLACK, 2, true);
             setLayout(null);
@@ -362,11 +340,9 @@ public class DashBoardPanel extends JPanel {
             list.setFixedCellHeight(30);
 
             // 리스트 모양 설정
-
             list.setCellRenderer(new ListCellRenderer() {
                 @Override
-                public Component getListCellRendererComponent(JList list, Object value, int index,
-                                                              boolean isSelected, boolean cellHasFocus) {
+                public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                     JLabel label = new JLabel(value.toString());
                     label.setFont(InjeFont.PSfont);
                     label.setForeground(Color.BLACK);
@@ -380,7 +356,6 @@ public class DashBoardPanel extends JPanel {
             setBorder(lineBorder);
             setVisible(true);
 
-
             // 공지사항 마우스 클릭 이벤트
             if (title.equals("공지사항")) {
                 list.addMouseListener(new MouseAdapter() {
@@ -390,7 +365,6 @@ public class DashBoardPanel extends JPanel {
                     }
                 });
             }
-
         }
 
         // 새로운 리스트 아이템으로 변경

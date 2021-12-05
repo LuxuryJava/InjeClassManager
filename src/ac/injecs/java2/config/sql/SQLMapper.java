@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public abstract class SQLMapper {
-	//protected SQLMapper(){}
     protected PreparedStatement preparedStatement = null;
     protected ResultSet resultSet = null;
 
