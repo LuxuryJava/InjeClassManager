@@ -72,7 +72,7 @@ public class Notice_Add  extends JPanel {
                     System.out.println(notice);
                     JOptionPane.showMessageDialog(null, "등록이 완료되었습니다!", "MESSAGE", JOptionPane.WARNING_MESSAGE);
                     mainFrame.noticeController.post(notice);
-
+                    mainFrame.lecture_list.setButton(size, notice.getContent());
                     System.out.println(notice.toString());
 
                 } catch (IllegalStateException e) {

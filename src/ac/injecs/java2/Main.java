@@ -140,6 +140,9 @@ public class Main {
             notice_add.setNameData();
             notice_add.updateContent();
         }
+        if (panel.equals(lecture_list)) {
+            lecture_list.updateContent();
+        }
         if (panel.equals(checkClass_day)) {
             checkClass_day.updateContent();
         }

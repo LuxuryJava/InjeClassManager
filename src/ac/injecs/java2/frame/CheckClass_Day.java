@@ -53,7 +53,7 @@ public class CheckClass_Day extends JPanel {
             DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
             int dayOfWeekNumber = dayOfWeek.getValue() - 1;
 
-            weekNames[dayOfWeekNumber].setForeground(Color.MAGENTA);
+            weekNames[dayOfWeekNumber+1].setForeground(Color.MAGENTA);
             weekNames[0].setForeground(Color.RED);
             weekNames[6].setForeground(Color.BLUE);
 

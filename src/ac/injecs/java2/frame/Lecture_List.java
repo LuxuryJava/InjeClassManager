@@ -12,6 +12,7 @@ import java.net.*;
 
 public class Lecture_List extends JPanel {
     private Main mainFrame;
+    private List list;
 
     public Lecture_List(Main main) {
         mainFrame = main;
@@ -21,11 +22,25 @@ public class Lecture_List extends JPanel {
         title.setFont(InjeFont.XLfont);
         add(title, BorderLayout.NORTH);
 
-        List list = new List();
+        list = new List();
         add(list);
 
         setVisible(true);
     }
+
+    public void updateContent(){
+        list.showLectureData();
+        if(mainFrame.session.isLogin){
+            if (mainFrame.session.getUser().isManager()) {
+                list.AddBtn.setVisible(true);
+            }
+        }
+    }
+
+    public void setButton(int i, String url){
+        list.setButtonEvent(i, url);
+    }
+
 
     public class List extends JPanel {
         JButton AddBtn;
@@ -95,7 +110,8 @@ public class Lecture_List extends JPanel {
             // Data Load To DB
             getLectureData();
         }
-        private void showLectureData(){
+
+        public void showLectureData(){
             java.util.List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
             for (int i = 0; i < noticeAll.size();  i++) {
                 Notice item = noticeAll.get(i);
@@ -104,34 +120,29 @@ public class Lecture_List extends JPanel {
             }
         }
 
-        private void getLectureData(){
+        public void setButtonEvent(int i, String url){
+            lectures[i].getBtn().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try { //해당 공지사항 클릭 시 웹 페이지로 이동
+                        Desktop.getDesktop().browse(new URL(url).toURI());
+                    } catch (Exception exe) {
+                        System.out.println(exe.getMessage());
+                    }
+                }
+            });
+        }
+
+        public void getLectureData(){
             // 데이터를 전부 가져온다
             java.util.List<Notice> noticeAll = mainFrame.repository.findNoticeAll();
             for (int i = 0; i < noticeAll.size();  i++){
                 Notice item = noticeAll.get(i);
                 lectures[i].getBtn().setText( item.getTitle());
                 lectures[i].setURL(item.getContent());
+                setButtonEvent(i, item.getContent());
+            }
+        }
 
-                lectures[i].getBtn().addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        try { //해당 공지사항 클릭 시 웹 페이지로 이동
-                            Desktop.getDesktop().browse(new URL(item.getContent()).toURI());
-                        } catch (Exception exe) {
-                             System.out.println(exe.getMessage());
-                        }
-                    }
-                });
-            }
-        }
-        //관리자일 때만 버튼 보임 
-        public void paintComponent(Graphics g) {
-            showLectureData();
-            if(mainFrame.session.isLogin){
-                if (mainFrame.session.getUser().isManager()) {
-                    AddBtn.setVisible(true);
-                }
-            }
-        }
     }
 }
